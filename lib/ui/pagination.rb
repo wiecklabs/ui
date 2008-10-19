@@ -3,6 +3,8 @@ View::path << Pathname(__FILE__).dirname + "views"
 module UI
   class Pagination
     
+    attr_reader :page_size, :total_count, :selected_page, :pages
+    
     def initialize(page_size, total_count, selected_page)
       @page_size = page_size.to_i
       @total_count = total_count.to_i
@@ -15,12 +17,7 @@ module UI
     end
     
     def to_s
-      View.new("ui/pagination.html.erb",
-        :page_size => @page_size,
-        :total_count => @total_count,
-        :selected_page => @selected_page,
-        :pages => @pages
-      ).to_s
+      View.new("ui/pagination.html.erb", :pagination => self).to_s
     end
   end
 end

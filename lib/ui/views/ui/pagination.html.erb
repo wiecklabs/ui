@@ -1,13 +1,13 @@
-<span class="pagination_total_count"><%= @total_count %></span>
+<span class="pagination_total_count"><%= @pagination.total_count %></span>
 
 <ul class="pagination">
-  <% if @selected_page > 1 %>
-    <li><a href="?page=<%= @selected_page - 1 %>">Previous</a></li>
+  <% if @pagination.selected_page > 1 %>
+    <li><a href="?page=<%= @pagination.selected_page - 1 %>">Previous</a></li>
   <% end %>
-  <% @pages.each do |i| %>
-    <li<%= ' class="selected"' if @selected_page == i %>><a href="?page=<%= i %>"><%= i %></a></li>
+  <% @pagination.pages.each do |i| %>
+    <li<%= ' class="selected"' if @pagination.selected_page == i %>><a href="?page=<%= i %>"><%= i %></a></li>
   <% end %>
-  <% if @selected_page < @pages.max %>
-    <li><a href="?page=<%= @selected_page + 1 %>">Next</a></li>
+  <% if @pagination.selected_page < @pagination.pages.max %>
+    <li><a href="?page=<%= @pagination.selected_page + 1 %>">Next</a></li>
   <% end %>
 </ul>
