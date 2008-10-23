@@ -1,3 +1,5 @@
+require "rubygems"
+
 gem "wheels"
 require "wheels"
 
