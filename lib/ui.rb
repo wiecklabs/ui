@@ -5,5 +5,5 @@ require "wheels"
 
 Wheels::View::path << Pathname(__FILE__).dirname + "ui/views"
 
-require Pathname(__FILE__).dirname + "ui/pagination"
-require Pathname(__FILE__).dirname + "ui/calendar"
+require Pathname(__FILE__).dirname.expand_path + "ui/pagination"
+require Pathname(__FILE__).dirname.expand_path + "ui/calendar"
