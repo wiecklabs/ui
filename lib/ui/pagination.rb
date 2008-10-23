@@ -1,4 +1,4 @@
-View::path << Pathname(__FILE__).dirname + "views"
+Wheels::View::path << Pathname(__FILE__).dirname + "views"
 
 module UI
   class Pagination
