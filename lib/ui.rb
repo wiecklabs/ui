@@ -1,3 +1,4 @@
+gem "wheels"
 require "wheels"
 
 Wheels::View::path << Pathname(__FILE__).dirname + "ui/views"
