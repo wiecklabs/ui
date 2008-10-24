@@ -1,26 +1,14 @@
 require "pathname"
 require Pathname(__FILE__).dirname + "helper"
 
-events = [
-  UI::Calendar::Event.new(Date.today, "Position Opened", { :type => "milestone" }),
-  UI::Calendar::Event.new(Date.today + 5, "Exclusivity End Date", { :type => "deadline" }),
-  UI::Calendar::Event.new(Date.today + 25, "Fill Date", { :type => "deadline" })
-]
-
-IO.popen("pbcopy", "w") { |f| f.puts(UI::Calendar.new(events).to_s(:size => :small)) }
-
-# puts UI::Calendar.new(events).to_s(:size => :small)
-
-__END__
 describe "UI::Calendar" do
 
   it "should do stuff" do
     events = [
       UI::Calendar::Event.new(Date.today, "Position Opened", { :type => "milestone" }),
-      UI::Calendar::Event.new(Date.today + 5, "Exclusivity End Date", { :type => "deadline" }),
-      UI::Calendar::Event.new(Date.today + 25, "Fill Date", { :type => "deadline" })
+      UI::Calendar::Event.new(Date.today + 5, "Exclusivity End Date", { :type => "deadline" })
     ]
-    puts UI::Calendar.new(events).to_s(:size => :small)
+    IO.popen("pbcopy", "w") { |f| f.puts UI::Calendar.new(events).to_s(:size => :small) }
   end
 
 end
