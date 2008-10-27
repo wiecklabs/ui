@@ -1,18 +1,17 @@
-<style type="text/css" media="screen">
-  body { font: 1em/2em Helvetica; }
-  .calendar .days th { background-color: #555; color: #eee; width: 100px; }
-  .calendar tbody td { background-color: #eee; height: 100px; vertical-align: top; width: 120px; }
-  .calendar tbody .date { display: block; }
-
-  .calendar .milestone { color: #090; }
-  .calendar .deadline { color: #900; }
-</style>
-
 <% @calendar.months.each do |month| %>
 <table class="calendar">
   <thead>
     <tr class="month">
       <th colspan="7"><%= month.to_s %></th>
+    </tr>
+    <tr class="legend">
+      <th colspan="7">
+        <ul>
+          <% @calendar.events.collect { |e| e.type }.uniq.each do |type| %>
+          <li class="<%= type %>"><%= Extlib::Inflection.humanize(type) %></li>
+          <% end %>
+        </ul>
+      </th>
     </tr>
     <tr class="days">
       <th>Sun</th>
@@ -31,10 +30,13 @@
       <% if day.nil? %>
       <td></td>
       <% else %>
-      <td>
+      <td class="<%= case day <=> Date.today; when -1 then "past"; when 0 then "today"; when 1 then "future" end %>">
         <span class="date"><%= day.day %></span>
         <% @calendar.events.find_all { |event| event.on?(day) }.each do |event| %>
-        <span class="event <%= event.type || "" %>"><%= event.title %></span>
+        <span class="event <%= event.type || "" %>">
+          <%= event.title %>
+          <%= Wheels::View.new("ui/calendar/_hover", :event => event) %>
+        </span>
         <% end %>
       </td>
       <% end # if day.nil? %>
