@@ -1,0 +1,16 @@
+<style type="text/css" media="screen">
+  .account { position: absolute; top: 0px; right: 0px; }
+  .account li { display: inline; }
+  .account a { color: #fff; margin: 6px; }
+</style>
+
+<ul class="account">
+  <%
+     UI::AccountNavigation::links.each do |link|
+       link =~ /^(.*)\:(.*)$/
+  -%>
+    <li><a href="<%= $2 %>"><%= $1 %></a></li>
+  <% end -%>
+  <li><a href="/account"><%= me %></a></li>
+  <li><a href="/session/delete">logout</a></li>
+</ul>
