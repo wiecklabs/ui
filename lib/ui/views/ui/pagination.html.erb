@@ -1,11 +1,22 @@
-<span class="pagination_total_count"><%= @pagination.total_count %></span>
+<style type="text/css" media="screen">
+  ul.pagination { display: inline; margin: 5px; padding: 0px; }
+  ul.pagination li { display: inline; }
+  ul.pagination li.selected { color: #cecece; }
+  ul.pagination a { color: #fff; }
+</style>
+
+<span class="pagination_total_count"><%= @pagination.total_count %> Records</span>
 
 <ul class="pagination">
   <% if @pagination.selected_page > 1 %>
     <li><a href="?page=<%= @pagination.selected_page - 1 %>">Previous</a></li>
   <% end %>
   <% @pagination.pages.each do |i| %>
-    <li<%= ' class="selected"' if @pagination.selected_page == i %>><a href="?page=<%= i %>"><%= i %></a></li>
+    <% if @pagination.selected_page == i %>
+      <li class="selected"><%= i %></li>
+    <% else %>
+      <li><a href="?page=<%= i %>"><%= i %></a></li>
+    <% end %>
   <% end %>
   <% if @pagination.selected_page < @pagination.pages.max %>
     <li><a href="?page=<%= @pagination.selected_page + 1 %>">Next</a></li>
