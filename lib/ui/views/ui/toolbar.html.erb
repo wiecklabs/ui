@@ -1,0 +1,7 @@
+<% if links = UI::Toolbar::links[@toolbar.name] %>
+<ul class="toolbar">
+  <% links.each do |link| %>
+  <li><a href="<%= link[1] %>"><%= link[0] %></a></li>
+  <% end %>
+</ul>
+<% end %>
