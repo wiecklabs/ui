@@ -34,4 +34,11 @@
     <option <%= 'selected' if value && value.min == minute %>  value="<%= minute %>"><%= "%02i" % minute %></option>
     <% end %>
   </select>
+
+  <select name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
+    <option></option>
+    <% UI::DateTime::ZONES.each do |offset, zones| %>
+    <option <%= 'selected' if value.zone.to_i == offset %> value="<%= offset.to_i %>"><%= zones.join(", ") %></option>
+    <% end %>
+  </select>
 </div>
