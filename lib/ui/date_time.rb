@@ -10,7 +10,8 @@ module UI
       -5 => ["EST"],
       -6 => ["CST"],
       -7 => ["MST"],
-      -8 => ["PST"]
+      -8 => ["PST"],
+      +11 => ["EDT"]
     }
 
     def initialize(object, name, field)

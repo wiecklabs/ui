@@ -2,7 +2,7 @@
 <div class="date">
   <select id="<%= @name %>_<%= @field %>" name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
     <option></option>
-    <% (this_year = Date.today.year).upto(this_year + 1) do |year| %>
+    <% (Date.today.year + 1).downto(1970) do |year| %>
     <option <%= 'selected' if value && value.year == year %> value="<%= year %>"><%= year %></option>
     <% end %>
   </select>
