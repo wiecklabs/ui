@@ -7,7 +7,7 @@
 </style>
 <input type="text" class="date_time_text_box" value="<%= value.strftime(format_string) if value %>">
 <% @shortcuts.each do |key, value| %>
-<a href="#" click='$(".date_time_text_box").val(<%= value.strftime(format_string).inspect %>); $(".date_time_text_box").focus(); return false;'><%= key %></a>
+<a href="#" onclick='$(".date_time_text_box").val(<%= value.strftime(format_string).inspect %>); $(".date_time_text_box").focus(); return false;'><%= key %></a>
 <% end %>
 <p class="date_time_message">
   Input a date and/or time (most formats accepted), or use "now", "today", "tomorrow".
