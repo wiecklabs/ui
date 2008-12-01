@@ -1,6 +1,6 @@
 module UI
   class DateTimeTextBox
-    def initialize(object, name, field, offset = (Time.local.gmt_offset / 60 / 60))
+    def initialize(object, name, field, offset = (Time.now.gmt_offset / 60 / 60))
        @object = object
        @name = name
        @field = field
