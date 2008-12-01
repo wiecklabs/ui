@@ -1,8 +1,14 @@
-<% value = @object.send(@field) %>
+<%
+  value = @object.send(@field)
+  format_string = "%Y-%m-%d @ %H:%M"
+%>
 <style type="text/css" media="screen">
   fieldset .date { display: none; }
 </style>
-<input type="text" class="date_time_text_box" value="<%= value.strftime("%Y-%m-%d @ %H:%M") if value %>">
+<input type="text" class="date_time_text_box" value="<%= value.strftime(format_string) if value %>">
+<% @options[:shortcuts].each do |key, value| %>
+<a href="#" click='$(".date_time_text_box").val(<%= value.strftime(format_string) %>); $(".date_time_text_box").focus(); return false;'><%= key %></a>
+<% end %>
 <p class="date_time_message">
   Input a date and/or time (most formats accepted), or use "now", "today", "tomorrow".
   <span style="display: block" class="error"></span>

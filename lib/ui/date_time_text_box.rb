@@ -1,14 +1,16 @@
 module UI
   class DateTimeTextBox
-    def initialize(object, name, field, offset = (Time.now.gmt_offset / 60 / 60))
+    def initialize(object, name, field, options = {})
        @object = object
        @name = name
        @field = field
-       @offset = offset
+       options[:offset] ||= Time.now.gmt_offset / 60 / 60
+       options[:shortcuts] ||= {}
+       @options = options
     end
 
     def to_s
-      context = { :object => @object, :name => @name, :field => @field, :offset => @offset }
+      context = @options.merge({ :object => @object, :name => @name, :field => @field })
       Wheels::View.new("ui/date_time_text_box.html.erb", context).to_s
     end
   end
