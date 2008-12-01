@@ -2,4 +2,90 @@
   fieldset .date { display: none; }
 </style>
 <input type="text" class="date_time_text_box">
+<p class="date_time_message">
+  Input a date and/or time (most formats accepted), or use "now", "today", "tomorrow".
+  <span style="display: block" class="error"></span>
+</p>
 <%= render "ui/date_time" %>
+
+<script type="text/javascript" charset="utf-8">
+
+  function parseDateTimeTextBox(text_box) {
+    var value = $(text_box).val().split(" ");
+
+    if ( value[0] == "" ) {
+      // If the text box is empty, return null
+      return null;
+    }
+    else if ( value.length == 1 ) {
+      // If the text box only has one item, try the date first,
+      // then try time.
+      try {
+        return parseDateString(value[0]);
+      }
+      catch(e) {
+        try {
+          return parseTimeString(value[0]);
+        }
+        catch(e) {
+          $(".date_time_message .error").html("Invalid date/time format");
+        }
+      }
+    }
+    else {
+      var time_string = value.pop();
+
+      // If the last match is an am/pm specification, grab the second
+      // to last match to send to the time formatter.
+      if ( time_string.match(/^(p|a| p| a)/i) ) {
+        time_string = value.pop() + " " + time_string;
+      }
+
+      var date_string = value.join(" ");
+      try {
+        date = parseDateString(date_string);
+        time = parseTimeString(time_string);
+        return mergeDateAndTime(date, time);
+      }
+      catch(e) {
+        $(".date_time_message .error").html("Invalid date/time format");
+      }
+    }
+  }
+
+  function mergeDateAndTime(date, time) {
+    var date_time = new Date();
+    date_time.setDate(date.getDate());
+    date_time.setMonth(date.getMonth());
+    date_time.setYear(date.getFullYear());
+    date_time.setHours(time.getHours());
+    date_time.setMinutes(time.getMinutes());
+    date_time.setSeconds(time.getSeconds());
+    return date_time
+  }
+
+  function updateSelectBoxes(date) {
+    $(".date .year").val(date.getFullYear());
+    $(".date .month").val(date.getMonth() + 1);
+    $(".date .day").val(date.getDate());
+    $(".date .hour").val(date.getHours());
+    $(".date .minute").val(date.getMinutes());
+  }
+
+  function formatDateTime(date) {
+    var date_string = ""
+    date_string += date.getFullYear() + "-" + padAZero(date.getMonth() + 1) + "-" + padAZero(date.getDate())
+    date_string += " @ ";
+    date_string += padAZero(date.getHours()) + ":" + padAZero(date.getMinutes());
+    return date_string;
+  }
+
+  $(".date_time_text_box").blur(function() {
+    date = parseDateTimeTextBox($(this));
+    if ( date ) {
+      $(".date_time_message .error").html("");
+      $(this).val(formatDateTime(date));
+      updateSelectBoxes(date);
+    }
+  });
+</script>
