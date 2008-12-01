@@ -1,7 +1,8 @@
+<% value = @object.send(@field) %>
 <style type="text/css" media="screen">
   fieldset .date { display: none; }
 </style>
-<input type="text" class="date_time_text_box">
+<input type="text" class="date_time_text_box" value="<%= value.strftime("%Y-%m-%d @ %H:%m") if value %>">
 <p class="date_time_message">
   Input a date and/or time (most formats accepted), or use "now", "today", "tomorrow".
   <span style="display: block" class="error"></span>
