@@ -35,10 +35,14 @@
     <% end %>
   </select>
 
+  <% if @offset %>
+  <input type="hidden" name="<%= @name %>[<%= @field %>][]" value="<%= @offset %>">
+  <% else %>
   <select name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
     <option></option>
     <% UI::DateTime::ZONES.each do |offset, zones| %>
     <option <%= 'selected' if value.zone.to_i == offset rescue false %> value="<%= offset.to_i %>"><%= zones.join(", ") %></option>
     <% end %>
   </select>
+  <% end %>
 </div>
