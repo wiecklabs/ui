@@ -6,7 +6,7 @@
   fieldset .date { display: none; }
 </style>
 <input type="text" class="date_time_text_box" value="<%= value.strftime(format_string) if value %>">
-<% @options[:shortcuts].each do |key, value| %>
+<% @shortcuts.each do |key, value| %>
 <a href="#" click='$(".date_time_text_box").val(<%= value.strftime(format_string).inspect %>); $(".date_time_text_box").focus(); return false;'><%= key %></a>
 <% end %>
 <p class="date_time_message">
