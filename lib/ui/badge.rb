@@ -12,11 +12,25 @@ module UI
     ORANGE= "#ee3311"
 
     def self.brighten(color)
-      "#" + (color[1..-1].hex + "111111".hex).to_s(16)
+      "#" + self.adjust_channels(color, "11")
     end
 
     def self.darken(color)
-      "#" + (color[1..-1].hex - "111111".hex).to_s(16)
+      "#" + self.adjust_channels(color, "-11")
+    end
+
+    def self.adjust_channels(hex_value, adjustment)
+      channels = hex_value[1..-1].scan(/\w{2}/)
+      adjustment = adjustment.hex
+
+      channels.map do |channel|
+        channel = channel.hex + adjustment
+        if channel <= 0 then "00"
+        elsif channel > "ff".hex then "ff"
+        else channel.to_s(16)
+        end
+      end.join
+
     end
   end
 
