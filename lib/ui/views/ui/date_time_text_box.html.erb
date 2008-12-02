@@ -11,7 +11,7 @@
 <% end %>
 <p class="date_time_message">
   Input a date and/or time (most formats accepted), or use "now", "today", "tomorrow".
-  <span style="display: block" class="error"></span>
+  <span style="display: none;" class="error"></span>
 </p>
 <%= render "ui/date_time" %>
 
@@ -35,7 +35,8 @@
           return parseTimeString(value[0]);
         }
         catch(e) {
-          $(".date_time_message .error").html("Invalid date/time format");
+          throw(e);
+          // $(".date_time_message .error").css('display', 'block').html("Invalid date/time format");
         }
       }
     }
@@ -49,14 +50,16 @@
       }
 
       var date_string = value.join(" ");
-      try {
+      // try {
         date = parseDateString(date_string);
         time = parseTimeString(time_string);
+        
+        $(".date_time_message .error").hide();
         return mergeDateAndTime(date, time);
-      }
-      catch(e) {
-        $(".date_time_message .error").html("Invalid date/time format");
-      }
+      // }
+      // catch(e) {
+      //   $(".date_time_message .error").html("Invalid date/time format");
+      // }
     }
   }
 
@@ -88,11 +91,15 @@
   }
 
   $(".date_time_text_box").blur(function() {
-    date = parseDateTimeTextBox($(this));
-    if ( date ) {
-      $(".date_time_message .error").html("");
-      $(this).val(formatDateTime(date));
-      updateSelectBoxes(date);
+    try {
+      date = parseDateTimeTextBox($(this));
+      if ( date ) {
+        $(".date_time_message .error").hide();
+        $(this).val(formatDateTime(date));
+        updateSelectBoxes(date);
+      }
+    } catch(e) {
+      $(".date_time_message .error").css('display', 'block').html("Invalid date/time format");
     }
   });
 </script>
