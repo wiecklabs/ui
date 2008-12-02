@@ -11,12 +11,12 @@ module UI
     GOLD  = "#ffcccc"
     ORANGE= "#ee3311"
     
-    def self.brighten(color)
-      "#" + self.adjust_channels(color, "11")
+    def self.brighten(color, amount = "11")
+      "#" + self.adjust_channels(color, amount)
     end
 
-    def self.darken(color)
-      "#" + self.adjust_channels(color, "-11")
+    def self.darken(color, amount = "-11")
+      "#" + self.adjust_channels(color, amount)
     end
 
     def self.adjust_channels(hex_value, adjustment)
@@ -100,14 +100,14 @@ module UI
       cmd << "-pointsize 10 -fill '#{title_color}' "
 
       # Draw the text a few times using a darker color
-      cmd << "-fill '#{Color.darken(background_color)}' "
-      cmd << "-draw \"text -2, #{subtitle ? 1 : 3} '#{title}'\" "
-      cmd << "-draw \"text 0, #{subtitle ? 1 : 3} '#{title}'\" "
+      cmd << "-fill '#{Color.darken(background_color, "-22")}' "
+      cmd << "-draw \"text -2, #{subtitle ? 0 : 2} '#{title}'\" "
+      cmd << "-draw \"text 0, #{subtitle ? 0 : 2} '#{title}'\" "
       cmd << "-draw \"text -2, #{subtitle ? 2 : 4} '#{title}'\" "
       cmd << "-draw \"text 0, #{subtitle ? 2 : 4} '#{title}'\" "
 
       # Overlay white on top of the dark text for a nice effect
-      cmd << "-fill white "
+      cmd << "-fill '#{title_color}' "
       cmd << "-draw \"text -1, #{subtitle ? 1 : 3} '#{title}'\" "
 
       # If we have a subtitle, add that, too
