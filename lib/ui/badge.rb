@@ -10,7 +10,7 @@ module UI
     GREEN = "#22cc22"
     GOLD  = "#ffcccc"
     ORANGE= "#ee3311"
-
+    
     def self.brighten(color)
       "#" + self.adjust_channels(color, "11")
     end
@@ -99,7 +99,16 @@ module UI
       cmd << "-font #{font_path + "TahomaBold.ttf"} "
       cmd << "-pointsize 10 -fill '#{title_color}' "
 
-      cmd << "-draw \"text -1, #{subtitle ? 2 : 4} '#{title}'\" "
+      # Draw the text a few times using a darker color
+      cmd << "-fill '#{Color.darken(background_color)}' "
+      cmd << "-draw \"text -2, #{subtitle ? 1 : 3} '#{title}'\" "
+      cmd << "-draw \"text 0, #{subtitle ? 1 : 3} '#{title}'\" "
+      cmd << "-draw \"text -2, #{subtitle ? 2 : 4} '#{title}'\" "
+      cmd << "-draw \"text 0, #{subtitle ? 2 : 4} '#{title}'\" "
+
+      # Overlay white on top of the dark text for a nice effect
+      cmd << "-fill white "
+      cmd << "-draw \"text -1, #{subtitle ? 1 : 3} '#{title}'\" "
 
       # If we have a subtitle, add that, too
 
@@ -107,7 +116,7 @@ module UI
         cmd << "-gravity North "
         cmd << "-font #{font_path + "Silkscreen.ttf"} "
         cmd << "-pointsize 8 -fill '#{subtitle_color}' "
-        cmd << "-draw \"text 0, 11 '#{subtitle}'\" "
+        cmd << "-draw \"text 0, 10 '#{subtitle}'\" "
       end
 
       # DONE!
