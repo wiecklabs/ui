@@ -6,9 +6,10 @@ module UI
     WHITE = "#ffffff"
     BLACK = "#111111"
     BLUE  = "#2222cc"
-    RED   = "#cc4444"
+    RED   = "#cc2222"
     GREEN = "#22cc22"
     GOLD  = "#ffcccc"
+    ORANGE= "#ee3311"
 
     def self.brighten(color)
       "#" + (color[1..-1].hex + "111111".hex).to_s(16)
@@ -109,5 +110,6 @@ if __FILE__ == $0
   puts UI::Badge.new("HIRES", "16:9", UI::Color::BLUE)
   puts UI::Badge.new("WMV", nil, UI::Color::GREEN)
   puts UI::Badge.new("FLV", "16:9", UI::Color::RED)
+  puts UI::Badge.new("SRC", nil, UI::Color::ORANGE)
   `open /tmp/images/badges/*`
 end
