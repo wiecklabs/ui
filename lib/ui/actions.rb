@@ -9,8 +9,8 @@ module Wheels
       end
     end
     
-    def write_actions
-      View.new("ui/actions.html.erb", :content => (actions_captures + named_actions_captures.values).join("\n")).to_s
+    def write_actions      
+      View.new("ui/actions.html.erb", merge(:actions_content => (actions_captures + named_actions_captures.values).join("\n"))).to_s
     end
     
     private
