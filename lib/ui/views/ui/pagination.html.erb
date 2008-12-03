@@ -1,9 +1,11 @@
+<% head "pagination" do %>
 <style type="text/css" media="screen">
   ul.pagination { display: inline; margin: 5px; padding: 0px; }
   ul.pagination li { display: inline; }
   ul.pagination li.selected { color: #cecece; }
   ul.pagination a { color: #fff; }
 </style>
+<% end %>
 
 <span class="pagination_total_count"><%= @pagination.total_count %> Records</span>
 
