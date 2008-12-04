@@ -3,7 +3,8 @@ module UI
 
     attr_reader :page_size, :total_count, :selected_page, :pages
 
-    def initialize(page_size, total_count, selected_page)
+    def initialize(context, page_size, total_count, selected_page)
+      @context = context
       @page_size = page_size.to_i
       @total_count = total_count.to_i
       @selected_page = selected_page.to_i
@@ -15,7 +16,7 @@ module UI
     end
 
     def to_s
-      @to_s ||= Wheels::View.new("ui/pagination.html.erb", :pagination => self).to_s
+      @to_s ||= Wheels::View.new("ui/pagination.html.erb", @context.merge(:pagination => self)).to_s
     end
   end
 end
