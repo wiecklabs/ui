@@ -11,7 +11,7 @@ module UI
 
       @pages = (1..(@total_count.to_f / @page_size).ceil)
 
-      raise ArgumentError.new("The selected_page must start at 1. The selected_page provided was #{selected_page.blank? ? 'none' : selected_page}") if @selected_page == 0
+      raise ArgumentError.new("The selected_page must start at 1. The selected_page provided was #{selected_page.blank? ? 'none' : selected_page}") if @selected_page.blank?
       raise ArgumentError.new("The selected_page (#{selected_page}) can't be larger than the max pages present (#{@pages.max}).") if @selected_page > @pages.max
     end
 
