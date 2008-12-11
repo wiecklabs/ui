@@ -5,13 +5,12 @@ module UI
       @object = object
       @name = name
       @field = field
-      options[:offset] ||= Time.now.gmt_offset / 60 / 60
-      options[:shortcuts] ||= {}
-      @options = options
+      @offset = options.fetch(:offset, Time.now.gmt_offset / 60 / 60)
+      @shortcuts = options.fetch(:shortcuts, {})
     end
 
     def to_s
-      @context.render("ui/date_time_text_box.html.erb", { :object => @object, :name => @name, :field => @field }).to_s
+      @context.render("ui/date_time_text_box.html.erb", { :object => @object, :name => @name, :field => @field, :offset => @offset, :shortcuts => @shortcuts }).to_s
     end
   end
 end
