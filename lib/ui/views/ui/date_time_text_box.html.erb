@@ -1,20 +1,10 @@
-<%
-  value = @object.send(@field)
-  format_string = "%Y-%m-%d @ %H:%M"
-%>
+<% head "date_time_text_box_stylesheets" do %>
 <style type="text/css" media="screen">
   fieldset .date { display: none; }
 </style>
-<input type="text" class="date_time_text_box" value="<%= value.strftime(format_string) if value %>">
-<% @shortcuts.each do |key, value| %>
-<a href="#" onclick='$(".date_time_text_box").val(<%= value.strftime(format_string).inspect %>); $(".date_time_text_box").focus(); return false;'><%= key %></a>
 <% end %>
-<p class="date_time_message">
-  Input a date and/or time (most formats accepted), or use "now", "today", "tomorrow".
-  <span style="display: none;" class="error"></span>
-</p>
-<%= render "ui/date_time" %>
 
+<% head "date_time_text_box_javascripts" do %>
 <script type="text/javascript" charset="utf-8">
 
   function parseDateTimeTextBox(text_box) {
@@ -108,3 +98,18 @@
     }
   });
 </script>
+<% end %>
+
+<%
+  value = @object.send(@field)
+  format_string = "%Y-%m-%d @ %H:%M"
+%>
+<input type="text" class="date_time_text_box" value="<%= value.strftime(format_string) if value %>">
+<% @shortcuts.each do |key, value| %>
+<a href="#" onclick='$(".date_time_text_box").val(<%= value.strftime(format_string).inspect %>); $(".date_time_text_box").focus(); return false;'><%= key %></a>
+<% end %>
+<p class="date_time_message">
+  Input a date and/or time (most formats accepted), or use "now", "today", "tomorrow".
+  <span style="display: none;" class="error"></span>
+</p>
+<%= render "ui/date_time" %>
