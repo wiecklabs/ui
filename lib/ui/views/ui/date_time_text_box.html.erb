@@ -1,7 +1,9 @@
-<% head "date_time_text_box_stylesheets" do %>
-<style type="text/css" media="screen">
-  fieldset .date { display: none; }
-</style>
+<% head "dateparse" do %>
+<script type="text/javascript" charset="utf-8" src="/javascripts/dateparse.js"></script>
+<% end %>
+
+<% head "timeparse" do %>
+<script type="text/javascript" charset="utf-8" src="/javascripts/timeparse.js"></script>
 <% end %>
 
 <% head "date_time_text_box_javascripts" do %>
@@ -11,12 +13,8 @@
     var value = $(text_box).val().split(" ");
 
     if ( value[0] == "" ) {
-      // If the text box is empty, return null
-      $(".date .year").val(null);
-      $(".date .month").val(null);
-      $(".date .day").val(null);
-      $(".date .hour").val(null);
-      $(".date .minute").val(null);
+      // If the text box is empty, set empty inputs and return null
+      updateDateTimeTextBoxInputs(text_box.id, null)
       return null;
     }
     else if ( value.length == 1 ) {
@@ -69,12 +67,20 @@
     return date_time
   }
 
-  function updateSelectBoxes(date) {
-    $(".date .year").val(date.getFullYear());
-    $(".date .month").val(date.getMonth() + 1);
-    $(".date .day").val(date.getDate());
-    $(".date .hour").val(date.getHours());
-    $(".date .minute").val(date.getMinutes());
+  function updateDateTimeTextBoxInputs(id, date) {
+    if(date == null) {
+      $("#" + id + "_year").val(null);
+      $("#" + id + "_month").val(null);
+      $("#" + id + "_day").val(null);
+      $("#" + id + "_hour").val(null);
+      $("#" + id + "_minute").val(null);
+    } else {
+      $("#" + id + "_year").val(date.getFullYear());
+      $("#" + id + "_month").val(date.getMonth() + 1);
+      $("#" + id + "_day").val(date.getDate());
+      $("#" + id + "_hour").val(date.getHours());
+      $("#" + id + "_minute").val(date.getMinutes());
+    }
   }
 
   function formatDateTime(date) {
@@ -85,17 +91,19 @@
     return date_string;
   }
 
-  $(".date_time_text_box").blur(function() {
-    try {
-      date = parseDateTimeTextBox($(this));
-      if ( date ) {
-        $(".date_time_message .error").hide();
-        $(this).val(formatDateTime(date));
-        updateSelectBoxes(date);
+  $(function() {
+    $(".date_time_text_box").blur(function() {
+      try {
+        date = parseDateTimeTextBox($(this));
+        if ( date ) {
+          $(".date_time_message .error").hide();
+          $(this).val(formatDateTime(date));
+          updateDateTimeTextBoxInputs(this.id, date);
+        }
+      } catch(e) {
+        $(".date_time_message .error").css('display', 'block').html("Invalid date/time format");
       }
-    } catch(e) {
-      $(".date_time_message .error").css('display', 'block').html("Invalid date/time format");
-    }
+    });
   });
 </script>
 <% end %>
@@ -103,13 +111,21 @@
 <%
   value = @object.send(@field)
   format_string = "%Y-%m-%d @ %H:%M"
+  text_box_id = "#{h @name}_#{h @field}_date_time_text_box"
 %>
-<input type="text" class="date_time_text_box" value="<%= value.strftime(format_string) if value %>">
+
+<input type="text" id="<%= text_box_id %>" class="date_time_text_box" value="<%= value.strftime(format_string) if value %>">
 <% @shortcuts.each do |key, value| %>
-<a href="#" onclick='$(".date_time_text_box").val(<%= value.strftime(format_string).inspect %>); $(".date_time_text_box").focus(); return false;'><%= key %></a>
+<a href="#" onclick='$("#<%= text_box_id %>").val(<%= value.strftime(format_string).inspect %>); $("#<%= text_box_id %>").focus(); return false;'><%= key %></a>
 <% end %>
 <p class="date_time_message">
   Input a date and/or time (most formats accepted), or use "now", "today", "tomorrow".
   <span style="display: none;" class="error"></span>
 </p>
-<%= render "ui/date_time" %>
+
+<input type="hidden" id="<%= text_box_id %>_year" name="<%= @name %>[<%= @field %>][]" value="<%= h value.year %>">
+<input type="hidden" id="<%= text_box_id %>_month" name="<%= @name %>[<%= @field %>][]" value="<%= h value.month %>">
+<input type="hidden" id="<%= text_box_id %>_day" name="<%= @name %>[<%= @field %>][]" value="<%= h value.day %>">
+<input type="hidden" id="<%= text_box_id %>_hour" name="<%= @name %>[<%= @field %>][]" value="<%= h value.hour %>">
+<input type="hidden" id="<%= text_box_id %>_minute" name="<%= @name %>[<%= @field %>][]" value="<%= h value.min %>">
+<input type="hidden" id="<%= text_box_id %>_offset" name="<%= @name %>[<%= @field %>][]" value="<%= h @offset %>">
