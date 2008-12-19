@@ -92,6 +92,8 @@
   }
 
   $(function() {
+
+    
     $(".date_time_text_box").blur(function() {
       try {
         date = parseDateTimeTextBox($(this));
@@ -102,6 +104,19 @@
         }
       } catch(e) {
         $(".date_time_message .error").css('display', 'block').html("Invalid date/time format");
+      }
+    }).keydown(function(event) {
+      if ( event.keyCode == 13 ) {
+        try {
+          date = parseDateTimeTextBox($(this));
+          updateDateTimeTextBoxInputs(this.id, date);
+          if ( date ) {
+            $(".date_time_message .error").hide();
+            $(this).val(formatDateTime(date));
+          }
+        } catch(e) {
+          $(".date_time_message .error").css('display', 'block').html("Invalid date/time format");
+        }
       }
     });
   });
