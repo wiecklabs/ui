@@ -13,11 +13,13 @@ module UI
 
     attr_accessor :text, :size, :text_color, :button_color, :background_color
 
-    def initialize(text, size = 16, text_color = Color::BLACK, button_color = Color::WHITE)
+    def initialize(text, size = 16, text_color = Color::BLACK, button_color = Color::WHITE, width = nil, height = nil)
       @text = text
       @size = size
       @text_color = text_color
       @button_color = button_color
+      @width = width
+      @height = height
     end
 
     def to_s
@@ -26,11 +28,11 @@ module UI
     end
 
     def width
-      ((text.size * size) * 0.55).to_i
+      @width ||= ((text.size * size) * 0.55).to_i
     end
 
     def height
-      size + 10
+      @height ||= size + 10
     end
 
     def unrooted_path
@@ -39,7 +41,7 @@ module UI
 
     def filename
       filename  = text.downcase.gsub(/[^\w]+/, "-")
-      filename << "_#{text_color[1..-1].downcase}_#{button_color[1..-1].downcase}"
+      filename << "_#{text_color[1..-1].downcase}_#{button_color[1..-1].downcase}_#{width}_#{height}"
       filename << ".gif"
     end
 
