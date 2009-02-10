@@ -1,0 +1,67 @@
+<% head "dateparse" do %>
+<script type="text/javascript" charset="utf-8" src="/javascripts/dateparse.js"></script>
+<% end %>
+
+<% head "date_text_box_javascripts" do %>
+<script type="text/javascript" charset="utf-8">
+
+  function parseDateTextBox(text_box) {
+    var value = $(text_box).val();
+    if ( value == "" ) return null;
+    return parseDateString(value);
+  }
+
+  function updateDateTextBoxInputs(id, date) {
+    if(date == null) {
+      $("#" + id + "_year").val("");
+      $("#" + id + "_month").val("");
+      $("#" + id + "_day").val("");
+    } else {
+      $("#" + id + "_year").val(date.getFullYear());
+      $("#" + id + "_month").val(date.getMonth() + 1);
+      $("#" + id + "_day").val(date.getDate());
+    }
+  }
+
+  function padAZero(s) {
+      s = s.toString();
+      if (s.length == 1) {
+          return '0' + s;
+      } else {
+          return s;
+      }
+  }
+
+  function formatDate(date) {
+    return padAZero(date.getMonth() + 1) + "/" + padAZero(date.getDate()) + "/" + date.getFullYear().toString().substr(2,3);
+  }
+
+  $(function() {
+    $(".date_text_box").blur(function() {
+      date = parseDateTextBox($(this));
+      updateDateTextBoxInputs(this.id, date);
+      if ( date ) {
+        $(this).val(formatDate(date));
+      }
+    }).keydown(function(event) {
+      if ( event.keyCode == 13 ) {
+        date = parseDateTextBox($(this));
+        updateDateTextBoxInputs(this.id, date);
+        if ( date ) {
+          $(this).val(formatDate(date));
+        }
+      }
+    });
+  });
+</script>
+<% end %>
+
+<%
+  value = @object.send(@field)
+  text_box_id = "#{h @name}_#{h @field}_date_text_box"
+%>
+<input type="text" id="<%= text_box_id %>" class="date_text_box" value="<%= value.strftime("%m/%d/%y") if value %>">
+
+<input type="hidden" id="<%= text_box_id %>_year" name="<%= @name %>[<%= @field %>][]" value="<%= h value.year if value %>">
+<input type="hidden" id="<%= text_box_id %>_month" name="<%= @name %>[<%= @field %>][]" value="<%= h value.month if value %>">
+<input type="hidden" id="<%= text_box_id %>_day" name="<%= @name %>[<%= @field %>][]" value="<%= h value.day if value %>">
