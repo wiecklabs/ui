@@ -7,8 +7,9 @@
 </style>
 <% end %>
 
-<span class="pagination_total_count"><%= @pagination.total_count %> Records</span>
+<span class="pagination_total_count"><%= @pagination.total_count %> <%= @pagination.total_count == 1 ? "Record" : "Records" %></span>
 
+<% if @pagination.pages.max > 1 %>
 <ul class="pagination">
   <% if @pagination.selected_page > 1 %>
     <li><a href="?page=<%= @pagination.selected_page - 1 %>">Previous</a></li>
@@ -24,3 +25,4 @@
     <li><a href="?page=<%= @pagination.selected_page + 1 %>">Next</a></li>
   <% end %>
 </ul>
+<% end %>
