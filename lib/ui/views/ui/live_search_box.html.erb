@@ -4,6 +4,29 @@
   var live_search_last_keypress;
   var live_search_interval = 750;
 
+  function mergeParams(url, params) {
+    var location = null;
+    var query_string = null;
+
+    if(/\?/.test(url)) {
+      var capture = url.toString().match(/^(.*?)\?(.*)$/);
+      location = capture[1];
+      query_string = capture[2];
+    } else {
+      location = url;
+    }
+
+    if(query_string) {
+      query_string = query_string + "&" + params;
+    } else {
+      query_string = params;
+    }
+
+    // Transform query-string...
+
+    return location + "?" + query_string;
+  }
+
   $(function() {
     $(".live_search input").keyup(function(e) {
       if ( e.keyCode == 224 || e.keyCode == 91 || e.keyCode == 9 || (e.keyCode >=37 && e.keyCode <= 40) ) return;
@@ -33,11 +56,14 @@
 
     $(".live_search").submit(function() {
       var query = $(this).serialize();
+
       $(".preserve_location").each(function() {
         this.href = mergeParams(this.href, query);
       });
 
-      $("#<%= @list_id %>").load(window.location + "?" + query, null, <%= @callback || "null" %>);
+      var url = $(this).attr("action") || window.location.toString()
+
+      $("#<%= @list_id %>").load(mergeParams(url, query), null, <%= @callback || "null" %>);
       return false;
     });
   });
