@@ -6,7 +6,7 @@ require "rake/gempackagetask"
 
 NAME = "ui"
 SUMMARY = "Wheels UI Components"
-GEM_VERSION = "0.2.6.2"
+GEM_VERSION = "0.2.7"
 
 spec = Gem::Specification.new do |s|
   s.name = NAME
@@ -32,6 +32,19 @@ desc "Publish UI gem"
 task :publish do
   STDOUT.print "Publishing gem... "
   STDOUT.flush
-  `ssh gems@able.wieck.com "cd ui && git pull &> /dev/null && rake repackage &> /dev/null && cp pkg/* ../site/gems && cd ../site && gem generate_index"`
+  `git tag -a #{GEM_VERSION} -m "v. #{GEM_VERSION}" &> /dev/null`
+  `git push --tags &> /dev/null`
+
+  commands = [
+    "if [ ! -d '#{NAME}' ]; then git clone /home/git/#{NAME}; fi",
+    "cd #{NAME}",
+    "git pull &> /dev/null",
+    "rake repackage &> /dev/null",
+    "cp pkg/* ../site/gems",
+    "cd ../site",
+    "gem generate_index"
+  ]
+
+  `ssh gems@able.wieck.com "#{commands.join(" && ")}"`
   STDOUT.puts "done"
 end
