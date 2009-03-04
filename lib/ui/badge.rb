@@ -49,8 +49,10 @@ module UI
     attr_accessor :title, :subtitle, :background_color, :title_color, :subtitle_color
 
     def initialize(title, subtitle = nil, background_color = nil, title_color = Color::WHITE, subtitle_color = Color::GOLD)
-      @title, @subtitle = title, subtitle
+      @title = title
       @background_color, @title_color, @subtitle_color = background_color, title_color, subtitle_color
+
+      @subtitle = subtitle.to_s.size == 0 ? nil : subtitle
     end
 
     def to_s
@@ -134,5 +136,7 @@ if __FILE__ == $0
   puts UI::Badge.new("WMV", nil, UI::Color::GREEN)
   puts UI::Badge.new("FLV", "16:9", UI::Color::RED)
   puts UI::Badge.new("SRC", nil, UI::Color::ORANGE)
+  puts UI::Badge.new("SAMP", "MeCrazy", UI::Color::ORANGE)
+  puts UI::Badge.new("TST", '', UI::Color::ORANGE)
   `open /tmp/images/badges/*`
 end
