@@ -48,7 +48,7 @@ module UI
 
     attr_accessor :title, :subtitle, :background_color, :title_color, :subtitle_color
 
-    def initialize(title, subtitle = nil, background_color = nil, title_color = Color::WHITE, subtitle_color = Color::GOLD)
+    def initialize(title, subtitle = nil, background_color = Color::BLUE, title_color = Color::WHITE, subtitle_color = Color::GOLD)
       @title = title
       @background_color, @title_color, @subtitle_color = background_color, title_color, subtitle_color
 
