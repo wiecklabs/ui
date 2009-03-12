@@ -1,4 +1,5 @@
 require "fileutils"
+require "pathname"
 
 module UI
 
@@ -8,12 +9,19 @@ module UI
     BLUE  = "#2222cc"
     RED   = "#cc2222"
     GREEN = "#22cc22"
-    GOLD  = "#ffcccc"
+    GOLD  = "#ffffaa"
     ORANGE= "#ee3311"
-    
+
     def self.brighten(color, amount = "11")
       "#" + self.adjust_channels(color, amount)
     end
+
+    # def self.lighten(color, amount = "33")
+    #   channels = color[1..-1].scan(/\w{2}/).map { |c| c.hex }.sort
+    #   if channels[0] == channels[1] == channels[2]
+    #     channels.map { |c| (c.hex + amount.hex).to_s(16) }.join
+    #   end
+    # end
 
     def self.darken(color, amount = "-11")
       "#" + self.adjust_channels(color, amount)
@@ -93,24 +101,29 @@ module UI
       cmd << "-fill '#{background_color}' -stroke '#{Color.darken(background_color)}' -draw 'roundRectangle 0, 0, 40, 18, 2, 2' "
 
       # Apply shine to box
-      cmd << "-fill '#{Color.brighten(background_color)}' -stroke none -draw 'roundRectangle 1, 1, 39, 9, 1, 1' "
+      cmd << "-fill '#ffffff40' -stroke none -draw 'roundRectangle 1, 1, 39, 9, 1, 1' "
+      # cmd << "-fill '#{Color.brighten(background_color, "+33")}' -stroke none -draw 'roundRectangle 1, 1, 39, 9, 1, 1' "
 
       # Now let's apply the basic font settings
 
-      cmd << "-blur 0x.3 -gravity North "
+      cmd << "-gravity North "
+      # cmd << "-font ~/Desktop/Fonts/FuturaCondensedExtraBold.ttf "
       cmd << "-font #{font_path + "TahomaBold.ttf"} "
-      cmd << "-pointsize 10 -fill '#{title_color}' "
+      cmd << "-pointsize 10.5 -fill '#{title_color}' "
 
       # Draw the text a few times using a darker color
-      cmd << "-fill '#{Color.darken(background_color, "-22")}' "
-      cmd << "-draw \"text -2, #{subtitle ? 0 : 2} '#{title}'\" "
-      cmd << "-draw \"text 0, #{subtitle ? 0 : 2} '#{title}'\" "
-      cmd << "-draw \"text -2, #{subtitle ? 2 : 4} '#{title}'\" "
-      cmd << "-draw \"text 0, #{subtitle ? 2 : 4} '#{title}'\" "
+      cmd << "-fill '#{Color.darken(background_color, "-33")}' "
+
+      offset = subtitle ? 0 : 3
+
+      cmd << "-draw \"text -1, #{offset - 1} '#{title}'\" "
+      cmd << "-draw \"text 1, #{offset - 1} '#{title}'\" "
+      cmd << "-draw \"text -1, #{offset + 1} '#{title}'\" "
+      cmd << "-draw \"text 1, #{offset + 1} '#{title}'\" "
 
       # Overlay white on top of the dark text for a nice effect
       cmd << "-fill '#{title_color}' "
-      cmd << "-draw \"text -1, #{subtitle ? 1 : 3} '#{title}'\" "
+      cmd << "-draw \"text 0, #{offset} '#{title}'\" "
 
       # If we have a subtitle, add that, too
 
@@ -130,13 +143,25 @@ end
 
 if __FILE__ == $0
   UI::Badge.public_path = "/tmp"
-  puts UI::Badge.new("MOV", nil, UI::Color::BLUE)
-  puts UI::Badge.new("MOV", "16:9", UI::Color::BLUE)
-  puts UI::Badge.new("HIRES", "16:9", UI::Color::BLUE)
-  puts UI::Badge.new("WMV", nil, UI::Color::GREEN)
-  puts UI::Badge.new("FLV", "16:9", UI::Color::RED)
-  puts UI::Badge.new("SRC", nil, UI::Color::ORANGE)
-  puts UI::Badge.new("SAMP", "MeCrazy", UI::Color::ORANGE)
-  puts UI::Badge.new("TST", '', UI::Color::ORANGE)
+  UI::Badge.new("SRC", nil, "#0600ff").to_s
+  UI::Badge.new("FLV", nil, "#cc1122").to_s
+  UI::Badge.new("WMV", nil, "#88dd00").to_s
+  UI::Badge.new("MOV", nil, "#1188cc").to_s
+  UI::Badge.new("MOV", "HI-RES", "#000000").to_s
+
   `open /tmp/images/badges/*`
+
+  # puts UI::Badge.new("MOV", "16:9", UI::Color::BLUE)
+  # puts UI::Badge.new("HIRES", "16:9", UI::Color::BLUE)
+  # puts UI::Badge.new("WMV", nil, UI::Color::GREEN)
+  # puts UI::Badge.new("FLV", "16:9", UI::Color::RED)
+  # puts UI::Badge.new("SRC", nil, UI::Color::ORANGE)
+  # puts UI::Badge.new("SAMP", "MeCrazy", UI::Color::ORANGE)
+  # puts UI::Badge.new("TST", '', UI::Color::ORANGE)
+  # `open /tmp/images/badges/*`
+  # cc1122 -> dd5566
+  # 0600ff -> 5555ff
+  # 88dd00 -> aaee33
+  # 1188cc -> 55aadd
+  # 000000 -> 444444
 end
