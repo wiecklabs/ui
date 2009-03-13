@@ -35,7 +35,8 @@ module UI
         channel = channel.hex + adjustment
         if channel <= 0 then "00"
         elsif channel > "ff".hex then "ff"
-        else channel.to_s(16)
+        else
+          channel.to_s(16).rjust(2, "0")
         end
       end.join
 
@@ -102,12 +103,10 @@ module UI
 
       # Apply shine to box
       cmd << "-fill '#ffffff40' -stroke none -draw 'roundRectangle 1, 1, 39, 9, 1, 1' "
-      # cmd << "-fill '#{Color.brighten(background_color, "+33")}' -stroke none -draw 'roundRectangle 1, 1, 39, 9, 1, 1' "
 
       # Now let's apply the basic font settings
 
       cmd << "-gravity North "
-      # cmd << "-font ~/Desktop/Fonts/FuturaCondensedExtraBold.ttf "
       cmd << "-font #{font_path + "TahomaBold.ttf"} "
       cmd << "-pointsize 10.5 -fill '#{title_color}' "
 
@@ -142,14 +141,16 @@ module UI
 end
 
 if __FILE__ == $0
+  `rm -r /tmp/images`
   UI::Badge.public_path = "/tmp"
-  UI::Badge.new("SRC", nil, "#0600ff").to_s
-  UI::Badge.new("FLV", nil, "#cc1122").to_s
-  UI::Badge.new("WMV", nil, "#88dd00").to_s
-  UI::Badge.new("MOV", nil, "#1188cc").to_s
-  UI::Badge.new("MOV", "HI-RES", "#000000").to_s
-
-  `open /tmp/images/badges/*`
+  path = UI::Badge.new("MP3", nil, "#a10007").to_s
+  `open /tmp#{path}`
+  # UI::Badge.new("FLV", nil, "#cc1122").to_s
+  # UI::Badge.new("WMV", nil, "#88dd00").to_s
+  # UI::Badge.new("MOV", nil, "#1188cc").to_s
+  # UI::Badge.new("MOV", "HI-RES", "#000000").to_s
+  # 
+  # `open /tmp/images/badges/*`
 
   # puts UI::Badge.new("MOV", "16:9", UI::Color::BLUE)
   # puts UI::Badge.new("HIRES", "16:9", UI::Color::BLUE)
