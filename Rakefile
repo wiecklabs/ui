@@ -6,7 +6,7 @@ require "rake/gempackagetask"
 
 NAME = "ui"
 SUMMARY = "Wheels UI Components"
-GEM_VERSION = "0.2.10"
+GEM_VERSION = "0.2.11"
 
 spec = Gem::Specification.new do |s|
   s.name = NAME

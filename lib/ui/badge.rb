@@ -64,7 +64,7 @@ module UI
     end
 
     def to_s
-      generate_badge unless File.exists?(filename)
+      generate_badge unless File.exists?(path)
       unrooted_path
     end
 
