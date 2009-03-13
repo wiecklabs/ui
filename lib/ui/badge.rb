@@ -116,14 +116,14 @@ module UI
 
       offset = subtitle ? 0 : 3
 
-      cmd << "-draw \"text -1, #{offset - 1} '#{title}'\" "
-      cmd << "-draw \"text 1, #{offset - 1} '#{title}'\" "
-      cmd << "-draw \"text -1, #{offset + 1} '#{title}'\" "
-      cmd << "-draw \"text 1, #{offset + 1} '#{title}'\" "
+      cmd << "-draw \"text -2, #{offset - 1} '#{title}'\" "
+      cmd << "-draw \"text 0, #{offset - 1} '#{title}'\" "
+      cmd << "-draw \"text -2, #{offset + 1} '#{title}'\" "
+      cmd << "-draw \"text 0, #{offset + 1} '#{title}'\" "
 
       # Overlay white on top of the dark text for a nice effect
       cmd << "-fill '#{title_color}' "
-      cmd << "-draw \"text 0, #{offset} '#{title}'\" "
+      cmd << "-draw \"text -1, #{offset} '#{title}'\" "
 
       # If we have a subtitle, add that, too
 
