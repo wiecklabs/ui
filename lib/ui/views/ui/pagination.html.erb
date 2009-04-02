@@ -12,17 +12,17 @@
 <% if @pagination.pages.max > 1 %>
 <ul class="pagination">
   <% if @pagination.selected_page > 1 %>
-    <li><a href="?page=<%= @pagination.selected_page - 1 %>">Previous</a></li>
+    <li><a href="?page=<%= @pagination.selected_page - 1 %><%= @pagination.params %>">Previous</a></li>
   <% end %>
   <% @pagination.pages.each do |i| %>
     <% if @pagination.selected_page == i %>
       <li class="selected"><%= i %></li>
     <% else %>
-      <li><a href="?page=<%= i %>"><%= i %></a></li>
+      <li><a href="?page=<%= i %><%= @pagination.params %>"><%= i %></a></li>
     <% end %>
   <% end %>
   <% if @pagination.selected_page < @pagination.pages.max %>
-    <li><a href="?page=<%= @pagination.selected_page + 1 %>">Next</a></li>
+    <li><a href="?page=<%= @pagination.selected_page + 1 %><%= @pagination.params %>">Next</a></li>
   <% end %>
 </ul>
 <% end %>
