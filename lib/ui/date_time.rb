@@ -6,7 +6,7 @@ module UI
 
     ZONES = {
       0  => ["UTC"],
-      # -4 => ["EDT"],
+      -4 => ["EDT"],
       -5 => ["EST"],
       -6 => ["CST"],
       -7 => ["MST"],
