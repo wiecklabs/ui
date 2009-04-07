@@ -45,16 +45,6 @@ module UI
 
   class Badge
 
-    def self.public_path=(path)
-      @@public_path = path
-    end
-
-    def self.public_path
-      Pathname(@@public_path).expand_path.to_s
-    rescue NameError
-      raise "UI::Badge::public_path not set."
-    end
-
     attr_accessor :title, :subtitle, :background_color, :title_color, :subtitle_color
 
     def initialize(title, subtitle = nil, background_color = Color::BLUE, title_color = Color::WHITE, subtitle_color = Color::GOLD)
@@ -72,12 +62,12 @@ module UI
     private
 
     def generate_badge
-      FileUtils.mkdir_p(File.dirname(self.class.public_path + unrooted_path))
+      FileUtils.mkdir_p(File.dirname(path))
       system(convert_command)
     end
 
     def path
-      self.class.public_path + unrooted_path
+      UI.public_path + unrooted_path
     end
 
     def unrooted_path
@@ -142,7 +132,7 @@ end
 
 if __FILE__ == $0
   `rm -r /tmp/images`
-  UI::Badge.public_path = "/tmp"
+  UI.public_path = "/tmp"
   path = UI::Badge.new("MP3", nil, "#a10007").to_s
   `open /tmp#{path}`
   # UI::Badge.new("FLV", nil, "#cc1122").to_s

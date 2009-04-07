@@ -1,5 +1,6 @@
 module UI
   class DateTextBox
+    Asset::register("javascripts/dateparse.js", UI::asset_path + "javascripts/dateparse.js")
 
     def initialize(context, object, name, field, options = {})
       @context = context

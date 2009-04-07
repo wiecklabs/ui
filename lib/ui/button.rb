@@ -1,16 +1,6 @@
 module UI
   class Button
 
-    def self.public_path=(path)
-      @@public_path = path
-    end
-
-    def self.public_path
-      Pathname(@@public_path).expand_path.to_s
-    rescue NameError
-      raise "UI::Button::public_path not set."
-    end
-
     attr_accessor :text, :size, :text_color, :button_color, :background_color
 
     def initialize(text, size = 16, text_color = Color::BLACK, button_color = Color::WHITE, width = nil, height = nil)
@@ -48,12 +38,12 @@ module UI
     private
 
     def generate_button
-      FileUtils.mkdir_p(File.dirname(self.class.public_path + unrooted_path))
+      FileUtils.mkdir_p(File.dirname(path))
       system(convert_command)
     end
 
     def path
-      self.class.public_path + unrooted_path
+      UI.public_path + unrooted_path
     end
 
     def font_path
@@ -90,7 +80,7 @@ if __FILE__ == $0
   require "pathname"
   require Pathname(__FILE__).dirname + "badge"
 
-  UI::Button.public_path = "/tmp"
+  UI.public_path = "/tmp"
   puts UI::Button.new("Create Candidate", 16, "#559900")
   `open /tmp/images/buttons/*`
 end

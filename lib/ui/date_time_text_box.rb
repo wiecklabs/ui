@@ -1,5 +1,7 @@
 module UI
   class DateTimeTextBox
+    Asset::register("javascripts/dateparse.js", UI::asset_path + "javascripts/dateparse.js")
+    Asset::register("javascripts/timeparse.js", UI::asset_path + "javascripts/timeparse.js")
 
     def self.default_offset=(offset)
       @default_offset = offset
