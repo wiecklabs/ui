@@ -17,7 +17,7 @@ module UI
     def initialize(unrooted_path)
       @unrooted_path = unrooted_path
 
-      unless source_path = @@assets.fetch(@unrooted_path)
+      unless source_path = @@assets.fetch(@unrooted_path, nil)
         raise ArgumentError.new("#{unrooted_path} is not a registered asset. Use UI::Asset#register(unrooted_path, full_path).")
       end
 
