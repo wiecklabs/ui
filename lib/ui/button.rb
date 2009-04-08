@@ -80,7 +80,13 @@ if __FILE__ == $0
   require "pathname"
   require Pathname(__FILE__).dirname + "badge"
 
-  UI.public_path = "/tmp"
+  module UI
+    def self.public_path
+      '/tmp'
+    end
+  end
+
   puts UI::Button.new("Create Candidate", 16, "#559900")
+
   `open /tmp/images/buttons/*`
 end
