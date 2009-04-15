@@ -1,0 +1,51 @@
+<% head "color_picker" do %>
+<script type="text/javascript" charset="utf-8" src="<%= UI::Asset.new("javascripts/color_picker.js") %>"></script>
+<% end %>
+
+<% head "color_picker_stylesheets" do %>
+<style type="text/css" media="screen">
+  ul.color_picker { position: absolute; margin: 1px 0px 0px 0px; padding: 0px; }
+  ul.color_picker li { list-style: none; display: inline; padding: 0px 10px; margin: 0px; border: solid 1px #000000; }
+  span.color_picker {
+    margin: 0px;
+    background-color: <%= @value %>;
+    padding: 0px 10px;
+    border: solid 1px #000000;
+  }
+</style>
+<% end %>
+
+<% head "color_picker_javascripts" do %>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+  $("input[type=text][name=<%= h @name %>]").next("span.color_picker").click(function() {
+    $("ul.color_picker").show();
+    $("ul.color_picker").css({
+      "top": $(this).position().top,
+      "left": $(this).position().left
+    });
+    $(this).hide();
+  });
+  
+  $("input[type=text][name=<%= h @name %>]").blur(function() {
+    $(this).val($(this).next().css("background-color"));
+    $("ul.color_picker").hide();
+  });
+  
+  $("ul.color_picker li").click(function() {
+    $(this).parent().prev("span").show();
+    $(this).parent().prev().css("background-color", $(this).css("background-color"));
+    $(this).parent().prev().prev().val($(this).css("background-color").toHex());
+    $(this).parent().hide();
+  });
+});
+</script>
+<% end %>
+
+<span class="color_picker <%= @name %>">&nbsp;</span>
+
+<ul class="color_picker" style="display: none;">
+<% UI::Color::colors do |name, value| %>
+  <li style="background-color: <%= h value %>;" alt="<%= h name %>">&nbsp;</li>
+<% end -%>
+</ul>
