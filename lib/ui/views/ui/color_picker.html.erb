@@ -6,8 +6,8 @@
 <style type="text/css" media="screen">
   ul.color_picker { position: absolute; margin: 1px 0px 0px 0px; padding: 0px; }
   ul.color_picker li { list-style: none; display: inline; padding: 0px; margin: 0px; }
-  ul.color_picker li a { padding: 0px 10px; margin: 0px; border: solid 1px #000000; }
-  span.color_picker { margin: 0px; padding: 0px 10px; border: solid 1px #000000; }
+  ul.color_picker li a { padding: 0px 6px; margin: 0px; border: solid 1px #000000; }
+  span.color_picker { margin: 0px; padding: 0px 6px; border: solid 1px #000000; }
 </style>
 <% end %>
 
@@ -22,13 +22,13 @@ $(function() {
     });
     $(this).hide();
   }).prev("input[type=text]").blur(function() {
+    $(this).next("span.color_picker").show().next("ul.color_picker").hide();
     try {
       $(this).val($(this).val().toHex());
       $(this).next("span").css("background-color", $(this).val());
     } catch(e) {
-      // Color could not be parsed...
+      alert("Color could not be parsed...");
     }
-    $(this).next("ul.color_picker").hide();
   });
   
   $("ul.color_picker li").click(function() {
@@ -43,6 +43,7 @@ $(function() {
 <span class="color_picker <%= @name %>" style="background-color: <%= h(("#" + @value).squeeze("#")) %>;">&nbsp;</span>
 
 <ul class="color_picker" style="display: none;">
+  <li style="background-color: transparent;"><a title="TRANSPARENT">?</a></li>
 <% UI::Color::colors do |name, value| %>
   <li style="background-color: <%= h value %>;"><a title="<%= h name %>">&nbsp;</a></li>
 <% end -%>
