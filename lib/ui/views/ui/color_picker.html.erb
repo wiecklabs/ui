@@ -5,47 +5,45 @@
 <% head "color_picker_stylesheets" do %>
 <style type="text/css" media="screen">
   ul.color_picker { position: absolute; margin: 1px 0px 0px 0px; padding: 0px; }
-  ul.color_picker li { list-style: none; display: inline; padding: 0px 10px; margin: 0px; border: solid 1px #000000; }
-  span.color_picker {
-    margin: 0px;
-    background-color: <%= @value %>;
-    padding: 0px 10px;
-    border: solid 1px #000000;
-  }
+  ul.color_picker li { list-style: none; display: inline; padding: 0px; margin: 0px; }
+  ul.color_picker li a { padding: 0px 10px; margin: 0px; border: solid 1px #000000; }
+  span.color_picker { margin: 0px; padding: 0px 10px; border: solid 1px #000000; }
 </style>
 <% end %>
 
 <% head "color_picker_javascripts" do %>
 <script type="text/javascript" charset="utf-8">
-$(function() {
-  $("input[type=text][name=<%= h @name %>]").next("span.color_picker").click(function() {
-    $("ul.color_picker").show();
-    $("ul.color_picker").css({
+$(function() {  
+  $("span.color_picker").click(function() {
+    $(this).next("ul.color_picker").show();
+    $(this).next("ul.color_picker").css({
       "top": $(this).position().top,
       "left": $(this).position().left
     });
     $(this).hide();
-  });
-  
-  $("input[type=text][name=<%= h @name %>]").blur(function() {
-    $(this).val($(this).next().css("background-color"));
-    $("ul.color_picker").hide();
+  }).prev("input[type=text]").blur(function() {
+    try {
+      $(this).val($(this).val().toHex());
+      $(this).next("span").css("background-color", $(this).val());
+    } catch(e) {
+      // Color could not be parsed...
+    }
+    $(this).next("ul.color_picker").hide();
   });
   
   $("ul.color_picker li").click(function() {
-    $(this).parent().prev("span").show();
-    $(this).parent().prev().css("background-color", $(this).css("background-color"));
-    $(this).parent().prev().prev().val($(this).css("background-color").toHex());
-    $(this).parent().hide();
+    $(this).parent().prev("span").show().css("background-color", $(this).css("background-color"));
+    $(this).parent("ul.color_picker").prev("span").prev("input[type=text]").val($(this).css("background-color").toHex());
+    $(this).parent("ul.color_picker").hide();
   });
 });
 </script>
 <% end %>
 
-<span class="color_picker <%= @name %>">&nbsp;</span>
+<span class="color_picker <%= @name %>" style="background-color: <%= h(("#" + @value).squeeze("#")) %>;">&nbsp;</span>
 
 <ul class="color_picker" style="display: none;">
 <% UI::Color::colors do |name, value| %>
-  <li style="background-color: <%= h value %>;" alt="<%= h name %>">&nbsp;</li>
+  <li style="background-color: <%= h value %>;"><a title="<%= h name %>">&nbsp;</a></li>
 <% end -%>
 </ul>

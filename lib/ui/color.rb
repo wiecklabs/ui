@@ -1,21 +1,27 @@
 module UI
   class Color
-    WHITE = "#ffffff"
-    BLACK = "#111111"
-    BLUE  = "#2222cc"
-    RED   = "#cc2222"
-    GREEN = "#22cc22"
-    GOLD  = "#ffffaa"
-    ORANGE= "#ee3311"
+    WHITE         = "#ffffff"
+    BLACK         = "#111111"
+    BLUE          = "#2222cc"
+    BABY_BLUE     = "#1188cc"
+    RED           = "#cc2222"
+    BRIGHT_RED    = "#cc1122"
+    GREEN         = "#22cc22"
+    LIME          = "#88dd00"
+    GOLD          = "#ffffaa"
+    ORANGE        = "#ee3311"
 
     def self.colors
       colors = constants.select do |name|
         next unless name =~ /[A-Z]+/
         value = const_get(name)
         value.is_a?(String) && value =~ /\#[0-9a-f]{6}/
+      end.sort do |a,b|
+        const_get(a) <=> const_get(b)
       end
 
       if block_given?
+
         colors.each do |name|
           yield name, const_get(name)
         end
