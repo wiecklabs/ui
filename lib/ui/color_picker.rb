@@ -1,7 +1,6 @@
 require "pathname"
 
 module UI
-  require Pathname(__FILE__).dirname + "color"
 
   class ColorPicker
     Asset::register("javascripts/color_picker.js", UI::asset_path + "javascripts/color_picker.js")

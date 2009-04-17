@@ -1,0 +1,27 @@
+<% head "jquery_ui_core" do %>
+<script type="text/javascript" charset="utf-8" src="<%= UI::Asset.new("javascripts/ui.core.js") %>"></script>
+<% end -%>
+<% head "jquery_ui_effects_core" do %>
+<script type="text/javascript" charset="utf-8" src="<%= UI::Asset.new("javascripts/effects.core.js") %>"></script>
+<% end -%>
+<% head "jquery_ui_effects_highlight" do %>
+<script type="text/javascript" charset="utf-8" src="<%= UI::Asset.new("javascripts/effects.highlight.js") %>"></script>
+<% end %>
+
+<% head "highlight_#{@css_class_name}_style" do %>
+<style type="text/css" media="screen">
+  <%= @css_class_name %> { border: solid 2px <%= @color %>; }
+</style>
+<% end %>
+
+<% head "highlight_#{@css_class_name}_script" do %>
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    $(".<%= @css_class_name %>").effect("highlight", "<%= @color %>", <%= @speed %>);
+  });
+</script>
+<% end %>
+
+<div class=".<%= @css_class_name %>">
+  <%= @value %>
+</div>
