@@ -1,4 +1,4 @@
-module Wheels
+module Harbor
   class ViewContext
     
     def head(name = nil, &b)

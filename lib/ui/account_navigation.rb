@@ -10,7 +10,7 @@ module UI
     end
 
     def to_s
-      @to_s ||= Wheels::View.new("ui/account_navigation.html.erb", @context).to_s
+      @to_s ||= Harbor::View.new("ui/account_navigation.html.erb", @context).to_s
     end
   end
 end

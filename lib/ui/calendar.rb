@@ -24,9 +24,9 @@ module UI
 
     def to_s(options = {})
       if options[:size] == :small
-        Wheels::View.new("ui/calendar/small", :calendar => self).to_s
+        Harbor::View.new("ui/calendar/small", :calendar => self).to_s
       else
-        Wheels::View.new("ui/calendar/calendar", :calendar => self).to_s
+        Harbor::View.new("ui/calendar/calendar", :calendar => self).to_s
       end
     end
 

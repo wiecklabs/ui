@@ -1,4 +1,4 @@
-module Wheels
+module Harbor
   class ViewContext
     
     def actions(name = nil, &b)

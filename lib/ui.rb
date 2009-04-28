@@ -1,9 +1,9 @@
 require "rubygems"
 
-gem "wheels"
-require "wheels"
+gem "harbor"
+require "harbor"
 
-Wheels::View::path << Pathname(__FILE__).dirname.expand_path + "ui/views"
+Harbor::View::path << Pathname(__FILE__).dirname.expand_path + "ui/views"
 
 require Pathname(__FILE__).dirname.expand_path + "ui/ui"
 require Pathname(__FILE__).dirname.expand_path + "ui/asset"

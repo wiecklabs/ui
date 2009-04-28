@@ -27,7 +27,7 @@ module UI
     end
 
     def to_s
-      @to_s ||= Wheels::View.new("ui/pagination.html.erb", @context.merge(:pagination => self)).to_s
+      @to_s ||= Harbor::View.new("ui/pagination.html.erb", @context.merge(:pagination => self)).to_s
     end
   end
 end

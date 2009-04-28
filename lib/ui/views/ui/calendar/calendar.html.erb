@@ -35,7 +35,7 @@
         <% @calendar.events.find_all { |event| event.on?(day) }.each do |event| %>
         <span class="event <%= event.type || "" %>">
           <%= event.title %>
-          <%= Wheels::View.new("ui/calendar/_hover", :event => event) %>
+          <%= Harbor::View.new("ui/calendar/_hover", :event => event) %>
         </span>
         <% end %>
       </td>

@@ -17,7 +17,7 @@ module UI
     end
 
     def to_s
-      @to_s ||= Wheels::View.new("ui/toolbar.html.erb", @context.merge(:toolbar => self)).to_s
+      @to_s ||= Harbor::View.new("ui/toolbar.html.erb", @context.merge(:toolbar => self)).to_s
     end
   end
 end
