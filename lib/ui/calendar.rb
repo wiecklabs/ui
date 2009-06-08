@@ -64,11 +64,11 @@ module UI
       attr_accessor :date
 
       def initialize(year, month)
-        @date = Date.new(year, month)
+        @date = ::Date.new(year, month, 1)
       end
 
       def succ
-        date = Date.new(@date.year, @date.month, -1) + 1
+        date = ::Date.new(@date.year, @date.month, -1) + 1
         self.class.new(date.year, date.month)
       end
 
@@ -83,7 +83,7 @@ module UI
       def to_a
         month = []
         days = [].fill(nil, 0, date.wday)
-        days += (date..Date.new(date.year, date.month, -1)).to_a
+        days += (date..::Date.new(date.year, date.month, -1)).to_a
         days << nil until days.size % 7 == 0
         days.each_slice(7) { |week| month << week }
         month
