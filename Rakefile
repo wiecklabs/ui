@@ -6,13 +6,14 @@ require "rake/gempackagetask"
 
 NAME = "ui"
 SUMMARY = "Harbor UI Components"
-GEM_VERSION = "0.4"
+GEM_VERSION = "0.4.1"
 
 spec = Gem::Specification.new do |s|
   s.name = NAME
   s.summary = s.description = SUMMARY
   s.author = "Wieck Media"
   s.email = "dev@wieck.com"
+  s.homepage = "http://www.wieck.com"
   s.version = GEM_VERSION
   s.platform = Gem::Platform::RUBY
   s.require_path = 'lib'
