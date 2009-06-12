@@ -37,6 +37,7 @@
         window.clearTimeout(live_search_timeout);
       }
       else {
+        $("#spinner").show();
         window.clearTimeout(live_search_timeout);
 
         if(live_search_last_keypress) {
@@ -63,9 +64,14 @@
 
       var url = $(this).attr("action") || window.location.toString()
 
-      $("#<%= @list_id %>").load(mergeParams(url, query), null, <%= @callback || "null" %>);
+      $("#<%= @list_id %>").load(mergeParams(url, query), null, callBack(<%= @callback || "null" %>));
       return false;
     });
   });
+
+  function callBack(additional_callback) {
+    $("#spinner").hide();
+    if (additional_callback) additional_callback();
+  }
 </script>
 <% end %>
