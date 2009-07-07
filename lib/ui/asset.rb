@@ -17,11 +17,11 @@ module UI
     def initialize(unrooted_path)
       @unrooted_path = unrooted_path
 
-      unless source_path = @@assets.fetch(@unrooted_path, nil)
+      unless @source_path = @@assets.fetch(@unrooted_path, nil)
         raise ArgumentError.new("#{unrooted_path} is not a registered asset. Use UI::Asset#register(unrooted_path, full_path).")
       end
 
-      FileUtils.cp(source_path, public_path) unless File.file?(public_path)
+      create unless exists?
     end
 
     def public_path
@@ -30,6 +30,17 @@ module UI
 
     def to_s
       '/' + @unrooted_path
+    end
+
+    def exists?
+      File.file?(public_path)
+    end
+
+    private
+
+    def create
+      FileUtils.mkdir_p(public_path.parent)
+      FileUtils.cp(@source_path, public_path)
     end
   end
 end
