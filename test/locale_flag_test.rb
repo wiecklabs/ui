@@ -7,6 +7,11 @@ class LocaleFlagTest < Test::Unit::TestCase
     
   end
   
+  def test_unknown_is_returned_when_locale_is_not_found
+    flag = UI::LocaleFlag.new("foo")
+    assert_equal "/images/locales/unknown.gif", flag.to_s
+  end
+  
   def test_with_locale_to_s
     flag = UI::LocaleFlag.new(Harbor::Locale["en-US"])
     assert_equal "/images/locales/en-US.gif", flag.to_s

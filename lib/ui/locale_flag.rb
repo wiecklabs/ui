@@ -20,7 +20,7 @@ module UI
       elsif locale.respond_to?("culture_code") and ::File.exists?(UI::asset_path + "images/locales/#{locale.culture_code}.gif")
         @culture_code = locale.culture_code
       else
-        raise Error.new "Failed to find a matching locale flag image for #{locale}"
+        @culture_code = "unknown" # This allows us to fall back to "unknown.gif" so apps display a black flag rather than crashing
       end
       Asset::register("images/locales/#{@culture_code}.gif", UI::asset_path + "images/locales/#{@culture_code}.gif")
     end
