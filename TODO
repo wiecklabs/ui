@@ -1,2 +1,5 @@
-Add rakefile to generate gem.
-Add Pagination.
+TODO
+====
+
+* Convert specs to test/unit.
+* Add Pagination.

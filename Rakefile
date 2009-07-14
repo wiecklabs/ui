@@ -1,12 +1,12 @@
 require "rubygems"
 require "pathname"
 require "rake"
-
 require "rake/gempackagetask"
+require "rake/testtask"
 
 NAME = "ui"
 SUMMARY = "Harbor UI Components"
-GEM_VERSION = "0.4.3"
+GEM_VERSION = "0.4.4"
 
 spec = Gem::Specification.new do |s|
   s.name = NAME
@@ -48,4 +48,12 @@ task :publish do
 
   `ssh gems@able.wieck.com "#{commands.join(" && ")}"`
   STDOUT.puts "done"
+end
+
+desc "Run tests"
+task :test do
+  Rake::TestTask.new('test') do |t|
+    t.pattern = "test/**/*_test.rb"
+    #t.warning = true
+  end
 end

@@ -24,3 +24,7 @@ require Pathname(__FILE__).dirname.expand_path + "ui/date_text_box"
 require Pathname(__FILE__).dirname.expand_path + "ui/toolbar"
 require Pathname(__FILE__).dirname.expand_path + "ui/live_search_box"
 require Pathname(__FILE__).dirname.expand_path + "ui/javascripts/default_inputs"
+
+require Pathname(__FILE__).dirname.expand_path + "ui/locale_flag"
+
+require Pathname(__FILE__).dirname.expand_path + "ui/assets"
