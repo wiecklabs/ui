@@ -3,6 +3,12 @@ require "rubygems"
 gem "harbor"
 require "harbor"
 
+module UI
+  
+  class Error < RuntimeError; end
+  
+end
+
 Harbor::View::path << Pathname(__FILE__).dirname.expand_path + "ui/views"
 
 require Pathname(__FILE__).dirname.expand_path + "ui/ui"
@@ -26,5 +32,6 @@ require Pathname(__FILE__).dirname.expand_path + "ui/live_search_box"
 require Pathname(__FILE__).dirname.expand_path + "ui/javascripts/default_inputs"
 
 require Pathname(__FILE__).dirname.expand_path + "ui/locale_flag"
+require Pathname(__FILE__).dirname.expand_path + "ui/locale_selection"
 
 require Pathname(__FILE__).dirname.expand_path + "ui/assets"

@@ -1,0 +1,21 @@
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		$(".locale_selection select").change(function(){
+			var locale = $(this).val();
+			$(".locale_selection img").hide();
+			$(".locale_selection img#" + locale).show();
+		});
+	});
+</script>
+
+
+<div class="locale_selection">
+	<select<%= @locale_selection_data.options[:id].nil? ? "" : " id='#{@locale_selection_data.options[:id]}'" %><%= @locale_selection_data.options[:name].nil? ? "" : " name='#{@locale_selection_data.options[:name]}'" %>>
+	  <% @locale_selection_data.locales.each do |locale| -%>
+	    <option value="<%= locale.culture_code %>"<%= ' selected' if locale.culture_code == @locale_selection_data.selected_culture_code %>><%= locale.description %></option>
+	  <% end %>
+	</select>
+	<% @locale_selection_data.locales.each do |locale|%>
+		<img id="<%= locale.culture_code %>" src="<%= UI::LocaleFlag.new(locale.culture_code) %>" style="<%= 'display: none' unless locale.culture_code == @locale_selection_data.selected_culture_code%>" />
+	<% end %>
+</div>
