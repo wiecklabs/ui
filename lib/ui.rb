@@ -34,4 +34,6 @@ require Pathname(__FILE__).dirname.expand_path + "ui/javascripts/default_inputs"
 require Pathname(__FILE__).dirname.expand_path + "ui/locale_flag"
 require Pathname(__FILE__).dirname.expand_path + "ui/locale_selection"
 
+require Pathname(__FILE__).dirname.expand_path + "ui/social_media"
+
 require Pathname(__FILE__).dirname.expand_path + "ui/assets"
