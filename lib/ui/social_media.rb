@@ -14,6 +14,7 @@ module UI
       'yahoo' => 'http://myweb2.search.yahoo.com/myresults/bookmarklet?u=URL&t=TITLE',
       'newsvine' => 'http://www.newsvine.com/_wine/save?u=URL&h=TITLE',
     }
+    # more here: http://kevin.vanzonneveld.net/techblog/article/list_of_social_bookmarking_sites
     
     attr_accessor :sites
     
