@@ -1,6 +1,8 @@
-<label for="social_media">Social Media</label>
+<% unless @sites.nil? %>
+<label for="social_media">Share This:</label>
 <div class="social_media">
 	<% @sites.each do |name,url| %>
 	<a href="<%= url %>"><img src="<%= UI::Asset.new("images/social_media/#{name}.gif") %>"></a>
 	<% end %>
 </div>
+<% end %>
