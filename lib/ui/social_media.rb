@@ -7,9 +7,9 @@ module UI
       'reddit' => 'http://reddit.com/submit?url=URL&title=TITLE',
       'digg' => 'http://digg.com/submit?phase=2&url=URL&title=TITLE',
       'facebook' => 'http://www.facebook.com/sharer.php?u=URL&t=TITLE',
-      'stumbleupon' => ' http://www.stumbleupon.com/submit?url=URL&title=TITLE',
+      'stumbleupon' => 'http://www.stumbleupon.com/submit?url=URL&title=TITLE',
       'delicious' => 'http://del.icio.us/post?url=URL&title=TITLE',
-      'twitter' => '#',
+      'twitter' => 'http://twitter.com/home?status=TITLE URL',
       'google' => 'http://www.google.com/bookmarks/mark?op=edit&bkmk=URL&title=TITLE',
       'yahoo' => 'http://myweb2.search.yahoo.com/myresults/bookmarklet?u=URL&t=TITLE',
       'newsvine' => 'http://www.newsvine.com/_wine/save?u=URL&h=TITLE',
@@ -51,6 +51,12 @@ module UI
     
     # Returns the bookmarklet URL for the page.
     def url(site)
+      # TODO: is there a better way to check for Cleat?
+      if site == "twitter" && defined? cleat
+        short_url = cleat(@url)
+        return UI::SocialMedia::ALL_SITES[site.downcase].sub(/URL/, short_url).sub(/TITLE/, @title)
+      end
+      
       UI::SocialMedia::ALL_SITES[site.downcase].sub(/URL/, @url).sub(/TITLE/, @title)
     end
     
