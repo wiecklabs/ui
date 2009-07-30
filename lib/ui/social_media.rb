@@ -20,7 +20,7 @@ module UI
     
     # Takes a title and a url, which are passed to the bookmarklets. The sites arguement
     # can be used to specify which bookmarklets to use, or can override elements in the 
-    # existing list. By default, every bookmarklet is shown.
+    # existing list. By default, no bookmarklets are shown.
     def initialize(title, url, sites=nil)
       @url = url
       @title = title
@@ -32,8 +32,8 @@ module UI
         # use only the sites provided in the array
         names = UI::SocialMedia::ALL_SITES.keys.select {|k| sites.include?(k) }
       else
-        # use all of the available bookmarklets
-        names = UI::SocialMedia::ALL_SITES.keys
+        # use none of the available bookmarklets
+        names = []
       end 
 
       # check for and register icons
