@@ -56,7 +56,7 @@ module UI
       # if Cleat is available, shorten the URL for Twitter links.
       # TODO: is there a better way to check for Cleat?
       if site == "twitter" && defined? @context.cleat
-        short_url = @context.q( @context.cleat(url) ) 
+        short_url = @context.q( @context.cleat(@url) ) 
         return UI::SocialMedia::ALL_SITES[site.downcase].sub(/URL/, short_url).sub(/TITLE/, @title)
       end
       
