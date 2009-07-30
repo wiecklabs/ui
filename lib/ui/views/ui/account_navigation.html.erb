@@ -5,12 +5,12 @@
 </style>
 
 <ul class="account">
-  <%
-     UI::AccountNavigation::links.each do |link|
-       link =~ /^(.*)\:(.*)$/
-  -%>
-    <li><a href="<%= $2 %>"><%= $1 %></a></li>
-  <% end -%>
+	<% UI::AccountNavigation::links.each do |link| %>
+		<% if link[2].call(self) %>
+  		<li><a href="<%= link[1] %>"><%= link[0] %></a></li>
+		<% end %>
+  <% end %>
+  
   <li><a href="/account"><%= me %></a></li>
   <li><a href="/session/delete">logout</a></li>
 </ul>

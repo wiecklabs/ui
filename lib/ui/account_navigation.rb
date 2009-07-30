@@ -5,6 +5,10 @@ module UI
       @links ||= []
     end
 
+    def self.register(action, url, block=nil)
+      links << [action, url, (block||lambda { true })]
+    end
+
     def initialize(context)
       @context = context
     end
