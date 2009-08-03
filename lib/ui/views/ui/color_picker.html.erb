@@ -40,7 +40,7 @@ $(function() {
 </script>
 <% end %>
 
-<span class="color_picker <%= @name %>" style="background-color: <%= h(("#" + @value).squeeze("#")) %>;">&nbsp;</span>
+<span class="color_picker <%= @name %>"<% "style=\"background-color: #{ h( ("#" + (@value.is_a?(Integer) ? @value.to_s(16) : @value.to_s) ).squeeze("#")) };\"" unless @value.blank? %>>&nbsp;</span>
 
 <ul class="color_picker" style="display: none;">
   <li style="background-color: transparent;"><a title="TRANSPARENT">?</a></li>
