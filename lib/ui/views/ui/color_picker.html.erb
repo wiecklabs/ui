@@ -29,7 +29,7 @@ $(function() {
     } catch(e) {
       alert("Color could not be parsed...");
     }
-  });
+  }).trigger("blur");
   
   $("ul.color_picker li").click(function() {
     $(this).parent().prev("span").show().css("background-color", $(this).css("background-color"));
