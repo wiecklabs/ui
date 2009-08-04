@@ -13,7 +13,7 @@
 
 <% head "color_picker_javascripts" do %>
 <script type="text/javascript" charset="utf-8">
-$(function() {  
+$(function() {
   $("span.color_picker").click(function() {
     $(this).next("ul.color_picker").show();
     $(this).next("ul.color_picker").css({
@@ -24,7 +24,7 @@ $(function() {
   }).prev("input[type=text]").blur(function() {
     $(this).next("span.color_picker").show().next("ul.color_picker").hide();
     try {
-      $(this).val($(this).val().toHex());
+      $(this).val($(this).val().toHex()).trigger("change");
       $(this).next("span").css("background-color", $(this).val());
     } catch(e) {
       alert("Color could not be parsed...");
@@ -33,7 +33,7 @@ $(function() {
   
   $("ul.color_picker li").click(function() {
     $(this).parent().prev("span").show().css("background-color", $(this).css("background-color"));
-    $(this).parent("ul.color_picker").prev("span").prev("input[type=text]").val($(this).css("background-color").toHex());
+    $(this).parent("ul.color_picker").prev("span").prev("input[type=text]").val($(this).css("background-color").toHex()).trigger("change");
     $(this).parent("ul.color_picker").hide();
   });
 });
