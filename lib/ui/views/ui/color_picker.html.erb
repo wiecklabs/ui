@@ -13,7 +13,7 @@
 
 <% head "color_picker_javascripts" do %>
 <script type="text/javascript" charset="utf-8">
-$(function() {  
+$(function() {
   $("span.color_picker").click(function() {
     $(this).next("ul.color_picker").show();
     $(this).next("ul.color_picker").css({
@@ -24,23 +24,23 @@ $(function() {
   }).prev("input[type=text]").blur(function() {
     $(this).next("span.color_picker").show().next("ul.color_picker").hide();
     try {
-      $(this).val($(this).val().toHex());
+      $(this).val($(this).val().toHex()).trigger("change");
       $(this).next("span").css("background-color", $(this).val());
     } catch(e) {
       alert("Color could not be parsed...");
     }
-  });
+  }).trigger("blur");
   
   $("ul.color_picker li").click(function() {
     $(this).parent().prev("span").show().css("background-color", $(this).css("background-color"));
-    $(this).parent("ul.color_picker").prev("span").prev("input[type=text]").val($(this).css("background-color").toHex());
+    $(this).parent("ul.color_picker").prev("span").prev("input[type=text]").val($(this).css("background-color").toHex()).trigger("change");
     $(this).parent("ul.color_picker").hide();
   });
 });
 </script>
 <% end %>
 
-<span class="color_picker <%= @name %>" style="background-color: <%= h(("#" + @value).squeeze("#")) %>;">&nbsp;</span>
+<span class="color_picker <%= @name %>"<% "style=\"background-color: #{ h( ("#" + (@value.is_a?(Integer) ? @value.to_s(16) : @value.to_s) ).squeeze("#")) };\"" unless @value.blank? %>>&nbsp;</span>
 
 <ul class="color_picker" style="display: none;">
   <li style="background-color: transparent;"><a title="TRANSPARENT">?</a></li>
