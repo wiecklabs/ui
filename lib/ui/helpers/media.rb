@@ -27,3 +27,5 @@ module UI
     end
   end
 end
+
+Harbor::ViewContext.send(:include, UI::Helpers::Media)
