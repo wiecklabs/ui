@@ -20,7 +20,6 @@ translations = @data.translations
   
   <% translations.each do |translation| -%>
     <div class="<%= content_type %>_translation" id="<%= content_type %>_<%= translation.culture_code %>" style="<%= 'display: none;' unless (default_translation && translation.culture_code == default_translation.culture_code) %>">
-      <img class="locale_flag" src="<%= UI::LocaleFlag.new(translation.locale) %>" alt="<%= translation.locale %>">
       <div style="clear: both;"> </div>
       
       <label for="translations_<%= translation.culture_code %>_title">Title</label>
@@ -39,7 +38,6 @@ translations = @data.translations
   
   <% Harbor::Locale::active_locales.reject { |locale| translations.map { |translation| translation.culture_code }.include?(locale.culture_code) }.each do |locale| -%>
     <div class="<%= content_type %>_translation" id="<%= content_type %>_<%= locale.culture_code %>" style='<%= "display: none;" unless  translations.size == 0 && locale == Harbor::Locale.default %>'>
-      <img class="locale_flag" src="<%= UI::LocaleFlag.new(locale) %>" alt="<%= locale %>">
       <div style="clear: both;"> </div>
       
       <label for="translations_<%= locale.culture_code %>_title">Title</label>
