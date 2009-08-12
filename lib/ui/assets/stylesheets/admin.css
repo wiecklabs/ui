@@ -28,6 +28,22 @@ body { font: 67.5%/2em "Lucida Grande"; margin: 0; }
 .header #media_navigation { clear: left; }
 .header #content_navigation { float: right; }
 
+ul#tabnav-left { text-align: left; list-style-type: none; margin: 0; padding: 0; clear:left; float: left; }
+ul#tabnav-left li { display: inline; }
+ul#tabnav-left li a { padding: 3px 4px 4px 4px; border: 1px solid #555555; background-color: #EEEEEE; color: #000; margin-right: 5px; text-decoration: none; border-bottom: none; }
+ul#tabnav-left li.selected { padding: 10px 10px; margin-top: 5px; border-bottom: 1px solid #555555; background-color: #555555; }
+ul#tabnav-left li.selected a { background-color: #555555; color: #fff; position: relative; top: 1px; padding-top: 4px; }
+ul#tabnav-left a:hover { background: #555555; color: #fff; }
+
+ul#tabnav-right { text-align: right; list-style-type: none; margin: 0; padding: 0; clear:right; }
+ul#tabnav-right li { display: inline; }
+ul#tabnav-right li a { padding: 15px 20px 4px 20px; border: 1px solid #555555; background-color: #EEEEEE; color: #002650; margin-right: 5px; text-decoration: none; border-bottom: none; }
+
+ul#tabnav-right #export_options { background-color: #fff; border: 1px solid #000; padding: 4px; }
+ul#tabnav-right #export_options li { display: inline; float: none; }
+ul#tabnav-right #export_options li a { background-color: #fff; display: inline; margin: 0; padding: 0; border: 1px solid #555555 }
+ul#tabnav-right #export_options li a.delete { color: #900; }
+
 .content { margin: 0 auto; overflow: auto; padding: 2em; width: 95%; }
 
 .column { float: left; padding: 0 1em; width: 48em; }
