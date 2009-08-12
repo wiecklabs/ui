@@ -2,8 +2,10 @@
 
 module UI
   
+  Asset::register("javascripts/admin.js", UI::asset_path + "javascripts/admin.js")
   Asset::register("javascripts/date.js", UI::asset_path + "javascripts/date.js")
   
+  Asset::register("stylesheets/admin.css", UI::asset_path + "stylesheets/admin.css")
   Asset::register("stylesheets/date_picker.css", UI::asset_path + "stylesheets/date_picker.css")
   
   Asset::register("images/calendar.gif", UI::asset_path + "images/calendar.gif")
