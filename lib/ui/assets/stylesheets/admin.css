@@ -28,7 +28,7 @@ body { font: 67.5%/2em "Lucida Grande"; margin: 0; }
 .header #media_navigation { clear: left; }
 .header #content_navigation { float: right; }
 
-ul#tabnav-left { text-align: left; list-style-type: none; margin: 0; padding: 0; clear:left; float: left; }
+ul#tabnav-left { text-align: left; list-style-type: none; margin: 0; padding: 0; clear:both; float: left; }
 ul#tabnav-left li { display: inline; }
 ul#tabnav-left li a { padding: 3px 4px 4px 4px; border: 1px solid #555555; background-color: #EEEEEE; color: #000; margin-right: 5px; text-decoration: none; border-bottom: none; }
 ul#tabnav-left li.selected { padding: 10px 10px; margin-top: 5px; border-bottom: 1px solid #555555; background-color: #555555; }
@@ -48,6 +48,8 @@ ul#tabnav-right #export_options li a.delete { color: #900; }
 
 .column { float: left; padding: 0 1em; width: 48em; }
 
+div.clear { clear: both; }
+
 a { border-bottom: 1px dotted #ccc; color: #063A60; font-weight: bold; text-decoration: none; }
 a:hover { border-bottom: 1px dotted #063A60; }
 a img { border: none; vertical-align: middle; }
@@ -64,11 +66,18 @@ pre { background-color: #eee; font: 1.2em/2em Monaco, monospace; padding: 1em; }
 
 table { border-collapse: collapse; width: 100%; }
 thead th { background-color: #eee; padding: .5em 1em; text-align: left; }
-tbody td { border-bottom: 1px solid #eee; padding: .5em 1em; }
+tbody td { border-top: 1px solid #eee; padding: .5em 1em; }
+
+tbody tr:hover { border-left: 1px solid #000; border-right: 1px solid #000; }
+tbody tr:hover td { border-top: 1px solid #000; border-bottom: 1px solid #000; }
+tbody tr.selected td { background-color: #ffe; }
+
+.batch { background-color: #555; color: #ccc; margin: 0; padding: 1em; }
+.batch a { border-color: #fff; color: #fff; font-weight: bold; }
 
 fieldset { border: 0; border-bottom: 1px solid #ccc; margin-bottom: 2em; padding: 1em 0; }
 legend { color: #063A60; font-size: 1.2em; font-weight: bold; overflow: auto; padding: 0; }
-label { clear: left; display: block; float: left; font-weight: bold; line-height: 2em; margin: 10px 0 0 0; width: 13em; }
+label { clear: left; display: block; float: left; font-weight: bold; line-height: 2em; width: 13em; }
 fieldset input { float: left; width: 32em; }
 fieldset input[type=checkbox] { width: auto; }
 fieldset select { float: left; width: 32em; }
@@ -82,14 +91,19 @@ ul.message { list-style: none; }
 .links { list-style: none; margin-bottom: 1em; overflow: none; padding: 0; }
 .links li { display: inline; margin-right: 1em; }
 
-.live_search { background-color: #555; color: #fff; margin: 0; padding: 1em 1em 0; }
+.live_search { background-color: #555; color: #fff; margin: 0; padding: 1em 1em 1em; }
 .live_search fieldset { border: 0; margin: 0; padding: 0; }
 .live_search input { width: 30em; }
-.live_search label { width: 12em; }
+.live_search label { margin-right: 1em; width: auto; }
 
 .account { position: absolute; top: 0px; right: 0px; }
 .account li { display: inline; }
 .account a { color: #fff; margin: 6px; }
+
+.help { background-color: #ffc; color: #063A60; font-weight: bold; padding: 4px; margin-bottom: 20px; width: 50%; clear: both; float: right; text-align: right; }
+
+.page_count { float: right; padding-left: 5px; }
+.channel_filter { float: right; }
 
 /* Modal Stuff */    
 #modalOverlay { background-color:#000; }
