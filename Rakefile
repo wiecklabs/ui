@@ -6,7 +6,7 @@ require "rake/testtask"
 
 NAME = "ui"
 SUMMARY = "Harbor UI Components"
-GEM_VERSION = "0.5.4"
+GEM_VERSION = "0.5.5"
 
 spec = Gem::Specification.new do |s|
   s.name = NAME
@@ -18,6 +18,9 @@ spec = Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.require_path = 'lib'
   s.files = %w(Rakefile) + Dir.glob("lib/**/*")
+
+  s.add_dependency "harbor"
+
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
