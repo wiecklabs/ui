@@ -38,3 +38,5 @@ require Pathname(__FILE__).dirname.expand_path + "ui/content_translations"
 require Pathname(__FILE__).dirname.expand_path + "ui/social_media"
 
 require Pathname(__FILE__).dirname.expand_path + "ui/assets"
+
+require Pathname(__FILE__).dirname.expand_path + "ui/dialogs/email_prompt"
