@@ -10,7 +10,7 @@ module UI
     def self.copy_assets!
       @@assets.each do |unrooted_path, source_path|
         public_path = Pathname(UI::public_path) + unrooted_path
-        FileUtils.cp(source_path, public_path)
+        FileUtils.cp_r(source_path, public_path)
       end
     end
 
@@ -40,7 +40,7 @@ module UI
 
     def create
       FileUtils.mkdir_p(public_path.parent)
-      FileUtils.cp(@source_path, public_path)
+      FileUtils.cp_r(@source_path, public_path)
     end
   end
 end
