@@ -11,6 +11,9 @@
 
 <div class="locale_selection">
 	<select<%= @locale_selection_data.options[:id].nil? ? "" : " id='#{@locale_selection_data.options[:id]}'" %><%= @locale_selection_data.options[:name].nil? ? "" : " name='#{@locale_selection_data.options[:name]}'" %>>
+		<% if @locale_selection_data.selected_culture_code.blank? %>
+			<option value="">Please choose one</option>
+		<% end %>
 	  <% @locale_selection_data.locales.each do |locale| -%>
 	    <option value="<%= locale.culture_code %>"<%= ' selected' if locale.culture_code == @locale_selection_data.selected_culture_code %>><%= locale.description %></option>
 	  <% end %>
