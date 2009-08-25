@@ -1,0 +1,40 @@
+<% @context.head "stylesheets/date_picker.css" do -%>
+  <link rel="stylesheet" type="text/css" media="screen" href="<%= UI::Asset.new("stylesheets/date_picker.css") %>">
+<% end -%>
+<% @context.head do -%>
+  <style type="text/css" media="screen">
+    a.dp-choose-date {
+      float: left; display: block; overflow: hidden;
+      width: 5px; height: 16px; margin: 5px 3px 0; padding: 0 5px; text-indent: -2000px;
+      background: url('<%= UI::Asset.new("images/calendar.gif") %>') no-repeat;
+    }
+    a.dp-choose-date.dp-disabled { background-position: 0 -20px; cursor: default; }
+    input.dp-applied { width: 100px; float: left; }
+    #<%= @id %> input { float: left; display: inline; }
+    #<%= @id %> label { float: left; clear: none; width: auto; line-height: auto; padding-right: 5px; }
+    #<%= @id %>_submit { float: left; width: auto; line-height: auto; }
+  </style>
+
+  <script type="text/javascript">
+    $(function() {
+      Date.format = 'yyyy-mm-dd';
+      $('#<%= @id %> .date-pick').datePicker({ startDate: '<%= @start_date.strftime('%Y-%m-%d') %>', endDate: '<%= @end_date.strftime('%Y-%m-%d') %>' });
+      $('#<%= @id %>_start_date').datePicker().val("<%= @start_date.strftime('%Y-%m-%d') %>").trigger('change');
+      $('#<%= @id %>_end_date').datePicker().val("<%= @end_date.strftime('%Y-%m-%d') %>").trigger('change');
+      $('#<%= @id %>_submit').click(function() {
+        var start_date = $('#<%= @id %>_start_date').val();
+        var end_date = $('#<%= @id %>_end_date').val();
+        $('#<%= @id %>').trigger('date_changed', { start_date: start_date, end_date: end_date });
+        return false;
+      });
+    });
+  </script>
+<% end -%>
+<div class="date-range-selection" id="<%= @id %>">
+  <label for="<%= @id %>_start_date"><%= @label %></label>
+  <input name="<%= @id %>_start_date" id="<%= @id %>_start_date" class="date-pick" style="width: 100px;">
+  <label name="<%= @id %>_end_date">-</label>
+  <input name="<%= @id %>_end_date" id="<%= @id %>_end_date" class="date-pick" style="width: 100px;">
+  <input type="submit" id="<%= @id %>_submit" value="Go">
+</div>
+<div style="clear: both;"> </div>
