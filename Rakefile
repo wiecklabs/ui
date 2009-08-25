@@ -6,7 +6,8 @@ require "rake/testtask"
 
 NAME = "ui"
 SUMMARY = "Harbor UI Components"
-GEM_VERSION = "0.5.8"
+
+GEM_VERSION = "0.5.10"
 
 spec = Gem::Specification.new do |s|
   s.name = NAME
