@@ -1,0 +1,31 @@
+<% head 'graphic_image_jscript' do %>
+	<script type="text/javascript" charset="utf-8">
+		$(function(){
+
+			$(".graphic_content_container .graphic_placeholder").click(function(){				
+				$(this).hide();
+				$(this).siblings(".graphic_original").show();
+				if( $(this).siblings("input").length > 0)
+				{
+					href = $(this).siblings("input").val();
+					$.post(href);
+				}
+				return false;
+			});
+		});
+	</script>
+<% end %>
+
+<% if @data.show_placeholder %>
+	<div class="graphic_content_container" style="width: <%= @data.width %>px; height: <%= @data.height %>px;">
+		<img src="<%= @data.placeholder_image %>" width="<%= @data.width %>" height="<%= @data.height %>" class="graphic_placeholder" style="" />
+		<img src="<%= @data.original_image %>" class="graphic_original" style="display: none;" />
+		<% if @data.post_url %>
+			<input type="hidden" class="post_url" value="<%= @data.post_url %>" />
+		<% end %>
+	</div>
+<% else %>
+	<div class="graphic_content_container" style="width: <%= @data.width %>px; height: <%= @data.height %>px;">
+		<img src="<%= @data.original_image %>" />
+	</div>
+<% end %>
