@@ -33,7 +33,7 @@ module UI
     end
 
     def exists?
-      File.file?(public_path)
+      File.exists?(public_path)
     end
 
     private
