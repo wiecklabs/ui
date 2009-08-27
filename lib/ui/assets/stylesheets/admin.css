@@ -47,7 +47,7 @@ ul#tabnav-right #export_options li a.delete { color: #900; }
 
 .content { margin: 0 auto; overflow: auto; padding: 2em; width: 95%; }
 
-.column { float: left; padding: 0 1em; width: 48em; }
+.column { float: left; padding: 0 1em; width: 47%; }
 
 div.clear { clear: both; }
 
@@ -70,9 +70,9 @@ thead th { background-color: #eee; padding: .5em 1em; text-align: left; }
 tbody tr { border-left: 1px solid #fff; border-right: 1px solid #fff; }
 tbody td { border-top: 1px solid #eee; padding: .5em 1em; }
 
-tbody tr:hover { border-left: 1px solid #000; border-right: 1px solid #000; }
-tbody tr:hover td { border-top: 1px solid #000; border-bottom: 1px solid #000; }
-tbody tr.selected td { background-color: #ffe; }
+tbody tr.selectable:hover { border-left: 1px solid #000; border-right: 1px solid #000; }
+tbody tr.selectable:hover td { border-top: 1px solid #000; border-bottom: 1px solid #000; }
+tbody tr.selectable.selected td { background-color: #ffe; }
 
 .batch { background-color: #ddd; color: #555; margin: 0; padding: 1em; }
 .batch a { border-color: #fff; color: #fff; font-weight: bold; }
