@@ -19,8 +19,8 @@
     $(function() {
       Date.format = 'yyyy-mm-dd';
       $('#<%= @id %> .date-pick').datePicker({ startDate: '<%= @start_date.strftime('%Y-%m-%d') %>', endDate: '<%= @end_date.strftime('%Y-%m-%d') %>' });
-      $('#<%= @id %>_start_date').datePicker().val("<%= @start_date.strftime('%Y-%m-%d') %>").trigger('change');
-      $('#<%= @id %>_end_date').datePicker().val("<%= @end_date.strftime('%Y-%m-%d') %>").trigger('change');
+      $('#<%= @id %>_start_date').datePicker().val("<%= @selected_start_date.strftime('%Y-%m-%d') %>").trigger('change');
+      $('#<%= @id %>_end_date').datePicker().val("<%= @selected_end_date.strftime('%Y-%m-%d') %>").trigger('change');
       $('#<%= @id %>_submit').click(function() {
         var start_date = $('#<%= @id %>_start_date').val();
         var end_date = $('#<%= @id %>_end_date').val();
