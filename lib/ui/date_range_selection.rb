@@ -8,8 +8,15 @@ module UI
       @context = context
       @options = options
 
-      options[:start_date] ||= Date.today - 30
-      options[:end_date] ||= Date.today
+      # Set up the range of selectable dates.
+      @options[:start_date] ||= ::Date.parse('1970-1-1')
+      @options[:end_date] ||= ::Date.today
+
+      # Set up the initially selected range.
+      @options[:selected_start_date] ||= ::Date.today - 30 
+      @options[:selected_end_date] ||= ::Date.today
+
+      @options[:label] ||= "Timeframe:"
     end
     
     def to_s
