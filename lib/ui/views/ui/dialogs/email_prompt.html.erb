@@ -1,14 +1,3 @@
-<script type="text/javascript">
-  function closeModal() {
-    $(window).unbind('keyup');
-    $('.modalClose').click();
-  }
-  
-  function openModal(content) {
-    content.modal();
-    $(window).keyup(function(e) { if (e.keyCode == 27) closeModal(); });
-  }
-</script>
 <a href="#" onclick="openModal($('#email_prompt_modal')); return false;">Email a Friend</a>
 <div id="email_prompt_modal" style="display: none;">
   <h1>Email a Friend</h1>
