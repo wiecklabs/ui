@@ -1,6 +1,8 @@
 require "fileutils"
 require "pathname"
 
+require Pathname(__FILE__).dirname + "color"
+
 module UI
 
   class Badge
