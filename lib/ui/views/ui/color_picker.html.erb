@@ -20,6 +20,7 @@ $(function() {
       "top": $(this).position().top,
       "left": $(this).position().left
     });
+		$(this).prev("input[type=text]").focus();
     $(this).hide();
   }).prev("input[type=text]").blur(function() {
     $(this).next("span.color_picker").show().next("ul.color_picker").hide();
