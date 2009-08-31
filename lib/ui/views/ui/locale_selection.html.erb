@@ -2,15 +2,15 @@
 	$(function(){
 		$(".locale_selection select").change(function(){
 			var locale = $(this).val();
-			$(".locale_selection img").hide();
-			$(".locale_selection img#" + locale).show();
+			$(".locale_selection div").hide();
+			$(".locale_selection div#" + locale).show();
 		});
 	});
 </script>
 
 
-<div class="locale_selection">
-	<select<%= @locale_selection_data.options[:id].nil? ? "" : " id='#{@locale_selection_data.options[:id]}'" %><%= @locale_selection_data.options[:name].nil? ? "" : " name='#{@locale_selection_data.options[:name]}'" %>>
+<div class="locale_selection" style="width: 260px;">
+	<select<%= @locale_selection_data.options[:id].nil? ? "" : " id='#{@locale_selection_data.options[:id]}'" %><%= @locale_selection_data.options[:name].nil? ? "" : " name='#{@locale_selection_data.options[:name]}'" %> style='float: left; width: 230px;'>
 		<% if @locale_selection_data.selected_culture_code.blank? %>
 			<option value="">Please choose one</option>
 		<% end %>
@@ -18,10 +18,12 @@
 	    <option value="<%= locale.culture_code %>"<%= ' selected' if locale.culture_code == @locale_selection_data.selected_culture_code %>><%= locale.description %></option>
 	  <% end %>
 	</select>
-	<% unless @locale_selection_data.options[:no_flag] %>
-		<% @locale_selection_data.locales.each do |locale| %>
-			<% empty_code = @locale_selection_data.selected_culture_code.blank? && locale == @locale_selection_data.locales.first %>
-			<img id="<%= locale.culture_code %>" src="<%= UI::LocaleFlag.new(locale.culture_code) %>" style="<%= 'display: none' unless locale.culture_code == @locale_selection_data.selected_culture_code || empty_code %>" />
-		<% end %>
-	<% end %>
+	<% unless @locale_selection_data.options[:no_flag] -%>
+		<% @locale_selection_data.locales.each do |locale| -%>
+			<% empty_code = @locale_selection_data.selected_culture_code.blank? && locale == @locale_selection_data.locales.first -%>
+                        <div id="<%= locale.culture_code %>" style="float: left; margin-left: 8px; display:<%= (locale.culture_code == @locale_selection_data.selected_culture_code || empty_code) ? 'block' : 'none' %>">
+                          <img src="<%= UI::LocaleFlag.new(locale.culture_code) %>"  />
+                        </div>
+		<% end -%>
+	<% end -%>
 </div>
