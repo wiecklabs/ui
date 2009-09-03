@@ -12,36 +12,42 @@
 <% end %>
 
 <% head "color_picker_javascripts" do %>
-<script type="text/javascript" charset="utf-8">
-$(function() {
-  $("span.color_picker").click(function() {
-    $(this).next("ul.color_picker").show();
-    $(this).next("ul.color_picker").css({
-      "top": $(this).position().top,
-      "left": $(this).position().left
-    });
-		$(this).prev("input[type=text]").focus();
-    $(this).hide();
-  }).prev("input[type=text]").blur(function() {
-		var self = $(this)
-		window.setTimeout(function(){
-    	self.next("span.color_picker").show().next("ul.color_picker").hide();
+	<script type="text/javascript" charset="utf-8">
+	$(function() {
+	  $("span.color_picker").click(function(e) {
+			$("input[type=text]").trigger("color_update");
+	    $(this).next("ul.color_picker").show();
+	    $(this).next("ul.color_picker").css({
+	      "top": $(this).position().top,
+	      "left": $(this).position().left
+	    });
+			// $(this).prev("input[type=text]").focus();
+	    $(this).hide();
+			if( e.stopPropagation ) { e.stopPropagation(); } //For 'Good' browsers
+			else { e.cancelBubble = true; } //For IE
+	  }).prev("input[type=text]").bind("color_update", function() {
+	   	$(this).next("span.color_picker").show().next("ul.color_picker").hide();
 		    try {
-		      self.val(self.val().toHex()).trigger("change");
-		      self.next("span").css("background-color", self.val());
+		      $(this).val($(this).val().toHex()).trigger("change");
+		      $(this).next("span").css("background-color", $(this).val());
 		    } catch(e) {
 		      alert("Color could not be parsed...");
 		    }
-		}, 100);
-  }).trigger("blur");
+	  }).trigger("color_update");
   
-  $("ul.color_picker li").click(function() {
-    $(this).parent().prev("span").show().css("background-color", $(this).children("a").css("background-color"));
-    $(this).parent("ul.color_picker").prev("span").prev("input[type=text]").val($(this).children("a").css("background-color").toHex()).trigger("change");
-    $(this).parent("ul.color_picker").hide();
-  });
-});
-</script>
+	  $("ul.color_picker li").click(function(e) {
+	    $(this).parent().prev("span").show().css("background-color", $(this).children("a").css("background-color"));
+	    $(this).parent("ul.color_picker").prev("span").prev("input[type=text]").val($(this).children("a").css("background-color").toHex()).trigger("change");
+	    $(this).parent("ul.color_picker").hide();
+			if( e.stopPropagation ) { e.stopPropagation(); } //For 'Good' browsers
+			else { e.cancelBubble = true; } //For IE
+	  });
+
+		$(document).click(function(){
+			$("input[type=text]").trigger("color_update");
+		});
+	});
+	</script>
 <% end %>
 
 <span class="color_picker <%= @name %>"<% "style=\"background-color: #{ h( ("#" + (@value.is_a?(Integer) ? @value.to_s(16) : @value.to_s) ).squeeze("#")) };\"" unless @value.blank? %>>&nbsp;</span>
