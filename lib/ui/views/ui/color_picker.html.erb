@@ -23,13 +23,16 @@ $(function() {
 		$(this).prev("input[type=text]").focus();
     $(this).hide();
   }).prev("input[type=text]").blur(function() {
-    $(this).next("span.color_picker").show().next("ul.color_picker").hide();
-    try {
-      $(this).val($(this).val().toHex()).trigger("change");
-      $(this).next("span").css("background-color", $(this).val());
-    } catch(e) {
-      alert("Color could not be parsed...");
-    }
+		var self = $(this)
+		window.setTimeout(function(){
+    	self.next("span.color_picker").show().next("ul.color_picker").hide();
+		    try {
+		      self.val(self.val().toHex()).trigger("change");
+		      self.next("span").css("background-color", self.val());
+		    } catch(e) {
+		      alert("Color could not be parsed...");
+		    }
+		}, 100);
   }).trigger("blur");
   
   $("ul.color_picker li").click(function() {
