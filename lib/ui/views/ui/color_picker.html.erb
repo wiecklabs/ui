@@ -28,12 +28,17 @@
 	  }).prev("input[type=text]").bind("color_update", function() {
 	   	$(this).next("span.color_picker").show().next("ul.color_picker").hide();
 		    try {
-		      $(this).val($(this).val().toHex()).trigger("change");
+		      $(this).val($(this).val().toHex())
 		      $(this).next("span").css("background-color", $(this).val());
+					$(this).trigger("change");
 		    } catch(e) {
+					$(this).val("");
 		      alert("Color could not be parsed...");
 		    }
-	  }).trigger("color_update");
+				
+	  }).blur(function(){
+			$(this).trigger("color_update");
+		}).trigger("color_update");
   
 	  $("ul.color_picker li").click(function(e) {
 	    $(this).parent().prev("span").show().css("background-color", $(this).children("a").css("background-color"));
@@ -42,9 +47,9 @@
 			if( e.stopPropagation ) { e.stopPropagation(); } //For 'Good' browsers
 			else { e.cancelBubble = true; } //For IE
 	  });
-
+	
 		$(document).click(function(){
-			$("input[type=text]").trigger("color_update");
+			$("input[type=text].cp").trigger("color_update");
 		});
 	});
 	</script>
