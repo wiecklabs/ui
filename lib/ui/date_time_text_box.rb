@@ -10,6 +10,14 @@ module UI
     def self.default_offset
       @default_offset || (Time.now.gmt_offset / 60 / 60)
     end
+    
+    def self.build(date_options)
+      if date_options && date_options.is_a?(Array)
+        ::DateTime.civil(*date_options.map { |component| component.to_i })
+      else
+        nil
+      end
+    end
 
     def initialize(context, object, name, field, options = {})
       @context = context
