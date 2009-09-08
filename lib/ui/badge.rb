@@ -9,6 +9,29 @@ module UI
 
     attr_accessor :title, :subtitle, :background_color, :title_color, :subtitle_color
 
+    ##
+    # Path to font to be used for badge titles. Tahoma Bold works well.
+    ##
+    def self.title_font=(font)
+      @title_font = font
+    end
+
+    def self.title_font
+      @title_font
+    end
+
+    ##
+    # Path to font to be used for badge subtitles. Best as a small, pixel font
+    # such as Silkscreen.
+    ##
+    def self.subtitle_font=(font)
+      @subtitle_font = font
+    end
+
+    def self.subtitle_font
+      @subtitle_font
+    end
+
     def initialize(title, subtitle = nil, background_color = Color::BLUE, title_color = Color::WHITE, subtitle_color = Color::GOLD)
       @title = title
       @background_color, @title_color, @subtitle_color = background_color, title_color, subtitle_color
@@ -43,12 +66,8 @@ module UI
       filename << ".gif"
     end
 
-    def font_path
-      Pathname(__FILE__).dirname.expand_path + "fonts"
-    end
-
     def convert_command
-      cmd  = "convert -size 42x20 xc:none "
+      cmd  = "/opt/local/bin/convert -size 42x20 xc:none "
 
       # Prepare canvas with rounded box
       cmd << "-fill '#{background_color}' -stroke '#{Color.darken(background_color)}' -draw 'roundRectangle 0, 0, 40, 18, 2, 2' "
@@ -59,7 +78,7 @@ module UI
       # Now let's apply the basic font settings
 
       cmd << "-gravity North "
-      cmd << "-font #{font_path + "TahomaBold.ttf"} "
+      cmd << "-font #{self.class.title_font} " if self.class.title_font
       cmd << "-pointsize 10.5 -fill '#{title_color}' "
 
       # Draw the text a few times using a darker color
@@ -77,10 +96,9 @@ module UI
       cmd << "-draw \"text -1, #{offset} '#{title}'\" "
 
       # If we have a subtitle, add that, too
-
       if subtitle
         cmd << "-gravity North "
-        cmd << "-font #{font_path + "Silkscreen.ttf"} "
+        cmd << "-font #{self.class.subtitle_font} " if self.class.subtitle_font
         cmd << "-pointsize 8 -fill '#{subtitle_color}' "
         cmd << "-draw \"text 0, 10 '#{subtitle}'\" "
       end
@@ -92,29 +110,17 @@ module UI
   end
 end
 
-if __FILE__ == $0
-  `rm -r /tmp/images`
-  UI.public_path = "/tmp"
-  path = UI::Badge.new("MP3", nil, "#a10007").to_s
-  `open /tmp#{path}`
-  # UI::Badge.new("FLV", nil, "#cc1122").to_s
-  # UI::Badge.new("WMV", nil, "#88dd00").to_s
-  # UI::Badge.new("MOV", nil, "#1188cc").to_s
-  # UI::Badge.new("MOV", "HI-RES", "#000000").to_s
-  # 
-  # `open /tmp/images/badges/*`
 
-  # puts UI::Badge.new("MOV", "16:9", UI::Color::BLUE)
-  # puts UI::Badge.new("HIRES", "16:9", UI::Color::BLUE)
-  # puts UI::Badge.new("WMV", nil, UI::Color::GREEN)
-  # puts UI::Badge.new("FLV", "16:9", UI::Color::RED)
-  # puts UI::Badge.new("SRC", nil, UI::Color::ORANGE)
-  # puts UI::Badge.new("SAMP", "MeCrazy", UI::Color::ORANGE)
-  # puts UI::Badge.new("TST", '', UI::Color::ORANGE)
-  # `open /tmp/images/badges/*`
-  # cc1122 -> dd5566
-  # 0600ff -> 5555ff
-  # 88dd00 -> aaee33
-  # 1188cc -> 55aadd
-  # 000000 -> 444444
+if __FILE__ == $0
+  module UI
+    def self.public_path
+      '/tmp'
+    end
+  end
+
+  `rm -r /tmp/images/badges` rescue nil
+
+  puts path = UI::Badge.new("MP3", "++++", "#a10007").to_s
+
+  `open /tmp/#{path}`
 end

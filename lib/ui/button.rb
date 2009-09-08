@@ -3,6 +3,17 @@ module UI
 
     attr_accessor :text, :size, :text_color, :button_color, :background_color
 
+    ##
+    # Path to font to be used for button text. Tahoma and Myriad Bold work well.
+    ##
+    def self.font=(font)
+      @font = font
+    end
+
+    def self.font
+      @font
+    end
+
     def initialize(text, size = 16, text_color = Color::BLACK, button_color = Color::WHITE, width = nil, height = nil)
       @text = text
       @size = size
@@ -18,7 +29,7 @@ module UI
     end
 
     def width
-      @width ||= ((text.size * size) * 0.55).to_i
+      @width ||= ((text.size * size) * 0.6).to_i
     end
 
     def height
@@ -46,20 +57,17 @@ module UI
       UI.public_path + unrooted_path
     end
 
-    def font_path
-      Pathname(__FILE__).dirname.expand_path + "fonts"
-    end
-
     def convert_command
 
-      cmd = "convert -size #{width}x#{height} "
+      cmd = "/opt/local/bin/convert -size #{width}x#{height} "
 
       # Draw button
       cmd << "xc:none -fill '#{button_color}' -stroke '#{Color.darken(button_color)}' "
       cmd << "-draw 'roundRectangle 0, 0, #{width - 4}, #{height - 4}, 4, 4' "
 
       # Add text
-      cmd << "-stroke none -gravity Center -blur 0x.5 -font #{font_path + "MyriadPro-Semibold.otf"} "
+      cmd << "-stroke none -gravity Center -blur 0x.5 "
+      cmd << "-font #{self.class.font} " if self.class.font
       cmd << "-pointsize #{size} "
 
       cmd << "-fill '#{Color.darken(button_color)}' "
@@ -86,7 +94,9 @@ if __FILE__ == $0
     end
   end
 
-  puts UI::Button.new("Create Candidate", 16, "#559900")
+  `rm -r /tmp/images/buttons` rescue nil
 
-  `open /tmp/images/buttons/*`
+  puts path = UI::Button.new("Create Candidate", 16, "#559900")
+
+  `open /tmp/#{path}`
 end
