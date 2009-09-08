@@ -9,6 +9,8 @@ SUMMARY = "Harbor UI Components"
 
 GEM_VERSION = "0.5.19"
 
+task :default => :test
+
 spec = Gem::Specification.new do |s|
   s.name = NAME
   s.summary = s.description = SUMMARY
