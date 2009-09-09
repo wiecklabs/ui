@@ -1,0 +1,23 @@
+<% value = @object.send(@field) %>
+<div class="date">
+  <select id="<%= @name %>_<%= @field %>" name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
+    <option></option>
+    <% (this_year = Date.today.year).upto(this_year + 1) do |year| %>
+    <option <%= 'selected' if value && value.year == year %> value="<%= year %>"><%= year %></option>
+    <% end %>
+  </select>
+
+  <select name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
+    <option></option>
+    <% 1.upto(12) do |month| %>
+    <option <%= 'selected' if value && value.month == month %>  value="<%= month %>"><%= month %></option>
+    <% end %>
+  </select>
+
+  <select name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
+    <option></option>
+    <% 1.upto(31) do |day| %>
+    <option <%= 'selected' if value && value.day == day %>  value="<%= day %>"><%= day %></option>
+    <% end %>
+  </select>
+</div>

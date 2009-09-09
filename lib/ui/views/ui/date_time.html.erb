@@ -1,0 +1,48 @@
+<% value = @object.send(@field) %>
+<div class="date">
+  <select class="year" id="<%= @name %>_<%= @field %>" name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
+    <option></option>
+    <% (Date.today.year + 6).downto(1970) do |year| %>
+    <option <%= 'selected' if value && value.year == year %> value="<%= year %>"><%= year %></option>
+    <% end %>
+  </select>
+
+  <select class="month" name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
+    <option></option>
+    <% 1.upto(12) do |month| %>
+    <option <%= 'selected' if value && value.month == month %>  value="<%= month %>"><%= month %></option>
+    <% end %>
+  </select>
+
+  <select class="day" name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
+    <option></option>
+    <% 1.upto(31) do |day| %>
+    <option <%= 'selected' if value && value.day == day %>  value="<%= day %>"><%= day %></option>
+    <% end %>
+  </select>
+  @
+  <select class="hour" name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
+    <option></option>
+    <% 0.upto(23) do |hour| %>
+    <option <%= 'selected' if value && value.hour == hour %>  value="<%= hour %>"><%= "%02i" % hour %></option>
+    <% end %>
+  </select>
+  :
+  <select class="minute" name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
+    <option></option>
+    <% 0.upto(59) do |minute| %>
+    <option <%= 'selected' if value && value.min == minute %>  value="<%= minute %>"><%= "%02i" % minute %></option>
+    <% end %>
+  </select>
+
+  <% if @offset %>
+  <input type="hidden" name="<%= @name %>[<%= @field %>][]" value="<%= @offset %>">
+  <% else %>
+  <select class="offset" name="<%= @name %>[<%= @field %>][]" style="float: none; width: auto;">
+    <option></option>
+    <% UI::DateTime::ZONES.each do |offset, zones| %>
+    <option <%= 'selected' if value.zone.to_i == offset rescue false %> value="<%= offset.to_i %>"><%= zones.join(", ") %></option>
+    <% end %>
+  </select>
+  <% end %>
+</div>

@@ -1,0 +1,48 @@
+<% @calendar.months.each do |month| %>
+<table class="calendar">
+  <thead>
+    <tr class="month">
+      <th colspan="7"><%= month.to_s %></th>
+    </tr>
+    <tr class="legend">
+      <th colspan="7">
+        <ul>
+          <% @calendar.events.collect { |e| e.type }.uniq.each do |type| %>
+          <li class="<%= type %>"><%= Extlib::Inflection.humanize(type) %></li>
+          <% end %>
+        </ul>
+      </th>
+    </tr>
+    <tr class="days">
+      <th>Sun</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% month.to_a.each do |week| %>
+    <tr>
+      <% week.each do |day| %>
+      <% if day.nil? %>
+      <td></td>
+      <% else %>
+      <td class="<%= case day <=> Date.today; when -1 then "past"; when 0 then "today"; when 1 then "future" end %>">
+        <span class="date"><%= day.day %></span>
+        <% @calendar.events.find_all { |event| event.on?(day) }.each do |event| %>
+        <span class="event <%= event.type || "" %>">
+          <%= event.title %>
+          <%= Harbor::View.new("ui/calendar/_hover", :event => event) %>
+        </span>
+        <% end %>
+      </td>
+      <% end # if day.nil? %>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

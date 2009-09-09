@@ -1,0 +1,58 @@
+<style type="text/css" media="screen">
+  .calendar { font: 10px Helvetica; }
+  .calendar .days th { background-color: #555; color: #eee; width: 20px; }
+  .calendar tbody td { background-color: #eee; vertical-align: middle; }
+
+  .calendar .date { display: block; height: 20px; line-height: 20px; text-align: center; width: 20px; }
+  .calendar td.events { background-color: #555; color: #eee; }
+  .calendar td.events .date { font-weight: bold; }
+  .calendar .milestone { color: #090; }
+  .calendar .deadline { color: #900; }
+
+  .calendar td .events { background-color: #fff; border: 1px solid #333; margin: -21px 0 0 -1px; min-height: 40px; overflow: auto; padding: 0; position: absolute; width: 200px; }
+  .calendar td .events .date { background-color: #555; color: #eee; float: left; font-weight: bold; margin-right: 5px; }
+  .calendar td .events .event { display: block; float: left; margin-top: 5px; margin-bottom: 5px; }
+</style>
+
+<% @calendar.months.each do |month| %>
+<table class="calendar">
+  <thead>
+    <tr class="month">
+      <th colspan="7"><%= month.to_s %></th>
+    </tr>
+    <tr class="days">
+      <th>S</th>
+      <th>M</th>
+      <th>T</th>
+      <th>W</th>
+      <th>T</th>
+      <th>F</th>
+      <th>S</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% month.to_a.each do |week| %>
+    <tr>
+      <% week.each do |day| %>
+      <% if day.nil? %>
+      <td></td>
+      <% else %>
+      <% events = @calendar.events.find_all { |event| event.on?(day) } %>
+      <td <%= 'class="events"' unless events.empty? %>>
+        <span class="date"><%= day.day %></span>
+        <% unless events.empty? %>
+        <div class="events" style="display: none">
+          <span class="date"><%= day.day %></span>
+        <% events.each do |event| %>
+          <span class="event <%= event.type || "" %>"><%= event.title %></span>
+        <% end %>
+        </div>
+        <% end %>
+      </td>
+      <% end # if day.nil? %>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

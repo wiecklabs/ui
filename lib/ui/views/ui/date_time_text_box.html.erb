@@ -1,0 +1,144 @@
+<% head "dateparse" do %>
+<script type="text/javascript" charset="utf-8" src="<%= UI::Asset.new("javascripts/dateparse.js") %>"></script>
+<% end %>
+
+<% head "timeparse" do %>
+<script type="text/javascript" charset="utf-8" src="<%= UI::Asset.new("javascripts/timeparse.js") %>"></script>
+<% end %>
+
+<% head "date_time_text_box_javascripts" do %>
+<script type="text/javascript" charset="utf-8">
+
+  function parseDateTimeTextBox(text_box) {
+    var value = $(text_box).val().split(" ");
+
+    if ( value[0] == "" ) {
+      // If the text box is empty, set empty inputs and return null
+      updateDateTimeTextBoxInputs(text_box.id, null)
+      return null;
+    }
+    else if ( value.length == 1 ) {
+      // If the text box only has one item, try the date first,
+      // then try time.
+      try {
+        return parseDateString(value[0]);
+      }
+      catch(e) {
+        try {
+          return parseTimeString(value[0]);
+        }
+        catch(e) {
+          throw(e);
+          // $(".date_time_message .error").css('display', 'block').html("Invalid date/time format");
+        }
+      }
+    }
+    else {
+      var time_string = value.pop();
+
+      // If the last match is an am/pm specification, grab the second
+      // to last match to send to the time formatter.
+      if ( time_string.match(/^(p|a| p| a)/i) ) {
+        time_string = value.pop() + " " + time_string;
+      }
+
+      var date_string = value.join(" ");
+      // try {
+        date = parseDateString(date_string);
+        time = parseTimeString(time_string);
+        
+        $(".date_time_message .error").hide();
+        return mergeDateAndTime(date, time);
+      // }
+      // catch(e) {
+      //   $(".date_time_message .error").html("Invalid date/time format");
+      // }
+    }
+  }
+
+  function mergeDateAndTime(date, time) {
+    var date_time = new Date();
+    date_time.setDate(date.getDate());
+    date_time.setMonth(date.getMonth());
+    date_time.setYear(date.getFullYear());
+    date_time.setHours(time.getHours());
+    date_time.setMinutes(time.getMinutes());
+    date_time.setSeconds(time.getSeconds());
+    return date_time
+  }
+
+  function updateDateTimeTextBoxInputs(id, date) {
+    if(date == null) {
+      $("#" + id + "_year").val("");
+      $("#" + id + "_month").val("");
+      $("#" + id + "_day").val("");
+      $("#" + id + "_hour").val("");
+      $("#" + id + "_minute").val("");
+    } else {
+      $("#" + id + "_year").val(date.getFullYear());
+      $("#" + id + "_month").val(date.getMonth() + 1);
+      $("#" + id + "_day").val(date.getDate());
+      $("#" + id + "_hour").val(date.getHours());
+      $("#" + id + "_minute").val(date.getMinutes());
+    }
+  }
+
+  function formatDateTime(date) {
+    var date_string = ""
+    date_string += date.getFullYear() + "-" + padAZero(date.getMonth() + 1) + "-" + padAZero(date.getDate())
+    date_string += " @ ";
+    date_string += padAZero(date.getHours()) + ":" + padAZero(date.getMinutes());
+    return date_string;
+  }
+
+  $(function() {
+    $(".date_time_text_box").blur(function() {
+      try {
+        date = parseDateTimeTextBox($(this));
+        updateDateTimeTextBoxInputs(this.id, date);
+        if ( date ) {
+          $(".date_time_message .error").hide();
+          $(this).val(formatDateTime(date));
+        }
+      } catch(e) {
+        $(".date_time_message .error").css('display', 'block').html("Invalid date/time format");
+      }
+    }).keydown(function(event) {
+      if ( event.keyCode == 13 ) {
+        try {
+          date = parseDateTimeTextBox($(this));
+          updateDateTimeTextBoxInputs(this.id, date);
+          if ( date ) {
+            $(".date_time_message .error").hide();
+            $(this).val(formatDateTime(date));
+          }
+        } catch(e) {
+          $(".date_time_message .error").css('display', 'block').html("Invalid date/time format");
+        }
+      }
+    });
+  });
+</script>
+<% end %>
+
+<%
+  value = @object.send(@field)
+  format_string = "%Y-%m-%d @ %H:%M"
+  text_box_id = "#{h @name}_#{h @field}_date_time_text_box"
+%>
+
+<input type="text" id="<%= text_box_id %>" class="date_time_text_box" value="<%= value.strftime(format_string) if value %>">
+<% @shortcuts.each do |key, shortcut_time| %>
+<a href="#" onclick='$("#<%= text_box_id %>").val(<%= shortcut_time.strftime(format_string).inspect %>); $("#<%= text_box_id %>").focus(); return false;'><%= key %></a>
+<% end %>
+<p class="date_time_message">
+  Input a date and/or time (most formats accepted), or use "now", "today", "tomorrow".
+  <span style="display: none;" class="error"></span>
+</p>
+
+<input type="hidden" id="<%= text_box_id %>_year" name="<%= @name %>[<%= @field %>][]" value="<%= h value.year if value %>">
+<input type="hidden" id="<%= text_box_id %>_month" name="<%= @name %>[<%= @field %>][]" value="<%= h value.month if value %>">
+<input type="hidden" id="<%= text_box_id %>_day" name="<%= @name %>[<%= @field %>][]" value="<%= h value.day if value %>">
+<input type="hidden" id="<%= text_box_id %>_hour" name="<%= @name %>[<%= @field %>][]" value="<%= h value.hour if value %>">
+<input type="hidden" id="<%= text_box_id %>_minute" name="<%= @name %>[<%= @field %>][]" value="<%= h value.min if value %>">
+<input type="hidden" id="<%= text_box_id %>_offset" name="<%= @name %>[<%= @field %>][]" value="<%= h @offset %>">

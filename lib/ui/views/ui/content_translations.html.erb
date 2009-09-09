@@ -1,0 +1,56 @@
+<%
+content_type = @data.content_type
+default_translation = @data.default_translation
+translations = @data.translations
+%>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#<%= content_type %>_locale').change(
+      function(e) {
+        locale = $('#<%= content_type %>_locale').val();
+        $('.<%= content_type %>_translation').hide();
+        $('#<%= content_type %>_' + locale).show();
+      }
+    );
+  })
+</script>
+
+<fieldset class="<%= content_type %>_translations">
+  <legend><%= ::UI::LocaleSelection.new default_translation.nil? ? nil : default_translation.culture_code, Harbor::Locale::active_locales, { :id => "#{content_type}_locale" } %></legend>
+  
+  <% translations.each do |translation| -%>
+    <div class="<%= content_type %>_translation" id="<%= content_type %>_<%= translation.culture_code %>" style="<%= 'display: none;' unless (default_translation && translation.culture_code == default_translation.culture_code) %>">
+      <div style="clear: both;"> </div>
+      
+      <label for="translations_<%= translation.culture_code %>_title">Title</label>
+      <input type="text" name="translations[<%= translation.culture_code %>][title]" id="translations_<%= translation.culture_code %>_title" value="<%= h translation.title %>">
+      <br />
+      
+      <label for="translations_<%= translation.culture_code %>_caption">Caption</label>
+      <textarea rows="10" cols="24" name="translations[<%= translation.culture_code %>][caption]" id="translations_<%= translation.culture_code %>_caption"><%= h(translation.caption || "").gsub("..", "\n") %></textarea>
+      <br />
+      
+      <label for="translations_<%= translation.culture_code %>_base_file_name">Filename</label>
+      <input type="text" name="translations[<%= translation.culture_code %>][base_file_name]" id="translations_<%= translation.culture_code %>_base_file_name" value="<%= h translation.base_file_name %>">
+      <br />
+    </div>
+  <% end -%>
+  
+  <% Harbor::Locale::active_locales.reject { |locale| translations.map { |translation| translation.culture_code }.include?(locale.culture_code) }.each do |locale| -%>
+    <div class="<%= content_type %>_translation" id="<%= content_type %>_<%= locale.culture_code %>" style='<%= "display: none;" unless  translations.size == 0 && locale == Harbor::Locale.default %>'>
+      <div style="clear: both;"> </div>
+      
+      <label for="translations_<%= locale.culture_code %>_title">Title</label>
+      <input type="text" name="translations[<%= locale.culture_code %>][title]" id="translations_<%= locale.culture_code %>_title" value="">
+      <br />
+      
+      <label for="translations_<%= locale.culture_code %>_caption">Caption</label>
+      <textarea rows="10" cols="24" name="translations[<%= locale.culture_code %>][caption]" id="translations_<%= locale.culture_code %>_caption"></textarea>
+      <br />
+      
+      <label for="translations_<%= locale.culture_code %>_base_file_name">Filename</label>
+      <input type="text" name="translations[<%= locale.culture_code %>][base_file_name]" id="translations_<%= locale.culture_code %>_base_file_name" value="">
+      <br />
+    </div>
+  <% end -%>
+</fieldset>

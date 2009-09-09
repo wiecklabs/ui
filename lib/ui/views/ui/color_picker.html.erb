@@ -1,0 +1,65 @@
+<% head "color_picker" do %>
+<script type="text/javascript" charset="utf-8" src="<%= UI::Asset.new("javascripts/color_picker.js") %>"></script>
+<% end %>
+
+<% head "color_picker_stylesheets" do %>
+<style type="text/css" media="screen">
+  ul.color_picker { position: absolute; margin: 1px 0px 0px 0px; padding: 0px; display: table; }
+	ul.color_picker li { display: table-cell; position: relative; padding-right: 6px; background-color: #FFFFFF; float: left; list-style: none; }
+	ul.color_picker li a { display: block; width: 15px; padding: 0; border: solid 1px #000000;}
+  span.color_picker { margin: 0px; padding: 0px 6px; border: solid 1px #000000; }
+</style>
+<% end %>
+
+<% head "color_picker_javascripts" do %>
+	<script type="text/javascript" charset="utf-8">
+	$(function() {
+	  $("span.color_picker").click(function(e) {
+			$("input[type=text]").trigger("color_update");
+	    $(this).next("ul.color_picker").show();
+	    $(this).next("ul.color_picker").css({
+	      "top": $(this).position().top,
+	      "left": $(this).position().left
+	    });
+			// $(this).prev("input[type=text]").focus();
+	    $(this).hide();
+			if( e.stopPropagation ) { e.stopPropagation(); } //For 'Good' browsers
+			else { e.cancelBubble = true; } //For IE
+	  }).prev("input[type=text]").bind("color_update", function() {
+	   	$(this).next("span.color_picker").show().next("ul.color_picker").hide();
+		    try {
+		      $(this).val($(this).val().toHex())
+		      $(this).next("span").css("background-color", $(this).val());
+					$(this).trigger("change");
+		    } catch(e) {
+					$(this).val("");
+		      alert("Color could not be parsed...");
+		    }
+				
+	  }).blur(function(){
+			$(this).trigger("color_update");
+		}).trigger("color_update");
+  
+	  $("ul.color_picker li").click(function(e) {
+	    $(this).parent().prev("span").show().css("background-color", $(this).children("a").css("background-color"));
+	    $(this).parent("ul.color_picker").prev("span").prev("input[type=text]").val($(this).children("a").css("background-color").toHex()).trigger("change");
+	    $(this).parent("ul.color_picker").hide();
+			if( e.stopPropagation ) { e.stopPropagation(); } //For 'Good' browsers
+			else { e.cancelBubble = true; } //For IE
+	  });
+	
+		$(document).click(function(){
+			$("input[type=text].cp").trigger("color_update");
+		});
+	});
+	</script>
+<% end %>
+
+<span class="color_picker <%= @name %>"<% "style=\"background-color: #{ h( ("#" + (@value.is_a?(Integer) ? @value.to_s(16) : @value.to_s) ).squeeze("#")) };\"" unless @value.blank? %>>&nbsp;</span>
+
+<ul class="color_picker" style="display: none;">
+  <li style="background-color: transparent;"><a title="TRANSPARENT">&nbsp;?</a></li>
+<% UI::Color::colors do |name, value| %>
+  <li><a title="<%= h name %>" style="background-color: <%= h value %>;">&nbsp;</a></li>
+<% end -%>
+</ul>
