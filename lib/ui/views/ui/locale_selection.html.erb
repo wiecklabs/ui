@@ -21,9 +21,9 @@
 	<% unless @locale_selection_data.options[:no_flag] -%>
 		<% @locale_selection_data.locales.each do |locale| -%>
 			<% empty_code = @locale_selection_data.selected_culture_code.blank? && locale == @locale_selection_data.locales.first -%>
-                        <div id="<%= locale.culture_code %>" style="float: left; margin-left: 8px; display:<%= (locale.culture_code == @locale_selection_data.selected_culture_code || empty_code) ? 'block' : 'none' %>">
-                          <img src="<%= UI::LocaleFlag.new(locale.culture_code) %>"  />
-                        </div>
+	     <div id="<%= locale.culture_code %>" style="float: left; margin-left: 8px; display:<%= (locale.culture_code == @locale_selection_data.selected_culture_code || empty_code) ? 'block' : 'none' %>">
+	       <img src="<%= UI::LocaleFlag.new(locale.culture_code) %>"  />
+	     </div>
 		<% end -%>
 	<% end -%>
 </div>
