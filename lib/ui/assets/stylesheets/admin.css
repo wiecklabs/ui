@@ -110,7 +110,7 @@ ul.message { list-style: none; }
 /* Modal Stuff */
 #modalOverlay { background-color:#000; }
 #modalContainer { height:400px; width:600px; top:15%; background-color:#fff; border:3px solid #ccc; }
-#modalContainer a.modalCloseImg { background:url(/images/x.png) no-repeat; border: 0; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-18px; cursor:pointer; }
+#modalContainer a.modalCloseImg { background:url(/images/x_black.png) no-repeat; border: 0; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-18px; cursor:pointer; }
 #modalContainer .modalData { margin:24px; }
 
 #modal h2 { margin: 0 0 20px; line-height: 12px; }

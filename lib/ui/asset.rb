@@ -10,8 +10,13 @@ module UI
     def self.copy_assets!
       @@assets.each do |unrooted_path, source_path|
         public_path = Pathname(UI::public_path) + unrooted_path
-        FileUtils.cp_r(source_path, public_path)
+        begin
+          FileUtils.cp_r(source_path, public_path)
+        rescue
+          puts "Failed to copy asset (#{source_path}, #{public_path})"
+        end
       end
+      true
     end
 
     def initialize(unrooted_path)
