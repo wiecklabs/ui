@@ -7,7 +7,7 @@ require "rake/testtask"
 NAME = "ui"
 SUMMARY = "Harbor UI Components"
 
-GEM_VERSION = "0.6.4"
+GEM_VERSION = "0.6.5"
 
 task :default => :test
 
