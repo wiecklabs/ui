@@ -116,4 +116,5 @@ ul.message { list-style: none; }
 #modal h2 { margin: 0 0 20px; line-height: 12px; }
 
 .actions { position: absolute; background-color: #ddd; bottom: 0px; left: 0px; width: 100%; padding: 5px 10px; border-top: solid 1px #aaa; }
+.actions .delete { float: right; padding-right: 20px; }
 @media screen { .actions { position: fixed; } }
