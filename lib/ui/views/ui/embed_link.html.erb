@@ -1,1 +1,16 @@
-<input id="embedLink" type="text" value="<%= @text %>"></input>
+<% head "embed_link_js" do %>
+<script type="text/javascript" charset="utf-8">
+  $(".embedLink input").focus().select();
+</script>
+<% end %>
+
+<% head "embed_link_css" do %>
+<style type="text/css" media="screen">
+  .embedLink label { display: block; font-weight: bold; }
+</style>
+<% end %>
+
+<div class="embedLink">
+  <% if @title %><label><%= @title %></label><% end %>
+  <input type="text" value="<%= @content %>"></input>
+</div>
