@@ -22,15 +22,15 @@ translations = @data.translations
     <div class="<%= content_type %>_translation" id="<%= content_type %>_<%= translation.culture_code %>" style="<%= 'display: none;' unless (default_translation && translation.culture_code == default_translation.culture_code) %>">
       <div style="clear: both;"> </div>
       
-      <label for="translations_<%= translation.culture_code %>_title">Title</label>
+      <label class="required" for="translations_<%= translation.culture_code %>_title">Title <em>*</em></label>
       <input type="text" name="translations[<%= translation.culture_code %>][title]" id="translations_<%= translation.culture_code %>_title" value="<%= h translation.title %>">
       <br />
       
-      <label for="translations_<%= translation.culture_code %>_caption">Caption</label>
+      <label class="required" for="translations_<%= translation.culture_code %>_caption">Caption <em>*</em></label>
       <textarea rows="10" cols="24" name="translations[<%= translation.culture_code %>][caption]" id="translations_<%= translation.culture_code %>_caption"><%= h(translation.caption || "").gsub("..", "\n") %></textarea>
       <br />
       
-      <label for="translations_<%= translation.culture_code %>_base_file_name">Filename</label>
+      <label class="required" for="translations_<%= translation.culture_code %>_base_file_name">Filename <em>*</em></label>
       <input type="text" name="translations[<%= translation.culture_code %>][base_file_name]" id="translations_<%= translation.culture_code %>_base_file_name" value="<%= h translation.base_file_name %>">
       <br />
     </div>
@@ -40,15 +40,15 @@ translations = @data.translations
     <div class="<%= content_type %>_translation" id="<%= content_type %>_<%= locale.culture_code %>" style='<%= "display: none;" unless  translations.size == 0 && locale == Harbor::Locale.default %>'>
       <div style="clear: both;"> </div>
       
-      <label for="translations_<%= locale.culture_code %>_title">Title</label>
+      <label class="required" for="translations_<%= locale.culture_code %>_title">Title <em>*</em></label>
       <input type="text" name="translations[<%= locale.culture_code %>][title]" id="translations_<%= locale.culture_code %>_title" value="">
       <br />
       
-      <label for="translations_<%= locale.culture_code %>_caption">Caption</label>
+      <label class="required" for="translations_<%= locale.culture_code %>_caption">Caption <em>*</em></label>
       <textarea rows="10" cols="24" name="translations[<%= locale.culture_code %>][caption]" id="translations_<%= locale.culture_code %>_caption"></textarea>
       <br />
       
-      <label for="translations_<%= locale.culture_code %>_base_file_name">Filename</label>
+      <label class="required" for="translations_<%= locale.culture_code %>_base_file_name">Filename <em>*</em></label>
       <input type="text" name="translations[<%= locale.culture_code %>][base_file_name]" id="translations_<%= locale.culture_code %>_base_file_name" value="">
       <br />
     </div>

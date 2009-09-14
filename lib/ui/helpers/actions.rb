@@ -15,7 +15,7 @@ module UI
         if captures.empty?
           nil
         else
-          View.new("ui/actions.html.erb", merge(:actions_content => captures.join("\n"))).to_s
+          Harbor::View.new("ui/actions.html.erb", merge(:actions_content => captures.join("\n"))).to_s
         end
       end
     
