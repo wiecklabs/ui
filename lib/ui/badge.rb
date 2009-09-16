@@ -67,7 +67,7 @@ module UI
     end
 
     def convert_command
-      cmd  = "/opt/local/bin/convert -size 42x20 xc:none "
+      cmd  = "convert -size 42x20 xc:none "
 
       # Prepare canvas with rounded box
       cmd << "-fill '#{background_color}' -stroke '#{Color.darken(background_color)}' -draw 'roundRectangle 0, 0, 40, 18, 2, 2' "

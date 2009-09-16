@@ -59,7 +59,7 @@ module UI
 
     def convert_command
 
-      cmd = "/opt/local/bin/convert -size #{width}x#{height} "
+      cmd = "convert -size #{width}x#{height} "
 
       # Draw button
       cmd << "xc:none -fill '#{button_color}' -stroke '#{Color.darken(button_color)}' "
