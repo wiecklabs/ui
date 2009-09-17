@@ -121,6 +121,40 @@
 </script>
 <% end %>
 
+<% if @format_guide %>
+	<% head 'date_time_textbox_format_guide' do %>
+		<script type="text/javascript">
+			// Adds some help text to the date time text boxes, and removes it when they gain focus
+			$(function(){
+				$(".date_time_text_box").each(function(i){
+					if($(this).val() == "")
+					{
+						$(this).val("<%= @format_guide %>");
+						$(this).css("color","#999999");
+					}
+				});
+				
+				$(".date_time_text_box").focus(function(){
+					if($(this).val() == '<%= @format_guide %>')
+					{
+						$(this).val("");
+						$(this).css("color","#000000");
+					}
+				});
+				
+				$(".date_time_text_box").blur(function(){
+					if($(this).val() == '')
+					{
+						$(this).val("<%= @format_guide %>");
+						$(this).css("color","#999999");
+					}
+				});
+
+			});
+		</script>
+	<% end %>
+<% end %>
+
 <%
   value = @object.send(@field)
   format_string = "%Y-%m-%d @ %H:%M"

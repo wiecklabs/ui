@@ -12,7 +12,7 @@ module UI
     end
     
     def self.build(date_options)
-      if date_options && date_options.is_a?(Array)
+      if date_options && date_options.is_a?(Array) && !date_options[0].blank?
         ::DateTime.civil(*date_options.map { |component| component.to_i })
       else
         nil
@@ -26,10 +26,11 @@ module UI
       @field = field
       @offset = options.fetch(:offset, self.class.default_offset)
       @shortcuts = options.fetch(:shortcuts, {})
+      @format_guide = options.fetch(:format_guide, nil)
     end
 
     def to_s
-      @context.render("ui/date_time_text_box.html.erb", { :object => @object, :name => @name, :field => @field, :offset => @offset, :shortcuts => @shortcuts }).to_s
+      @context.render("ui/date_time_text_box.html.erb", { :object => @object, :name => @name, :field => @field, :offset => @offset, :shortcuts => @shortcuts, :format_guide => @format_guide }).to_s
     end
   end
 end
