@@ -8,12 +8,13 @@ module UI
     end
 
     def self.copy_assets!
-      @@assets.each do |unrooted_path, source_path|
+      @@assets.each do |unrooted_path, source|
         public_path = Pathname(UI::public_path) + unrooted_path
         begin
-          FileUtils.cp_r(source_path, public_path)
-        rescue
-          puts "Failed to copy asset (#{source_path}, #{public_path})"
+          FileUtils.mkdir_p(Pathname(public_path).dirname)
+          FileUtils.cp_r(source.path, public_path)
+        rescue => ex
+          puts "Failed to copy asset (#{source.path}, #{public_path}): #{ex.inspect}"
         end
       end
       true
