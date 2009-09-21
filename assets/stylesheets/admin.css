@@ -4,6 +4,7 @@ body {
   margin: 0; padding: 0;
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;
   font-size: 12px;
+  line-height: 20px;
 }
 
 p, h1, form, button {
@@ -70,7 +71,7 @@ ul#tabnav-right #export_options li a.delete { color: #900; }
 
 div.clear { clear: both; }
 
-a { border-bottom: 1px dotted #ccc; color: #063A60; font-weight: bold; text-decoration: none; }
+a, a:visited { border-bottom: 1px dotted #ccc; color: #063A60; font-weight: bold; text-decoration: none; }
 a:hover { border-bottom: 1px dotted #063A60; }
 a img { border: none; vertical-align: middle; }
 

@@ -21,7 +21,7 @@ spec = Gem::Specification.new do |s|
   s.version = GEM_VERSION
   s.platform = Gem::Platform::RUBY
   s.require_path = 'lib'
-  s.files = %w(Rakefile) + Dir.glob("lib/**/*")
+  s.files = %w(Rakefile) + Dir.glob("{lib,assets,public,test}/**/*")
 
   s.add_dependency "harbor"
 

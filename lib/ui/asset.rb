@@ -58,6 +58,10 @@ module UI
 
       def initialize(path)
         @path = path
+
+        unless File.exists?(path)
+          raise ArgumentError.new("#{path} was registered as an asset but does not exist!")
+        end
       end
 
       def modified

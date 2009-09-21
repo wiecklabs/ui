@@ -12,6 +12,6 @@ module UI
   end
 
   def self.asset_path
-    Pathname(__FILE__).dirname + "assets"
+    Pathname(__FILE__).dirname.parent.parent + "assets"
   end
 end
