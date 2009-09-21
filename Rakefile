@@ -3,11 +3,12 @@ require "pathname"
 require "rake"
 require "rake/gempackagetask"
 require "rake/testtask"
+require "lib/ui/version"
 
 NAME = "ui"
 SUMMARY = "Harbor UI Components"
 
-GEM_VERSION = "0.7"
+GEM_VERSION = UI::VERSION
 
 task :default => :test
 
