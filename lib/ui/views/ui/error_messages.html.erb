@@ -1,0 +1,14 @@
+<% if @errors.any? %>
+	<div class="errors">
+		<h2><%=h @title %></h2>
+		<ul>
+			<% @errors.each do |error| %>
+				<% if error.is_a?(UI::ErrorMessages::FormFieldError) %>
+					<li><label for="<%= error.form_field_id -%>"><%= error.to_s %></label></li>
+				<% else %>
+					<li><%= error.to_s %></li>
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
