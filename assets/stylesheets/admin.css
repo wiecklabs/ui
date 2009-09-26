@@ -27,6 +27,7 @@ a.cancel { color: #990000; }
   border-bottom: 1px solid #002650;
   background-color: #002650;
   padding: 12px 24px 0 24px;
+  margin-bottom: 12px;
   color: white;
   overflow: auto;
 }
@@ -49,21 +50,26 @@ a.cancel { color: #990000; }
 .header #media_navigation { clear: left; left: 24px; }
 .header #content_navigation { float: right; right: 24px; }
 
-ul#tabnav-left { text-align: left; list-style-type: none; margin: 0; padding: 0; clear:both; float: left; }
-ul#tabnav-left li { display: inline; }
-ul#tabnav-left li a { padding: 3px 4px 4px 4px; border: 1px solid #555555; background-color: #EEEEEE; color: #000; margin-right: 5px; text-decoration: none; border-bottom: none; }
-ul#tabnav-left li.selected { padding: 10px 10px; margin-top: 5px; border-bottom: 1px solid #555555; background-color: #555555; }
-ul#tabnav-left li.selected a { background-color: #555555; color: #fff; position: relative; top: 1px; padding-top: 4px; }
+#tabnav-left { float: left; }
+#tabnav-left li { float: left; margin-right: 2px; }
+
+.links,
+  #tabnav-left,
+  #tabnav-right { list-style: none; margin: 0; overflow: auto; padding: 0; }
+.links li, #tabnav-left li { float: left; margin: 0; }
+#tabnav-right li { float: right; margin: 0; }
+.links li a,
+  #tabnav-left li a,
+  #tabnav-right li a { background-color: #eee; border: 0; color: #6dac00; display: block; font-weight: bold; margin-right: 1px; padding: 6px 12px; text-decoration: underline; }
+
+#users_index #export_options { background-color: #fff; border: 1px solid #000; padding: 4px; }
+#users_index #export_options li { display: inline; float: none; }
+#users_index #export_options li a { background-color: #fff; display: inline; margin: 0; padding: 0; }
+#users_index #export_options li a.delete { color: #900; }
+
+ul#tabnav-left li.selected, ul#tabnav-left li.selected a { background-color: #555555; color: #fff; }
 ul#tabnav-left a:hover { background: #555555; color: #fff; }
-
-ul#tabnav-right { text-align: right; list-style-type: none; margin: 0; padding: 0; clear:right; }
-ul#tabnav-right li { display: inline; }
-ul#tabnav-right li a { padding: 15px 20px 4px 20px; border: 1px solid #555555; background-color: #EEEEEE; color: #002650; margin-right: 5px; text-decoration: none; border-bottom: none; }
-
-ul#tabnav-right #export_options { background-color: #fff; border: 1px solid #000; padding: 4px; }
-ul#tabnav-right #export_options li { display: inline; float: none; }
-ul#tabnav-right #export_options li a { background-color: #fff; display: inline; margin: 0; padding: 0; border: 0 }
-ul#tabnav-right #export_options li a.delete { color: #900; }
+ul#tabnav-left li.seperator { background-color: #fff; padding: 6px 4px; margin-right: 10px; font-weight: bold; }
 
 .content { margin: 0 auto; padding: 8px 24px 24px 24px; overflow: auto; }
 
@@ -110,9 +116,6 @@ ul.message { list-style: none; }
 .message { background-color: #ADC96F; color: #fff; font-weight: bold; line-height: 24px; padding: 10px 20px; margin: 0 0 2em; }
 .message.error { background-color: #CA6F6F; }
 
-.links { list-style: none; margin-bottom: 1em; overflow: none; padding: 0; }
-.links li { display: inline; margin-right: 1em; }
-
 .live_search { background-color: #555; color: #fff; margin: 0; padding: 1em 1em 1em; }
 .live_search fieldset { border: 0; margin: 0; padding: 0; }
 .live_search input { width: 30em; }
@@ -122,7 +125,7 @@ ul.message { list-style: none; }
 .account li { display: inline; }
 .account a { color: #fff; margin: 6px; }
 
-.help { background-color: #ffc; color: #063A60; font-weight: bold; padding: 4px; margin-bottom: 20px; width: 50%; clear: both; float: right; text-align: right; }
+.help { background-color: #ffc; color: #063A60; font-weight: bold; padding: 4px; margin-bottom: 20px; clear: both; text-align: left; }
 
 .page_count { float: right; padding-left: 5px; }
 .channel_filter { float: right; }
