@@ -7,22 +7,22 @@
 </style>
 <% end %>
 
-<span class="pagination_total_count"><%= @pagination.total_count %> <%= @pagination.total_count == 1 ? "Record" : "Records" %></span>
+<span class='pagination_total_count'><%= @pagination.total_count %> <%= @pagination.total_count == 1 ? 'Record' : 'Records' %></span>
 
 <% if @pagination.pages.max > 1 %>
-<ul class="pagination">
+<ul class='pagination'>
   <% if @pagination.selected_page > 1 %>
-    <li class="previous"><a href="?<%= merge_query_string(request.query_string, "page" => @pagination.selected_page - 1) %>"><%= @pagination.previous_text %></a></li>
+    <li class='previous'><a href='?<%= merge_query_string(request.query_string, 'page' => @pagination.selected_page - 1) %>'><%= @pagination.previous_text %></a></li>
   <% end %>
   <% @pagination.page_context.each do |i| %>
     <% if @pagination.selected_page == i %>
-      <li class="selected"><%= i %></li>
+      <li class='selected'><%= i %></li>
     <% else %>
-      <li><a href="?<%= merge_query_string(request.query_string, "page" => i) %>"><%= i %></a></li>
+      <li><a href='?<%= merge_query_string(request.query_string, 'page' => i) %>'><%= i %></a></li>
     <% end %>
   <% end %>
   <% if @pagination.selected_page < @pagination.pages.max %>
-    <li class="next"><a href="?<%= merge_query_string(request.query_string, "page" => @pagination.selected_page + 1) %>"><%= @pagination.next_text %></a></li>
+    <li class='next'><a href='?<%= merge_query_string(request.query_string, 'page' => @pagination.selected_page + 1) %>'><%= @pagination.next_text %></a></li>
   <% end %>
 </ul>
 <% end %>

@@ -121,6 +121,8 @@ ul.message { list-style: none; }
 .live_search input { width: 30em; }
 .live_search label { margin-right: 1em; width: auto; }
 
+#spinner { height: 21px; padding-left: 3px; }
+
 .account { position: absolute; top: 0px; right: 0px; }
 .account li { display: inline; }
 .account a { color: #fff; margin: 6px; }
@@ -129,6 +131,7 @@ ul.message { list-style: none; }
 
 .page_count { float: right; padding-left: 5px; }
 .channel_filter { float: right; }
+.channel_filter select { width: auto; }
 
 /* Modal Stuff */
 #modalOverlay { background-color:#000; }

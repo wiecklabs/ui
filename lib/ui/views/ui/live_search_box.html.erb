@@ -63,8 +63,8 @@
       });
 
       var url = $(this).attr("action") || window.location.toString()
-
       $("#<%= @list_id %>").load(mergeParams(url, query), null, callBack(<%= @callback || "null" %>));
+
       return false;
     });
   });
