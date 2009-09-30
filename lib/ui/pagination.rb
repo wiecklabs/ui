@@ -26,8 +26,8 @@ module UI
       @pages[start, 5]
     end
 
-    def to_s
-      @to_s ||= Harbor::View.new("ui/pagination.html.erb", @context.merge(:pagination => self)).to_s.gsub("\n",'')
+    def to_s(format = "default", action = nil, container = nil)
+      @to_s ||= Harbor::View.new("ui/pagination/#{format}.html.erb", @context.merge(:pagination => self, :action => action, :container => container)).to_s.gsub("\n",'').gsub("\"", '\'')
     end
   end
 end
