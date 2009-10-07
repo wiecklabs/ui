@@ -146,5 +146,5 @@ form .actions { position: fixed; bottom: 0px; left: 0px; width: 100%; padding: 5
 form .actions input { margin-left: 10px; }
 
 /* .actions { position: absolute; background-color: #ddd; bottom: 0px; left: 0px; width: 100%; padding: 5px 10px; border-top: solid 1px #aaa; } */
-.actions .delete { float: right; padding-right: 20px; }
-@media screen { .actions { position: fixed; } }
+form .actions .delete { float: right; padding-right: 20px; }
+@media screen { form .actions { position: fixed; } }
