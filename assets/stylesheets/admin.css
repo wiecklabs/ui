@@ -116,6 +116,11 @@ ul.message { list-style: none; }
 .message { background-color: #ADC96F; color: #fff; font-weight: bold; line-height: 24px; padding: 10px 20px; margin: 0 0 2em; }
 .message.error { background-color: #CA6F6F; }
 
+div.errors { background-color: #CA6F6F; color: #fff; font-weight: bold; line-height: 24px; padding: 5px 20px; margin: 0 0 2em; }
+div.errors h2 { color: white; font-size: 1.4em; font-weight: 700; padding: 5px; background-image: none; border: none; margin-bottom: 5px; }
+div.errors ul { list-style: none; padding-left: 20px; }
+div.errors label { float: none; clear: none; width: auto; }
+
 .live_search { background-color: #555; color: #fff; margin: 0; padding: 1em 1em 1em; }
 .live_search fieldset { border: 0; margin: 0; padding: 0; }
 .live_search input { width: 30em; }
