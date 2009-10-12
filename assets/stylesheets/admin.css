@@ -126,7 +126,7 @@ div.errors label { float: none; clear: none; width: auto; }
 .live_search input { width: 30em; }
 .live_search label { margin-right: 1em; width: auto; }
 
-#spinner { height: 21px; padding-left: 3px; }
+#spinner { padding-left: 3px; }
 
 .account { position: absolute; top: 0px; right: 0px; }
 .account li { display: inline; }
