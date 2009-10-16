@@ -45,7 +45,10 @@ function closeModal() {
 }
 
 function bindSelectable() {
-  $('.selectable').live("click", function() {
+  $('.selectable').live("click", function(e) {
+			if (e.target.nodeName == 'A' || e.target.nodeName == 'IMG')
+				return true;
+
       checkbox = $(':checkbox', $(this))[0];
 			checkbox.checked = !checkbox.checked
 
