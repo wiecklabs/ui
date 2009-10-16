@@ -45,19 +45,19 @@ function closeModal() {
 }
 
 function bindSelectable() {
-  $('.selectable')
-    .click(function(e) {
+  $('.selectable').live("click", function() {
       checkbox = $(':checkbox', $(this))[0];
+			checkbox.checked = !checkbox.checked
 
 			if ( checkbox.checked ) {
 				$(this).addClass('selected');
 			}
 			else $(this).removeClass('selected');
 
-      if ( e.target.nodeName == "TD" ) checkbox.click();
+			updateBatch();
     });
 
-  $('.selectable :checkbox').click(updateBatch);
+  $('.selectable :checkbox').live("click", updateBatch);
 }
 
 // Repositions the actions bar on load and on scroll.
