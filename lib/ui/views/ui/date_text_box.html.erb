@@ -8,7 +8,15 @@
   function parseDateTextBox(text_box) {
     var value = $(text_box).val();
     if ( value == "" ) return null;
-    return parseDateString(value);
+
+    try {
+      parsed_date = parseDateString(value);
+    }
+    catch (e) { 
+      return null;
+    }
+
+    return parsed_date;
   }
 
   function updateDateTextBoxInputs(id, date) {
@@ -42,6 +50,8 @@
       updateDateTextBoxInputs(this.id, date);
       if ( date ) {
         $(this).val(formatDate(date));
+      } else {
+        $(this).val("");
       }
     }).keydown(function(event) {
       if ( event.keyCode == 13 ) {
@@ -49,6 +59,8 @@
         updateDateTextBoxInputs(this.id, date);
         if ( date ) {
           $(this).val(formatDate(date));
+        } else {
+          $(this).val("");
         }
       }
     });
@@ -60,7 +72,12 @@
   value = @object.send(@field)
   text_box_id = "#{h @name}_#{h @field}_date_text_box"
 %>
+
 <input type="text" id="<%= text_box_id %>" class="date_text_box" value="<%= value.strftime("%m/%d/%y") if value %>">
+<p class="date_time_message">
+  Input a date (most formats accepted), or use "now", "today", "tomorrow".
+  <span style="display: none;" class="error"></span>
+</p>
 
 <input type="hidden" id="<%= text_box_id %>_year" name="<%= @name %>[<%= @field %>][]" value="<%= h value.year if value %>">
 <input type="hidden" id="<%= text_box_id %>_month" name="<%= @name %>[<%= @field %>][]" value="<%= h value.month if value %>">
