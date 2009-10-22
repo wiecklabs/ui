@@ -1,3 +1,3 @@
 module UI
-  VERSION = "0.7.15"
+  VERSION = "0.7.16"
 end

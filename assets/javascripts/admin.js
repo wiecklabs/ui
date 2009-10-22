@@ -50,7 +50,8 @@ function bindSelectable() {
 				return true;
 
       checkbox = $(':checkbox', $(this))[0];
-			checkbox.checked = !checkbox.checked
+			if (e.target.nodeName != 'INPUT')
+				checkbox.checked = !checkbox.checked
 
 			if ( checkbox.checked ) {
 				$(this).addClass('selected');
