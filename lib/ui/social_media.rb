@@ -13,6 +13,7 @@ module UI
       'google' => 'http://www.google.com/bookmarks/mark?op=edit&bkmk=URL&title=TITLE',
       'yahoo' => 'http://myweb2.search.yahoo.com/myresults/bookmarklet?u=URL&t=TITLE',
       'newsvine' => 'http://www.newsvine.com/_wine/save?u=URL&h=TITLE',
+      'technorati' => 'http://technorati.com/faves/?add=URL'
     }
     # more here: http://kevin.vanzonneveld.net/techblog/article/list_of_social_bookmarking_sites
     
@@ -32,6 +33,8 @@ module UI
       elsif sites.is_a?(Array)
         # use only the sites provided in the array
         names = UI::SocialMedia::ALL_SITES.keys.select {|k| sites.include?(k) }
+      elsif sites == :all
+        names = UI::SocialMedia::ALL_SITES.keys
       else
         # use none of the available bookmarklets
         names = []
