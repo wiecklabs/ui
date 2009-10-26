@@ -29,6 +29,10 @@ translations = @data.translations
       <label class="required" for="translations_<%= translation.culture_code %>_caption">Caption <em>*</em></label>
       <textarea rows="10" cols="24" name="translations[<%= translation.culture_code %>][caption]" id="translations_<%= translation.culture_code %>_caption"><%= h(translation.caption || "").gsub("..", "\n") %></textarea>
       <br />
+
+      <label for="translations_<%= translation.culture_code %>_copyright">Copyright </label>
+      <textarea rows="5" cols="24" name="translations[<%= translation.culture_code %>][copyright]" id="translations_<%= translation.culture_code %>_copyright"><%= h(translation.copyright || "Copyright #{Date.today.year}").gsub("..", "\n") %></textarea>
+      <br />
       
       <label class="required" for="translations_<%= translation.culture_code %>_base_file_name">Filename <em>*</em></label>
       <input type="text" name="translations[<%= translation.culture_code %>][base_file_name]" id="translations_<%= translation.culture_code %>_base_file_name" value="<%= h translation.base_file_name %>">
@@ -46,6 +50,10 @@ translations = @data.translations
       
       <label class="required" for="translations_<%= locale.culture_code %>_caption">Caption <em>*</em></label>
       <textarea rows="10" cols="24" name="translations[<%= locale.culture_code %>][caption]" id="translations_<%= locale.culture_code %>_caption"></textarea>
+      <br />
+
+      <label for="translations_<%= locale.culture_code %>_copyright">Copyright </label>
+      <textarea rows="5" cols="24" name="translations[<%= locale.culture_code %>][copyright]" id="translations_<%= locale.culture_code %>_copyright">Copyright <%= Date.today.year %></textarea>
       <br />
       
       <label class="required" for="translations_<%= locale.culture_code %>_base_file_name">Filename <em>*</em></label>
