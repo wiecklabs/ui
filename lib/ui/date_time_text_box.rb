@@ -27,10 +27,11 @@ module UI
       @offset = options.fetch(:offset, self.class.default_offset)
       @shortcuts = options.fetch(:shortcuts, {})
       @format_guide = options.fetch(:format_guide, nil)
+      @disabled = options.fetch(:disabled, false)
     end
 
     def to_s
-      @context.render("ui/date_time_text_box.html.erb", { :object => @object, :name => @name, :field => @field, :offset => @offset, :shortcuts => @shortcuts, :format_guide => @format_guide }).to_s
+      @context.render("ui/date_time_text_box.html.erb", { :object => @object, :name => @name, :field => @field, :offset => @offset, :shortcuts => @shortcuts, :format_guide => @format_guide, :disabled => @disabled }).to_s
     end
   end
 end

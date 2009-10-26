@@ -15,10 +15,11 @@ module UI
       @object = object
       @name = name
       @field = field
+      @disabled = options.fetch(:disabled, false)
     end
 
     def to_s
-      @context.render("ui/date_text_box.html.erb", { :object => @object, :name => @name, :field => @field }).to_s
+      @context.render("ui/date_text_box.html.erb", { :object => @object, :name => @name, :field => @field, :disabled => @disabled }).to_s
     end
   end
 end

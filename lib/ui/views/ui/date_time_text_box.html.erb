@@ -161,7 +161,7 @@
   text_box_id = "#{h @name}_#{h @field}_date_time_text_box"
 %>
 
-<input type="text" id="<%= text_box_id %>" class="date_time_text_box" value="<%= value.strftime(format_string) if value %>">
+<input type="text" id="<%= text_box_id %>" class="date_time_text_box" value="<%= value.strftime(format_string) if value %>" <%= @disabled ? 'disabled' : nil %>>
 <% @shortcuts.each do |key, shortcut_time| %>
 <a href="#" onclick='$("#<%= text_box_id %>").val(<%= shortcut_time.strftime(format_string).inspect %>); $("#<%= text_box_id %>").focus(); return false;'><%= key %></a>
 <% end %>

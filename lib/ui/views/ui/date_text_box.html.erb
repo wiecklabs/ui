@@ -73,7 +73,7 @@
   text_box_id = "#{h @name}_#{h @field}_date_text_box"
 %>
 
-<input type="text" id="<%= text_box_id %>" class="date_text_box" value="<%= value.strftime("%m/%d/%y") if value %>">
+<input type="text" id="<%= text_box_id %>" class="date_text_box" value="<%= value.strftime("%m/%d/%y") if value %>" <%= @disabled ? 'disabled' : nil %>>
 <p class="date_time_message">
   Input a date (most formats accepted), or use "today", "tomorrow".
   <span style="display: none;" class="error"></span>
