@@ -109,7 +109,7 @@ label { clear: left; display: block; float: left; font-weight: bold; line-height
 fieldset input, fieldset span { float: left; width: 32em; }
 fieldset input[type=checkbox] { width: auto; }
 fieldset select { float: left; width: 32em; }
-
+fieldset textarea { width: 32em; float: left;}
 fieldset .textarea { width: 29.7em; float: left;}
 fieldset .textarea textarea{ margin:0; padding:0; width: 100%;}
 
