@@ -110,7 +110,8 @@ fieldset input, fieldset span { float: left; width: 32em; }
 fieldset input[type=checkbox] { width: auto; }
 fieldset select { float: left; width: 32em; }
 
-fieldset textarea { float: left; width: 27em; }
+fieldset .textarea { width: 29.7em; float: left;}
+fieldset .textarea textarea{ margin:0; padding:0; width: 100%;}
 
 ul.message { list-style: none; }
 .message { background-color: #ADC96F; color: #fff; font-weight: bold; line-height: 24px; padding: 10px 20px; margin: 0 0 2em; }
