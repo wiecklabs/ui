@@ -5,7 +5,7 @@ module UI
     # The list of all of the available social media bookmarklets
     ALL_SITES = {
       'reddit' => 'http://reddit.com/submit?url=URL&title=TITLE',
-      'digg' => 'http://digg.com/submit?phase=2&url=URL&title=TITLE',
+      'digg' => 'http://digg.com/submit?phase=2%20&url=URL&title=TITLE',
       'facebook' => 'http://www.facebook.com/sharer.php?u=URL&t=TITLE',
       'stumbleupon' => 'http://www.stumbleupon.com/submit?url=URL&title=TITLE',
       'delicious' => 'http://del.icio.us/post?url=URL&title=TITLE',
@@ -67,10 +67,10 @@ module UI
           short_title += "…"
         end
         
-        return UI::SocialMedia::ALL_SITES[site.downcase].sub(/URL/, short_url).sub(/TITLE/, short_title)
+        return UI::SocialMedia::ALL_SITES[site.downcase].sub(/URL/, short_url).sub(/TITLE/, @context.q(short_title))
       end
       
-      UI::SocialMedia::ALL_SITES[site.downcase].sub(/URL/, @url).sub(/TITLE/, @title)
+      UI::SocialMedia::ALL_SITES[site.downcase].sub(/URL/, @context.q(@url)).sub(/TITLE/, @context.q(@title))
     end
     
     def to_s
