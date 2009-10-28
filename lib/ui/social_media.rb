@@ -5,7 +5,7 @@ module UI
     # The list of all of the available social media bookmarklets
     ALL_SITES = {
       'reddit' => 'http://reddit.com/submit?url=URL&title=TITLE',
-      'digg' => 'http://digg.com/submit?phase=2%20&url=URL&title=TITLE',
+      'digg' => 'http://digg.com/submit?url=URL&title=TITLE',
       'facebook' => 'http://www.facebook.com/sharer.php?u=URL&t=TITLE',
       'stumbleupon' => 'http://www.stumbleupon.com/submit?url=URL&title=TITLE',
       'delicious' => 'http://del.icio.us/post?url=URL&title=TITLE',

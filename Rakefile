@@ -43,3 +43,7 @@ task :test do
     #t.warning = true
   end
 end
+
+task :version do
+  puts GEM_VERSION
+end
