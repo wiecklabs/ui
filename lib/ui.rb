@@ -48,3 +48,5 @@ require Pathname(__FILE__).dirname.expand_path + "ui/assets"
 require Pathname(__FILE__).dirname.expand_path + "ui/dialogs/email_prompt"
 
 require Pathname(__FILE__).dirname.expand_path + "ui/date_range_selection"
+
+UI::FormattedDate.register_format("rfc822", "%a, %d %b %Y %H:%M:%S %z")
