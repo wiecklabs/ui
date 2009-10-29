@@ -63,7 +63,7 @@ module UI
 
       # Draw button
       cmd << "xc:none -fill '#{button_color}' -stroke '#{Color.darken(button_color)}' "
-      cmd << "-draw 'roundRectangle 0, 0, #{width - 4}, #{height - 4}, 4, 4' "
+      cmd << "-draw 'roundRectangle 0, 0, #{width - 1}, #{height - 1}, 4, 4' "
 
       # Add text
       cmd << "-stroke none -gravity Center -blur 0x.5 "
