@@ -5,7 +5,7 @@ module UI
     # The list of all of the available social media bookmarklets
     ALL_SITES = {
       'reddit' => 'http://reddit.com/submit?url=URL&title=TITLE',
-      'digg' => 'http://digg.com/submit?url=URL&title=TITLE',
+      'digg' => 'http://digg.com/submit?url=URL&title=TITLE&media=news',
       'facebook' => 'http://www.facebook.com/sharer.php?u=URL&t=TITLE',
       'stumbleupon' => 'http://www.stumbleupon.com/submit?url=URL&title=TITLE',
       'delicious' => 'http://del.icio.us/post?url=URL&title=TITLE',
@@ -42,7 +42,9 @@ module UI
 
       # check for and register icons
       names.each do |name|
-        if ::File.exists?(UI::asset_path + "images/social_media/#{name}.gif")
+        if UI::Asset.entries["images/social_media/#{name}.gif"]
+          next # already registered, should NOT be overridden
+        elsif ::File.exists?(UI::asset_path + "images/social_media/#{name}.gif")
           Asset::register("images/social_media/#{name}.gif", UI::asset_path + "images/social_media/#{name}.gif")
         else
           Asset::register("images/social_media/#{name}.gif", UI::asset_path + "images/locales/unknown.gif")
