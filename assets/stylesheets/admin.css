@@ -126,6 +126,10 @@ div.errors label { float: none; clear: none; width: auto; }
 .live_search fieldset { border: 0; margin: 0; padding: 0; }
 .live_search input { width: 30em; }
 .live_search label { margin-right: 1em; width: auto; }
+.live_search .channel { float: left; margin-left: 16px; }
+.live_search .channel select { width: auto; }
+.live_search .page_count { float: right; padding-top: 2px; }
+.live_search .page_count span { width: auto; }
 
 #spinner { padding-left: 3px; }
 
