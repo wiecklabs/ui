@@ -1,0 +1,37 @@
+<% head do %>
+	
+	<script type="text/javascript" src="<%= UI::Asset.new("javascripts/asyncUpload.js").to_s %>"></script>
+	<script type="text/javascript" src="<%= UI::Asset.new("javascripts/swfupload.js").to_s %>"></script>
+	
+	<style type="text/css">
+		div.ProgressBar { width: 100px; padding: 0; border: 1px solid black; margin-right: 1em; height:.75em; margin-left:1em; display:-moz-inline-stack; display:inline-block; zoom:1; *display:inline; }
+		div.ProgressBar div { background-color: Green; font-size: 1pt; height:100%; float:left; }
+		span.asyncUploader object { position: relative; top: 5px; left: 10px; }
+	</style>
+	
+	<script type="text/javascript">
+		$(function() {
+	    $("#<%= @file_field_id %>").makeAsyncUploader(
+				<% if @file %>
+					{
+		        upload_url: "<%= @upload_url %>",
+						existingFilename: "<%= @file.filename %>",
+						existingGuid: "<%= @file.uuid %>",
+						existingFileSize: "<%= @file.size %>"
+		    	}
+				<% else %>
+					{
+		        upload_url: "<%= @upload_url %>",
+		        flash_url: '<%= UI::Asset.new("swf/swfupload.swf") %>',
+		        button_image_url: '<%= UI::Asset.new("images/blankButton.png") %>',
+						file_size_limit: '4 GB',
+						disableDuringUpload: "INPUT[type='submit']",
+		    	}
+				<% end %>
+			);
+    });
+	</script>
+	
+<% end %>
+
+<input type="file" id="<%= @file_field_id %>" name="<%= @file_field_id %>" />
