@@ -18,4 +18,9 @@ module UI
   Asset::register("images/x_grey.png", UI::asset_path + "images/x_grey.png")
   Asset::register("images/x_black.png", UI::asset_path + "images/x_black.png")
   
+  Asset.register("javascripts/asyncUpload.js", UI.asset_path + "javascripts/jquery-asyncUpload-0.1.js")
+  Asset.register("javascripts/swfupload.js", UI.asset_path + "javascripts/swfupload.js")
+  Asset.register("swf/swfupload.swf", UI.asset_path + "swf/swfupload.swf")
+  Asset.register("images/blankButton.png", UI.asset_path + "images/blankButton.png")
+  
 end
