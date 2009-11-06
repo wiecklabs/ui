@@ -5,8 +5,7 @@ class UI::FormattedDate
 	
 	class UnknownDateFormatError < StandardError
 		def initialize(format, locale)
-		  registered_formats = UI::FormattedDate.formats.keys.map
-			super("Could not find a match for Format Key='#{format}' and Locale='#{locale.inspect}' in the list of registered UI::FormattedDate formats")
+		  super("Could not find a match for Format Key='#{format}' and Locale='#{locale.inspect}' in the list of registered UI::FormattedDate formats")
 		end
 	end
 	
