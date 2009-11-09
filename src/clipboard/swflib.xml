@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<movie version="9">
+   <frame>
+       <library>
+           <bitmap id="CopyIcon" name="CopyIcon" import="images/copy.png" width="16" height="16" />
+           <font id="TahomaBold" name="TahomaBold" import="fonts/TahomaBold.ttf" glyphs="COPYIEDcopied" />
+       </library>
+   </frame>
+</movie>

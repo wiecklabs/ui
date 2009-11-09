@@ -1,0 +1,10 @@
+To build a new version of the clipboard, you'll need haxe-2.04. To change
+the embedded font or image data, you'll also need swfmill-0.2.12.
+
+To recompile, you'll need to put your own copy of TahomaBold in fonts/
+
+TO BUILD
+========
+
+  > swfmill simple swflib.xml swflib.swf
+  > haxe compile.hxml

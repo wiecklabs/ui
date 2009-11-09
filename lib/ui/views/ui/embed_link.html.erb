@@ -6,11 +6,14 @@
 
 <% head "embed_link_css" do %>
 <style type="text/css" media="screen">
-  .embedLink label { display: block; font-weight: bold; }
+  .embedLink { overflow: auto; }
+  .embedLink input { width: 100%; }
+  .embedLink .clipboard { float: right; }
 </style>
 <% end %>
 
 <div class="embedLink">
   <% if @title %><label><%= @title %></label><% end %>
   <input type="text" value="<%= @content %>"></input>
+  <%= UI::Clipboard.new(self, @content) %>
 </div>

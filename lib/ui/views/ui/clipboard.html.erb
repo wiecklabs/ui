@@ -1,0 +1,17 @@
+<% head "clipboard.css" do %>
+<style type="text/css" media="screen">
+  div.clipboard { width: 54px; height: 14px; }
+</style>
+<% end %>
+<div class="clipboard">
+  <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="54" height="14" align="middle">
+    <param name="movie" value="<%= UI::Asset.new("swf/clipboard.swf") %>"/>
+    <param name="allowScriptAccess" value="always" />
+    <param name="quality" value="high" />
+    <param name="scale" value="noscale" />
+    <param name="wmode" value="transparent" />
+    <param name="flashvars" value="content=<%= @content %>" />
+    <param name="bgcolor" value="#ffffff"/>
+    <embed src="<%= UI::Asset.new("swf/clipboard.swf") %>?content=<%= @content %>" bgcolor="transparent" width="54" height="14" name="haxe" quality="high" align="middle" wmode="transparent" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+  </object>
+</div>
