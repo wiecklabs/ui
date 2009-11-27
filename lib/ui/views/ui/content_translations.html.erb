@@ -31,7 +31,7 @@ translations = @data.translations
       <br />
 
       <label for="translations_<%= translation.culture_code %>_copyright">Copyright </label>
-      <textarea rows="5" cols="24" name="translations[<%= translation.culture_code %>][copyright]" id="translations_<%= translation.culture_code %>_copyright"><%= h(translation.copyright || "Copyright #{Date.today.year}").gsub("..", "\n") %></textarea>
+      <textarea rows="5" cols="24" name="translations[<%= translation.culture_code %>][copyright]" id="translations_<%= translation.culture_code %>_copyright"><%= h(translation.copyright || "Copyright #{Date.today.year}").gsub("..", "\n").gsub("&copy;", "©") %></textarea>
       <br />
       
       <label class="required" for="translations_<%= translation.culture_code %>_base_file_name">Filename <em>*</em></label>
