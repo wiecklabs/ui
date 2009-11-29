@@ -7,11 +7,11 @@ module UI
     # Path to font to be used for button text. Tahoma and Myriad Bold work well.
     ##
     def self.font=(font)
-      @font = font
+      @@font = font
     end
 
     def self.font
-      @font
+      @@font rescue nil
     end
 
     def initialize(text, size = 16, text_color = Color::BLACK, button_color = Color::WHITE, width = nil, height = nil)

@@ -13,11 +13,11 @@ module UI
     # Path to font to be used for badge titles. Tahoma Bold works well.
     ##
     def self.title_font=(font)
-      @title_font = font
+      @@title_font = font
     end
 
     def self.title_font
-      @title_font
+      @@title_font rescue nil
     end
 
     ##
@@ -25,11 +25,11 @@ module UI
     # such as Silkscreen.
     ##
     def self.subtitle_font=(font)
-      @subtitle_font = font
+      @@subtitle_font = font
     end
 
     def self.subtitle_font
-      @subtitle_font
+      @@subtitle_font rescue nil
     end
 
     def initialize(title, subtitle = nil, background_color = Color::BLUE, title_color = Color::WHITE, subtitle_color = Color::GOLD)
