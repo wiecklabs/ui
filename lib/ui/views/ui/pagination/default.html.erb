@@ -7,7 +7,10 @@
 </style>
 <% end %>
 
-<span class='pagination_total_count'><%= @pagination.total_count %> <%= @pagination.total_count == 1 ? 'Record' : 'Records' %></span>
+<span class='pagination_total_count'>
+  <%= @pagination.total_count %> <%= @pagination.total_count == 1 ? 'Record' : 'Records' %>, 
+  <%= @pagination.pages.max %> <%= @pagination.pages.max == 1 ? 'Page' : 'Pages' %>
+</span>
 
 <% if @pagination.pages.max > 1 %>
 <ul class='pagination'>
