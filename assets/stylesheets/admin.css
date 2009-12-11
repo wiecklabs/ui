@@ -74,6 +74,7 @@ ul#tabnav-left li.seperator { background-color: #fff; padding: 6px 4px; margin-r
 .content { margin: 0 auto; padding: 8px 24px 24px 24px; overflow: auto; }
 
 .column { float: left; padding: 0 1em; width: 47%; }
+.right_column { float: left; padding: 0 1em; width: 47%; }
 
 div.clear { clear: both; }
 
