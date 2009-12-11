@@ -21,9 +21,12 @@ module UI
     register "application/msword", "images/icon_doc.gif"
     register "application/pdf", "images/icon_pdf.gif"
     register "application/xls", "images/icon_xls.gif"
+    register "audio/x-wav", "images/icon_audio.gif"
+    register "audio/mpeg", "images/icon_audio.gif"
 
   end
 
+  Asset::register("images/icon_audio.gif", asset_path + "images/icon_audio.gif")
   Asset::register("images/icon_generic.gif", asset_path + "images/icon_generic.gif")
   Asset::register("images/icon_doc.gif", asset_path + "images/icon_doc.gif")
   Asset::register("images/icon_pdf.gif", asset_path + "images/icon_pdf.gif")
