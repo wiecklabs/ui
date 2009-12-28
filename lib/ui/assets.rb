@@ -16,6 +16,7 @@ module UI
   
   Asset::register("images/blankButton.png", UI.asset_path + "images/blankButton.png")
   Asset::register("images/delete_big.png", UI::asset_path + "images/delete_big.png")
+  Asset::register("images/email.gif", UI::asset_path + "images/email.gif")
   Asset::register("images/calendar.gif", UI::asset_path + "images/calendar.gif")
   Asset::register("images/spinner.gif", UI::asset_path + "images/spinner.gif")
   Asset::register("images/x_grey.png", UI::asset_path + "images/x_grey.png")
