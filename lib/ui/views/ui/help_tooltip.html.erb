@@ -1,0 +1,44 @@
+<% head "help_tooltip" do %>
+<style type="text/css" media="screen">
+  fieldset label span { width: auto; float: none; }
+  .help_tooltip { float: right; margin-right: 10px; }
+  .help_tooltip_text {
+    background-color: #ffc;
+    border: 1px solid #ee9;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 1.2em;
+    padding: 5px 10px 5px 30px;
+    position: absolute;
+    width: 250px;
+    z-index: 1;
+  }
+  .help_tooltip img { position: relative; }
+  .help_tooltip_text h4 { color: #000; margin-top: 2px; margin-bottom: 0; }
+  .help_tooltip_text p { margin-top: 5px; }
+</style>
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    var position_help_text = function(parent, tooltip) {
+      tooltip.css("left", parent.position().left - 12);
+      tooltip.css("top", parent.position().top - 5);
+    }
+    $("span.help_tooltip").each(function() {
+      var visible = $(this).css("display") != "none";
+
+      var text = $("div.help_tooltip_text", this);
+      var image = $("> img", this);
+
+      $(this).hover(
+        function() { position_help_text($(this), text); image.css("z-index", 100); text.show() },
+        function() { image.css("z-index", null); text.hide() }
+      );
+      text.hide();
+    });
+  });
+</script>
+<% end %>
+<span class="help_tooltip">
+  <img src="<%= UI::Asset.new("images/help.png") %>">
+  <div class="help_tooltip_text"><%= @text %></div>
+</span>
