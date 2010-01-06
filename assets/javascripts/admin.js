@@ -66,20 +66,32 @@ function bindSelectable() {
 
 // Repositions the actions bar on load and on scroll.
 function fix_actions_bar_for_ie6() {
-  var actions = $('form .actions');
 
-  if (!actions.get(0)) {
-    return false;
-  }
+  var reposition_bar = function() {
+    var actions = $('form .actions');
 
-  var original_top = document.documentElement.clientHeight - actions.outerHeight();
-  var width = document.documentElement.clientWidth;
+    if (!actions.get(0)) {
+      return false;
+    }
 
-  actions.css({ position: 'absolute', bottom: '', top: '' + original_top + 'px' }).width(width);
-  $(window).scroll(function(e) {
-    var scroll_top = document.documentElement.scrollTop;
-    actions.css({ top: (scroll_top + original_top) + 'px' });
+    var top = $(window).scrollTop() + $(window).height() - actions.outerHeight();
+    var width = $(window).width();
+
+    actions.css({ position: 'absolute', bottom: '', top: '' + top + 'px' }).width(width);
+  };
+
+  reposition_bar();
+
+  $(window).scroll(reposition_bar);
+
+  var resizeTimer = null;
+  $(window).bind('resize', function() {
+    if (resizeTimer) {
+      clearTimeout(resizeTimer);
+    }
+    resizeTimer = setTimeout(reposition_bar, 100);
   });
+
 }
 
 // Modal behavior for modalized links.
@@ -100,6 +112,12 @@ function png_fix_for_ie6() {
 }
 
 $(document).ready(function() {
+
+  var actions = $('form .actions');
+  if (actions) {
+    // Insert a spacer to account for the fixed actions bar.
+    $('body').append('<div id="actions-spacer" style="height: ' + (actions.outerHeight() + 4) + 'px;">&nbsp;</div>');
+  }
 
   if ($.browser.msie && /^6/.test($.browser.version)) {
     png_fix_for_ie6();
