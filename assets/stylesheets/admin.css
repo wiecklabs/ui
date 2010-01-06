@@ -154,8 +154,9 @@ div.errors label { float: none; clear: none; width: auto; }
 
 form { overflow: auto; }
 form .actions { position: fixed; bottom: 0px; left: 0px; width: 100%; padding: 5px 0; background-color: #DDDDDD; border-top: solid 1px #AAAAAA; z-index: 100; }
+form .actions input, form .actions a { float: left; margin-bottom: 0; margin-top: 0; }
 form .actions input { margin-left: 10px; }
 
 /* .actions { position: absolute; background-color: #ddd; bottom: 0px; left: 0px; width: 100%; padding: 5px 10px; border-top: solid 1px #aaa; } */
-form .actions .delete { float: right; padding-right: 20px; }
+form .actions .delete { float: right; margin: 0 20px 0 0; }
 @media screen { form .actions { position: fixed; } }
