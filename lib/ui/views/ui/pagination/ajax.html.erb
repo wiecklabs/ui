@@ -1,38 +1,44 @@
-<% head "ajax_pagination_css" do %>
-<style type="text/css" media="screen">
-  .pagination_total_count { display: none; }
-  ul.pagination { display: inline; margin: 5px; padding: 0px; }
-  ul.pagination li { display: inline; list-style: none; }
-  ul.pagination li.selected { color: #cecece; }
-  ul.pagination a { color: #fff; }
-</style>
-<% end %>
-
-<% head "ajax_pagination_js" do %>
-<script type="text/javascript" charset="utf-8">
-  function load_page(e){
-    $(e.attr("class")).load(e.attr("id"));
-    return false;
-  }
-</script>
-<% end %>
-
-<span class='pagination_total_count'><%= @pagination.total_count %> <%= @pagination.total_count == 1 ? 'Record' : 'Records' %></span>
-
-<% if @pagination.pages.max > 1 %>
-<ul class='pagination'>
-  <% if @pagination.selected_page > 1 %>
-    <li class='previous'><a onclick='load_page($(this));' href="javascript:void(0);" id='<%= @action %>?<%= merge_query_string(request.query_string, 'page' => @pagination.selected_page - 1) %>' class='#<%= @container %>'><%= @pagination.previous_text %></a></li>
+<% if @pagination.selected_page > @pagination.pages.max %>
+  <div>
+    Try <a href="<%= @action %>?<%= merge_query_string(request.query_string, 'page' => @pagination.pages.max) %>"> page <%= @pagination.pages.max %></a>
+  </div>
+<% else %>
+  <% head "ajax_pagination_css" do %>
+  <style type="text/css" media="screen">
+    .pagination_total_count { display: none; }
+    ul.pagination { display: inline; margin: 5px; padding: 0px; }
+    ul.pagination li { display: inline; list-style: none; }
+    ul.pagination li.selected { color: #cecece; }
+    ul.pagination a { color: #fff; }
+  </style>
   <% end %>
-  <% @pagination.page_context.each do |i| %>
-    <% if @pagination.selected_page == i %>
-      <li class='selected'><%= i %></li>
-    <% else %>
-      <li><a onclick='load_page($(this));' href="javascript:void(0);" id='<%= @action %>?<%= merge_query_string(request.query_string, 'page' => i) %>' class='#<%= @container %>'><%= i %></a></li>
+
+  <% head "ajax_pagination_js" do %>
+  <script type="text/javascript" charset="utf-8">
+    function load_page(e){
+      $(e.attr("class")).load(e.attr("id"));
+      return false;
+    }
+  </script>
+  <% end %>
+
+  <span class='pagination_total_count'><%= @pagination.total_count %> <%= @pagination.total_count == 1 ? 'Record' : 'Records' %></span>
+
+  <% if @pagination.pages.max > 1 %>
+  <ul class='pagination'>
+    <% if @pagination.selected_page > 1 %>
+      <li class='previous'><a onclick='load_page($(this));' href="javascript:void(0);" id='<%= @action %>?<%= merge_query_string(request.query_string, 'page' => @pagination.selected_page - 1) %>' class='#<%= @container %>'><%= @pagination.previous_text %></a></li>
     <% end %>
+    <% @pagination.page_context.each do |i| %>
+      <% if @pagination.selected_page == i %>
+        <li class='selected'><%= i %></li>
+      <% else %>
+        <li><a onclick='load_page($(this));' href="javascript:void(0);" id='<%= @action %>?<%= merge_query_string(request.query_string, 'page' => i) %>' class='#<%= @container %>'><%= i %></a></li>
+      <% end %>
+    <% end %>
+    <% if @pagination.selected_page < @pagination.pages.max %>
+      <li class='next'><a onclick='load_page($(this));' href="javascript:void(0);" id='<%= @action %>?<%= merge_query_string(request.query_string, 'page' => @pagination.selected_page + 1) %>' class='#<%= @container %>'><%= @pagination.next_text %></a></li>
+    <% end %>
+  </ul>
   <% end %>
-  <% if @pagination.selected_page < @pagination.pages.max %>
-    <li class='next'><a onclick='load_page($(this));' href="javascript:void(0);" id='<%= @action %>?<%= merge_query_string(request.query_string, 'page' => @pagination.selected_page + 1) %>' class='#<%= @container %>'><%= @pagination.next_text %></a></li>
-  <% end %>
-</ul>
 <% end %>
