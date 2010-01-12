@@ -1,3 +1,4 @@
+<% head do %>
 <style type="text/css" media="screen">
   .calendar { font: 10px Helvetica; }
   .calendar .days th { background-color: #555; color: #eee; width: 20px; }
@@ -13,6 +14,7 @@
   .calendar td .events .date { background-color: #555; color: #eee; float: left; font-weight: bold; margin-right: 5px; }
   .calendar td .events .event { display: block; float: left; margin-top: 5px; margin-bottom: 5px; }
 </style>
+<% end %>
 
 <% @calendar.months.each do |month| %>
 <table class="calendar">
