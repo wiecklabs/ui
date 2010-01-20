@@ -62,16 +62,18 @@
         this.href = mergeParams(this.href, query);
       });
 
-      var url = $(this).attr("action") || window.location.toString()
-      $("#<%= @list_id %>").load(mergeParams(url, query), null, callBack(<%= @callback || "null" %>));
+      var url = $(this).attr("action") || window.location.toString();
+      var callback = <%= @callback || "null" %>;
+
+      $("#<%= @list_id %>").load(mergeParams(url, query), null, function() {
+        $("#spinner").hide();
+        if ( callback )
+          callback.apply(this, this.arguments);
+      });
 
       return false;
     });
   });
 
-  function callBack(additional_callback) {
-    $("#spinner").hide();
-    if (additional_callback) additional_callback();
-  }
 </script>
 <% end %>
