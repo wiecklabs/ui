@@ -68,7 +68,7 @@
       $("#<%= @list_id %>").load(mergeParams(url, query), null, function() {
         $("#spinner").hide();
         if ( callback )
-          callback.apply(this, this.arguments);
+          callback.apply(this, arguments);
       });
 
       return false;
