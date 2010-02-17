@@ -46,6 +46,7 @@ require Pathname(__FILE__).dirname.expand_path + "ui/mime_type_icon"
 require Pathname(__FILE__).dirname.expand_path + "ui/pagination"
 require Pathname(__FILE__).dirname.expand_path + "ui/rich_text_area"
 require Pathname(__FILE__).dirname.expand_path + "ui/social_media"
+require Pathname(__FILE__).dirname.expand_path + "ui/tag_box"
 require Pathname(__FILE__).dirname.expand_path + "ui/toolbar"
 
 UI::FormattedDate.register_format("rfc822", "%a, %d %b %Y %H:%M:%S %z")

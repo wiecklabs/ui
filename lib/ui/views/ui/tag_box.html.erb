@@ -1,0 +1,15 @@
+<% head "tagbox" do %>
+<link rel="stylesheet" type="text/css" media="screen" href="<%= UI::Asset.new("stylesheets/jquery.tagbox.css") %>">
+<script type="text/javascript" src="<%= UI::Asset.new("javascripts/jquery.tagbox.js") %>"></script>
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    $('.tagbox').tagbox({
+      separator: /[,; ]/,
+      grouping: '"',
+      name: '<%= @name %>',
+      fx: false
+    });
+  });
+</script>
+<% end %>
+<div class="tagbox"><%= @tags.map { |tag| tag.name }.join(",") %></div>
