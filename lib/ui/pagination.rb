@@ -1,15 +1,16 @@
 module UI
   class Pagination
 
-    attr_reader :page_size, :total_count, :selected_page, :pages, :previous_text, :next_text
+    attr_reader :page_size, :total_count, :selected_page, :pages, :previous_text, :next_text, :page_sizes
 
-    def initialize(context, page_size, total_count, selected_page, previous_text = "Previous", next_text = "Next")
+    def initialize(context, page_size, total_count, selected_page, previous_text = "Previous", next_text = "Next", page_sizes = [])
       @context = context
       @page_size = page_size.to_i
       @total_count = total_count.to_i
       @selected_page = selected_page.to_i
       @previous_text = previous_text
       @next_text = next_text
+      @page_sizes = page_sizes
 
       if @total_count == 0
         @pages = [1]
