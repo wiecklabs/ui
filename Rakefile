@@ -47,3 +47,11 @@ end
 task :version do
   puts GEM_VERSION
 end
+
+spec_file = ".gemspec"
+desc "Create #{spec_file}"
+task :gemspec do
+  File.open(spec_file, "w") do |file|
+    file.puts spec.to_ruby
+  end
+end
