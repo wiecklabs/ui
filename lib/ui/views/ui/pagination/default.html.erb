@@ -9,12 +9,25 @@
     ul.pagination li { display: inline; list-style: none; }
     ul.pagination li.selected { color: #cecece; }
     ul.pagination a { color: #fff; }
+    .pagination_total_count .divider { margin-left: 10px; }
+    .pagination_total_count a, .pagination_total_count strong { margin: 0 10px; }
   </style>
   <% end %>
 
   <span class='pagination_total_count'>
     <%= @pagination.total_count %> <%= @pagination.total_count == 1 ? 'Record' : 'Records' %>, 
-    <%= @pagination.pages.max %> <%= @pagination.pages.max == 1 ? 'Page' : 'Pages' %>
+    <%= @pagination.pages.max %> <%= @pagination.pages.max == 1 ? 'Page' : 'Pages' -%>
+    <% unless @pagination.page_sizes.blank? || @pagination.page_sizes.size == 1 %>
+      <strong class="divider">|</strong>
+      <% @pagination.page_sizes.each do |page_size| %>
+        <% if page_size == @pagination.page_size %>
+          <strong><%= page_size %></strong>
+        <% else %>
+          <a href="?<%= merge_query_string(request.query_string, 'page_size' => page_size) %>"><%= page_size %></a>
+        <% end %>
+      <% end %>
+      Records per page
+    <% end %>
   </span>
 
   <% if @pagination.pages.max > 1 %>
