@@ -1,14 +1,15 @@
 require 'fileutils'
 
 module UI
-  def self.public_path=(path)
-    @@public_path = path
+  
+  @@public_path = nil
+  def self.public_path=(value)
+    @@public_path = value
   end
 
   def self.public_path
-    Pathname(@@public_path).expand_path.to_s
-  rescue NameError
-    raise "UI::public_path not set."
+    return @@public_path if @@public_path
+    Harbor::FileStore['public'] ? Harbor::FileStore['public'].root : @@public_path
   end
 
   def self.asset_path
