@@ -9,7 +9,7 @@ module UI
 
   def self.public_path
     return @@public_path if @@public_path
-    Harbor::FileStore['public'] ? Harbor::FileStore['public'].root : @@public_path
+    Harbor::FileStore['public'] ? Harbor::FileStore['public'].root.to_s : @@public_path
   end
 
   def self.asset_path
