@@ -14,6 +14,6 @@
 
 <div class="embedLink">
   <% if @title %><label><%= @title %></label><% end %>
-  <input type="text" value="<%= @content %>"></input>
+  <input type="text" value='<%=h @content %>'></input>
   <%= UI::Clipboard.new(self, @content) %>
 </div>
