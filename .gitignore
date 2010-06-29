@@ -3,3 +3,4 @@ pkg
 log
 tmp
 /src/clipboard/fonts/*
+.bundle
