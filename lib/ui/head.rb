@@ -42,6 +42,10 @@ module UI
       @apply_title_format = false
       title(value)
     end
+    
+    def separator(value)
+      @separator = value
+    end
 
     # Gets/sets the title_format
     # The value should expect to be a sprintf format string expecting a single argument that is the view's title.
@@ -66,11 +70,14 @@ module UI
     private
 
     def format_title
-      if @apply_title_format && @title_format && @title_format.size > 0
+      formatted_title = if @apply_title_format && @title_format && @title_format.size > 0
         @title_format % @title
       else
         @title
       end
+      formatted_title.sub!(/(#{@separator}\s*)$/,'') if @separator
+      
+      formatted_title
     end
 
   end
