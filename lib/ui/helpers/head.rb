@@ -37,8 +37,8 @@ module UI
       end
 
       # Return UI::Head#to_html
-      def write_head
-        @head.to_html
+      def write_head(name = nil)
+        name ? @head.named_values.delete(name) : @head.to_html
       end
 
     end

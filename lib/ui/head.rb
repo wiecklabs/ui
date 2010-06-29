@@ -2,7 +2,7 @@ module UI
 
   class Head
 
-    attr_accessor :title_format
+    attr_accessor :title_format, :appended_values, :named_values
 
     def initialize
       @apply_title_format = true

@@ -1,2 +1,6 @@
+<% if @name %>
+<%= write_head(@name) %>
+<% else %>
 <%= write_head %>
+<% end %>
 <%= @content %>
