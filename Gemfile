@@ -10,5 +10,6 @@ gem "harbor", "0.18.33", :git => "git://github.com/wiecklabs/harbor.git"
 
 group "development" do
   gem "capybara"
+  gem "mocha"
   gem "ruby-debug"
 end

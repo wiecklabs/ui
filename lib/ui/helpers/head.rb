@@ -1,28 +1,50 @@
 module UI
+
   module Helpers
+
+    # Usage:
+    #
+    # Layout:
+    #
+    #   <% head.title_format "My Site - %s" %>
+    #   <head>
+    #     ...
+    #     <%= write_head %>
+    #   </head>
+    #
+    # View:
+    #
+    #   <% head.title "Content Show Page" %>
+    #   <% head.keywords 'my', 'site', 'content', 'etc' %>
+    #
+    # =>
+    #   <head>
+    #     <title>My Site - Content Show Page</title>
+    #     <meta name="keywords" content="my,site,content,etc" />
+    #   </head>
+
     module Head
-      def head(name = nil, &b)
-        if name
-          named_head_captures[name] = capture(&b)
+
+      # Capture the output of the block and either set the named value on the UI::Head or append it
+      def head(name = nil, &block)
+        @head ||= UI::Head.new
+        if block_given?
+          captured_output = capture(&block)
+          name ? @head.set(name, captured_output) : @head.append(captured_output)
         else
-          head_captures << capture(&b)
+          @head
         end
       end
 
+      # Return UI::Head#to_html
       def write_head
-        (head_captures + named_head_captures.values).join("\n")
+        @head.to_html
       end
 
-      private
-      def head_captures
-        @head_captures ||= []
-      end
-
-      def named_head_captures
-        @named_head_captures ||= {}
-      end
     end
+
   end
+
 end
 
 Harbor::ViewContext.send(:include, UI::Helpers::Head)
