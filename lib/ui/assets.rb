@@ -20,6 +20,8 @@ module UI
   Asset::register("images/calendar.gif", UI::asset_path + "images/calendar.gif")
   Asset::register("images/help.png", UI::asset_path + "images/help.png")
   Asset::register("images/spinner.gif", UI::asset_path + "images/spinner.gif")
+  Asset::register("images/download_http.gif", UI::asset_path + "images/download_http.gif")
+  Asset::register("images/download_ftp.gif", UI::asset_path + "images/download_ftp.gif")
   Asset::register("images/x_grey.png", UI::asset_path + "images/x_grey.png")
   Asset::register("images/x_black.png", UI::asset_path + "images/x_black.png")
 

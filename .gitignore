@@ -4,3 +4,5 @@ log
 tmp
 /src/clipboard/fonts/*
 .bundle
+*.swp
+*.swo
