@@ -158,5 +158,5 @@ form .actions input, form .actions a { float: left; margin-bottom: 0; margin-top
 form .actions input { margin-left: 10px; }
 
 /* .actions { position: absolute; background-color: #ddd; bottom: 0px; left: 0px; width: 100%; padding: 5px 10px; border-top: solid 1px #aaa; } */
-form .actions .delete { float: right; margin: 0 20px 0 0; }
+form .actions .delete { float: right; margin: 0 20px 0 0; _float:none;}
 @media screen { form .actions { position: fixed; } }
