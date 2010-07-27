@@ -3,7 +3,7 @@ module UI
   class SocialMedia
     
     # The list of all of the available social media bookmarklets
-    ALL_SITES = {
+    @@sites = {
       'reddit' => 'http://reddit.com/submit?url=URL&title=TITLE',
       'digg' => 'http://digg.com/submit?url=URL&title=TITLE&media=news',
       'facebook' => 'http://www.facebook.com/sharer.php?u=URL&t=TITLE',
@@ -16,6 +16,14 @@ module UI
       'technorati' => 'http://technorati.com/faves/?add=URL'
     }
     # more here: http://kevin.vanzonneveld.net/techblog/article/list_of_social_bookmarking_sites
+
+    def self.configure(&block)
+      yield(@@sites)
+    end
+    
+    def self.sites
+      @@sites
+    end
     
     attr_accessor :sites
     
@@ -32,9 +40,9 @@ module UI
         names = sites.keys
       elsif sites.is_a?(Array)
         # use only the sites provided in the array
-        names = UI::SocialMedia::ALL_SITES.keys.select {|k| sites.include?(k) }
+        names = @@sites.keys.select {|k| sites.include?(k) }
       elsif sites == :all
-        names = UI::SocialMedia::ALL_SITES.keys
+        names = @@sites.keys
       else
         # use none of the available bookmarklets
         names = []
@@ -69,10 +77,10 @@ module UI
           short_title += "…"
         end
         
-        return UI::SocialMedia::ALL_SITES[site.downcase].sub(/URL/, short_url).sub(/TITLE/, @context.q(short_title))
+        return @@sites[site.downcase].sub(/URL/, short_url).sub(/TITLE/, @context.q(short_title))
       end
       
-      UI::SocialMedia::ALL_SITES[site.downcase].sub(/URL/, @context.q(@url)).sub(/TITLE/, @context.q(@title))
+      @@sites[site.downcase].sub(/URL/, @context.q(@url)).sub(/TITLE/, @context.q(@title))
     end
     
     def to_s
