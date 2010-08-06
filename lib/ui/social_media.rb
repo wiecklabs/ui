@@ -59,28 +59,22 @@ module UI
         end
       end
       
+      # if Cleat is available, shorten the URL
+      if defined? @context.cleat
+        @short_url = @context.q( @context.cleat(@url) )
+        @short_title = @title[0..139-@short_url.size]
+        
+        # if we had to truncate the title, add an ellipsis
+        @short_title += "…" if @short_title != @title
+      end
+      
       urls = names.map {|name| url(name) }
       @sites = names.zip(urls)
     end
     
     # Returns the bookmarklet URL for the page.
     def url(site)
-      
-      # if Cleat is available, shorten the URL for Twitter links.
-      if defined? @context.cleat
-        short_url = @context.q( @context.cleat(@url) )
-        
-        short_title = @title[0..139-short_url.size]
-        
-        # if we had to truncate the title, add an ellipsis
-        if short_title != @title
-          short_title += "…"
-        end
-        
-        return @@sites[site.downcase].sub(/URL/, short_url).sub(/TITLE/, @context.q(short_title))
-      end
-      
-      @@sites[site.downcase].sub(/URL/, @context.q(@url)).sub(/TITLE/, @context.q(@title))
+      @@sites[site.downcase].sub(/URL/, @context.q(@short_url || @url)).sub(/TITLE/, @context.q(@short_title || @title))
     end
     
     def to_s
