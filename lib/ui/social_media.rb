@@ -67,7 +67,7 @@ module UI
     def url(site)
       
       # if Cleat is available, shorten the URL for Twitter links.
-      if site == "twitter" && defined? @context.cleat
+      if defined? @context.cleat
         short_url = @context.q( @context.cleat(@url) )
         
         short_title = @title[0..139-short_url.size]
