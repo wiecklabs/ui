@@ -61,7 +61,7 @@ module UI
       
       # if Cleat is available, shorten the URL
       if defined? @context.cleat
-        @short_url = @context.q( @context.cleat(@url) )
+        @short_url = @context.cleat(@url).to_s
         @short_title = @title[0..139-@short_url.size]
         
         # if we had to truncate the title, add an ellipsis
