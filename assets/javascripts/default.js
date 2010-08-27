@@ -7,18 +7,42 @@ function deleteWithModal(link) {
 
 function openModal(content) {
   content.modal();
-  $(window).keyup(function(e) { if ( e.keyCode == 27 ) closeModal(); });
 
-  if($.browser.msie && $.browser.version < 7)
-  {
-	  var delete_modal = $("#modalContainer")
-			
-	  if ( !delete_modal.get(0) )
-	    return false;
-	
-	  var original_top = document.documentElement.scrollTop + (document.documentElement.clientHeight / 2) - (delete_modal.outerHeight() / 2);
-	  delete_modal.css({top: '' + original_top + 'px' })
+  var height = $(window).height();
+  var width = $(document).width()
+
+  if (arguments.length >= 2) {
+    if (arguments[1] >= 1) {
+      var containerHeight = arguments[1];
+    } else {
+      var containerHeight = height * arguments[1];
+    }
+  } else {
+    var containerHeight = height * 0.7;
   }
+  
+  var containerTop = ($.browser.msie && $.browser.version < 7 ? $(window).scrollTop() : 0) + (height / 2) - (containerHeight / 2);
+
+  if (containerTop < 1) { containerTop = 1 }
+
+  $("#modalContainer").css("height", containerHeight + "px")
+  $('#modalContainer').css("top", containerTop + "px");
+  
+  if (arguments.length >= 3) {
+    if (arguments[2] >= 1) {
+      var containerWidth = arguments[2];
+    } else {
+      var containerWidth = width * arguments[2] ;
+    }
+  } else {
+    var containerWidth = 770;
+  }
+  
+  var containerLeft = (width / 2) - (containerWidth / 2);  
+  $("#modalContainer").css("width", containerWidth + "px")
+  $('#modalContainer').css("left", containerLeft + "px");  
+    
+  $(document).keyup(function(e) { if ( e.keyCode == 27 ) closeModal(); });
 }
 
 function closeModal() {
