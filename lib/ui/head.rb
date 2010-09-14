@@ -7,6 +7,7 @@ module UI
     def initialize
       @apply_title_format = true
       @title_format = nil
+      @description = ''
       @keywords = []
       @appended_values = []
       @named_values = {}
@@ -17,6 +18,10 @@ module UI
       @appended_values << value
     end
 
+    def description(value)
+      @description = value.to_s
+    end
+    
     # Add a single keyword
     def keyword(value)
       @keywords << value
@@ -59,6 +64,8 @@ module UI
 
       formatted_title = format_title.to_s.strip
       html << "<title>#{formatted_title}</title>\n" if formatted_title.size > 0
+
+      html << "<meta name=\"description\" content=\"#{@description}\" />\n" if @description.size > 0
 
       combined_keywords = @keywords.uniq.join(",")
       html << "<meta name=\"keywords\" content=\"#{combined_keywords}\" />\n" if combined_keywords.size > 0
